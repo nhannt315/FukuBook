@@ -1,0 +1,4 @@
+{
+    "connectionDatabase": "mongodb://admin:admin@ds121535.mlab.com:21535/skymarket",
+    "port": 6969
+  }
