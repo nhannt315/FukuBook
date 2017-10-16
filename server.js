@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const cors = require('cors');
@@ -27,11 +27,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect(config.connectionDatabase, (err) => {
-    if(err) {
+    if (err) {
         console.log(err);
     } else {
         console.log('Connect to db success');
-}
+    }
 })
 ;
 
