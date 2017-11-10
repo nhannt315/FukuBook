@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+#username {
+  display: none
+}
+
+#userImg {
+  display: none
+}
+
+#usernameRes {
+  display: none
+}
+
+#userImgRes {
+  display: none
+}
+
+#logout_btn {
+  display: none
+}
+
+#logout_btn_res {
+  display: none
+}
+
+#loginedPanel {
+  display: none
+}
+
+#loginedCollapse {
+  display: none;
+}
+
+.addFavUrl {
+  display: none;
+}
