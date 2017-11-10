@@ -48,13 +48,13 @@ const updateCollection = (listUrl, range) => {
     var listDataGlasses = fuse.search("kính glasses glass");
     var listDataJewellery = fuse.search("vòng khuyên nhẫn lắc ring rings");
     deleteDatabase();
-    createPostWithCategory(listDataPants, "quần");
-    createPostWithCategory(listDataShirts, "áo");
-    createPostWithCategory(listDataShoes, "giày");
-    createPostWithCategory(listDataSocks, "tất");
-    createPostWithCategory(listDataWallets, "ví");
-    createPostWithCategory(listDataGlasses, "kính");
-    createPostWithCategory(listDataJewellery, "trang sức");
+    createPostWithCategory(listDataPants, "quan");
+    createPostWithCategory(listDataShirts, "ao");
+    createPostWithCategory(listDataShoes, "giay");
+    createPostWithCategory(listDataSocks, "tat");
+    createPostWithCategory(listDataWallets, "vi");
+    createPostWithCategory(listDataGlasses, "kinh");
+    createPostWithCategory(listDataJewellery, "trang_suc");
   });
 }
 
@@ -86,7 +86,7 @@ const getPostsFromDBWithCategory = (category, page, callback) => {
     if (err) {
       callback(err);
     } else {
-      callback(result);
+      callback(null, result);
     }
   });
 }
@@ -96,7 +96,7 @@ const getAllPostsFromDB = (page, callback) => {
     if (err) {
       callback(err);
     } else {
-      callback(result);
+      callback(null, result);
     }
   });
 }
@@ -110,5 +110,6 @@ const updateDatabase = () => {
 module.exports = {
   updateCollection,
   getPostsFromDBWithCategory,
+  getAllPostsFromDB,
   updateDatabase
 }
