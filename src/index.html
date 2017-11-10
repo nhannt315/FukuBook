@@ -1,14 +1,379 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>WebProject</title>
-  <base href="/">
+<!DOCTYPE html>
+<html>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <title>TrendEz</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" href="img/logo_icon.png" type="favicon/ico">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+
+        <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js"></script>
+
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/mainCSS/sidebar.css">
+        <link rel="stylesheet" href="/css/mainCSS/main.css">
+        <link rel="stylesheet" href="/css/mainCSS/modal.css">
+        <link rel="stylesheet" href="/css/mainCSS/responsive.css">
+        <style media="screen">
+            #username {
+                display: none
+            }
+
+            #userImg {
+                display: none
+            }
+
+            #usernameRes {
+                display: none
+            }
+
+            #userImgRes {
+                display: none
+            }
+
+            #logout_btn {
+                display: none
+            }
+
+            #logout_btn_res {
+                display: none
+            }
+
+            #loginedPanel {
+                display: none
+            }
+
+            #loginedCollapse {
+                display: none;
+            }
+
+            .addFavUrl {
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="sidebar-panel offscreen-left" id="sidebar">
+            <div class="brand">
+                <div class="brand-logo">
+                    <img src="/img/trendy.png" height="15" alt="">
+                </div>
+                <button href="javascript:;" class="toggle-sidebar hidden-xs hamburger-icon v3" id="sidebarCollapse"
+                        data-toggle="layout-small-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+
+            <nav class="ps-container">
+                <ul class="nav">
+                    <li>
+                        <a href="javascript:showHighlightPosts();" onClick="hideSidepanel()">
+                            <i class="fa fa-home" aria-hidden="true"></i> <span>Trang chủ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:getPostsAboutNews();" onClick="hideSidepanel()">
+                            <i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>Tin tức</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:getPostsAboutFood();" onClick="hideSidepanel()">
+                            <i class="fa fa-cutlery" aria-hidden="true"></i> <span>Ăn uống</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:getPostsAboutFashion();" onClick="hideSidepanel()">
+                            <i class="fa fa-shirtsinbulk" aria-hidden="true"></i> <span>Thời trang</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:getPostsAboutFilms();" onClick="hideSidepanel()">
+                            <i class="fa fa-film" aria-hidden="true"></i> <span>Phim ảnh</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:getPostsAboutSports();" onClick="hideSidepanel()">
+                            <i class="fa fa-futbol-o" aria-hidden="true"></i> <span>Thể thao</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:getPostsOfFavPages();" onclick="hideSidepanel()">
+                            <i class="fa fa-eye" aria-hidden="true"></i> <span>Trang theo dõi</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:getFavPosts();" onclick="hideSidepanel()">
+                            <i class="fa fa-heart" aria-hidden="true"></i> <span>Bài viết đã lưu</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-content">
+
+            <!-- Responsive only -->
+            <div class="brand visible-xs">
+                <div class="toggle-offscreen">
+                    <button type="button" name="button" id="sidebarCollapse2">
+                        <i class="fa fa-bars visible-xs" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="brand-logo">
+                    <img src="/img/trendy_dark.png" height="15" alt="">
+                </div>
+                <div class="toggle-user">
+                    <button type="button" class="toggle-user-button" id="userlayoutCollapse">
+                        <i class="fa fa-circle-thin" aria-hidden="true" id="unloginCollapse"></i>
+                        <i class="fa fa-check-circle-o" aria-hidden="true" id="loginedCollapse"></i>
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="user-layout visible-xs" id="user-layout">
+                <div class="login-panel" id="unloginPanel">
+                    <div class="">
+                        <button type="button" name="button" data-toggle="modal" data-target="#login">
+                            <span class="glyphicon glyphicon-user"></span>
+                            Đăng nhập
+                        </button>
+                    </div>
+                    <div class="">
+                        <button type="button" name="button" data-toggle="modal" data-target="#signup">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                            Đăng ký
+                        </button>
+                    </div>
+                </div>
+
+                <div class="login-panel" id="loginedPanel">
+                    <div class="user">
+                        <span id="usernameRes"></span>
+                        <i id="userImgRes" class="fa fa-user-circle" aria-hidden="true"></i>
+                    </div>
+                    <div class="">
+                        <button type="button" onclick="getFavPosts()">
+                            <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+                            Các bài viết đã lưu
+                        </button>
+                    </div>
+                    <div class="">
+                        <button type="button" id="logout_btn_res">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            Đăng xuất
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--End Responsive-->
+
+            <nav class="header navbar hidden-xs" id="header">
+                <div class="navbar-header">
+                    <p id="current-tab" class="navbar-brand">Trang chủ</p>
+                </div>
+
+                <ul class="nav navbar-nav navbar-right">
+
+                    <li class="user"><span id="username"></span> <i id="userImg" class="fa fa-user-circle"
+                                                                    aria-hidden="true"></i></li>
+                    <li>
+                        <button type="button" class="btn" data-toggle="modal" data-target="#login" id="login_btn">
+                            <span class="glyphicon glyphicon-user"></span>
+                            Đăng nhập
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn" data-toggle="modal" data-target="#signup"
+                                style="margin-right: 20px;" id="signup_btn">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                            Đăng ký
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn" id="logout_btn" style="margin-right: 40px;">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                            Đăng xuất
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="posts">
+                <div id="index" style="display:none">
+                    <div class="aboutNews">
+                        <h3>Tin tức</h3>
+                        <div class="gridNews">
+
+                        </div>
+                    </div>
+                    <div class="aboutFood">
+                        <h3>Ăn uống</h3>
+                        <div class="gridFood">
+
+                        </div>
+                    </div>
+                    <div class="aboutFashion">
+                        <h3>Thời trang</h3>
+                        <div class="gridFashion">
+
+                        </div>
+                    </div>
+                    <div class="aboutFilms">
+                        <h3>Phim ảnh</h3>
+                        <div class="gridFilms">
+
+                        </div>
+                    </div>
+                    <div class="aboutSports">
+                        <h3>Thể thao</h3>
+                        <div class="gridSports">
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tùy chọn -->
+
+                <div class="addFavUrl">
+                    <form class="" action="" method="post" style="display: inline-block">
+                        <div class="form-group">
+                            <input type="text" name="url" id="favUrl" placeholder="Link fanpage bạn muốn theo dõi"
+                                   class="form-control favUrl url">
+                        </div>
+                    </form>
+                    <button type="" id="submitFavUrlBtn" onclick="">Thêm vào danh sách ưa thích</button>
+                </div>
+
+                <div class="panel-fav-urls" style="display:none">
+                    <div class="heading">
+                        Các trang yêu thích đã lưu
+                    </div>
+                    <div class="showFavUrl">
+                        <!-- <div class="favUrls">
+                          <p class="page-name">Beatvn</p>
+                          <button type="button" class="remove-page-btn"> <i class="fa fa-minus" aria-hidden="true"></i> Xóa</button>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- Kết thúc tùy chọn -->
+                <app-root></app-root>
+            </div>
+
+        </div>
+
+        <div class="container formInput">
+            <!-- Login form -->
+            <div class="modal fade" id="login" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Đăng nhập </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="error-login"></div>
+                            <form id="login-form" class="form-horizontal" action="" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form-control login username" placeholder="Username"
+                                           name="username" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control login password" placeholder="Password"
+                                           name="password" required>
+                                </div>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" class="remember login" name="remember"></input>
+                                            Ghi nhớ </label>
+                                    </div>
+                                </div>
+                            </form>
+                            <div>
+                                <button type="button" class="btn login btn-default">Đăng nhập</button>
+                                <a href="user/auth/facebook" class="btn btn-default"><i class="fa fa-facebook-official"
+                                                                                        aria-hidden="true"
+                                                                                        style="color: #fff"></i> Đăng
+                                    nhập bằng Facebook</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Login form -->
+
+            <!-- Sign up form -->
+            <div class="modal fade" id="signup" role="dialog">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Chào mừng bạn đến với TrendEz</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="error-sign_up"></div>
+                            <form id="sign_up-form" class="form-horizontal" action="" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form-control username sign_up" required
+                                           placeholder="Enter your username" name="username">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control sign_up password" required
+                                           placeholder="Enter password" name="password">
+                                </div>
+                            </form>
+                            <div>
+                                <button type="button" class="btn sign_up btn-default">Đăng ký</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Sign up form -->
+        </div>
+
+
+        <script type="text/javascript">
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $('.main-content').toggleClass('active');
+            });
+            $('#sidebarCollapse2').on('click', function () {
+                $('#sidebar').toggleClass('active2');
+                $('.brand').toggleClass('active');
+            })
+
+            $('#userlayoutCollapse').on('click', function () {
+                $('#user-layout').toggleClass('active');
+                $('.main-content .posts').toggleClass('active');
+            })
+
+            function hideSidepanel() {
+                $('#sidebar').toggleClass('active2');
+                $('.brand').toggleClass('active');
+            }
+        </script>
+
+    </body>
+
 </html>
