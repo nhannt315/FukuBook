@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "client": "ng build --watch",
     "server": "nodemon server.js",
-    "start": "ng build && nodemon --watch server server.js"
+    "start": "ng build --watch & nodemon --watch server server.js"
   },
   "private": true,
   "dependencies": {
@@ -41,6 +41,7 @@
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.13.0",
     "ngx-bootstrap": "^1.9.3",
+    "ngx-facebook": "^2.4.0",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1",
     "passport-local": "^1.0.0",

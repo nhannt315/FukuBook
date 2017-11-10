@@ -8,4 +8,5 @@ export class ApiUrlConstants {
   public static GET_POST_BY_CATEGORY = (category: String, page: number) => {
     return `post/${category}/${page}`;
   }
+  
 }
