@@ -16,7 +16,7 @@ const createNewPost = (newPost, callback) => {
 }
 
 const deleteDatabase = () => {
-  postModel.remove({}, function(err) {
+  postModel.remove({}, function (err) {
     if (err) {
       console.log('deleteDatabase ERROR ', err);
     } else {
@@ -59,8 +59,9 @@ const updateCollection = (listUrl, range) => {
 }
 
 const createPostWithCategory = (list, category) => {
-  list.forEach(function(item) {
-    if (item.error) {} else if (!item.error) {
+  list.forEach(function (item) {
+    if (item.error) {
+    } else if (!item.error) {
       let newPost = {
         id: item.id,
         permalink_url: item.permalink_url,
@@ -71,7 +72,8 @@ const createPostWithCategory = (list, category) => {
       createNewPost(newPost, (err, doc) => {
         if (err) {
           console.log('updateCollection ERROR ', err);
-        } else {}
+        } else {
+        }
       });
     }
   })
