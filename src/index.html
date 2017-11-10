@@ -6,29 +6,10 @@
         <title>TrendEz</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <base href="/">
 
-        <link rel="shortcut icon" href="img/logo_icon.png" type="favicon/ico">
+        <link rel="shortcut icon" href="/assets/img/logo_icon.png" type="favicon/ico">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-        <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-
-        <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.11.4/sweetalert2.all.js"></script>
-
-        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/css/mainCSS/sidebar.css">
-        <link rel="stylesheet" href="/css/mainCSS/main.css">
-        <link rel="stylesheet" href="/css/mainCSS/modal.css">
-        <link rel="stylesheet" href="/css/mainCSS/responsive.css">
         <style media="screen">
             #username {
                 display: none
@@ -73,7 +54,7 @@
         <div class="sidebar-panel offscreen-left" id="sidebar">
             <div class="brand">
                 <div class="brand-logo">
-                    <img src="/img/trendy.png" height="15" alt="">
+                    <img src="/assets/img/trendy.png" height="15" alt="">
                 </div>
                 <button href="javascript:;" class="toggle-sidebar hidden-xs hamburger-icon v3" id="sidebarCollapse"
                         data-toggle="layout-small-menu">
@@ -140,7 +121,7 @@
                     </button>
                 </div>
                 <div class="brand-logo">
-                    <img src="/img/trendy_dark.png" height="15" alt="">
+                    <img src="/assets/img/trendy_dark.png" height="15" alt="">
                 </div>
                 <div class="toggle-user">
                     <button type="button" class="toggle-user-button" id="userlayoutCollapse">
@@ -282,76 +263,6 @@
 
         </div>
 
-        <div class="container formInput">
-            <!-- Login form -->
-            <div class="modal fade" id="login" role="dialog">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Đăng nhập </h4>
-                        </div>
-                        <div class="modal-body">
-                            <div id="error-login"></div>
-                            <form id="login-form" class="form-horizontal" action="" method="post">
-                                <div class="form-group">
-                                    <input type="text" class="form-control login username" placeholder="Username"
-                                           name="username" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control login password" placeholder="Password"
-                                           name="password" required>
-                                </div>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" class="remember login" name="remember"></input>
-                                            Ghi nhớ </label>
-                                    </div>
-                                </div>
-                            </form>
-                            <div>
-                                <button type="button" class="btn login btn-default">Đăng nhập</button>
-                                <a href="user/auth/facebook" class="btn btn-default"><i class="fa fa-facebook-official"
-                                                                                        aria-hidden="true"
-                                                                                        style="color: #fff"></i> Đăng
-                                    nhập bằng Facebook</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Login form -->
-
-            <!-- Sign up form -->
-            <div class="modal fade" id="signup" role="dialog">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Chào mừng bạn đến với TrendEz</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div id="error-sign_up"></div>
-                            <form id="sign_up-form" class="form-horizontal" action="" method="post">
-                                <div class="form-group">
-                                    <input type="text" class="form-control username sign_up" required
-                                           placeholder="Enter your username" name="username">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control sign_up password" required
-                                           placeholder="Enter password" name="password">
-                                </div>
-                            </form>
-                            <div>
-                                <button type="button" class="btn sign_up btn-default">Đăng ký</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Sign up form -->
-        </div>
-
 
         <script type="text/javascript">
             $('#sidebarCollapse').on('click', function () {
@@ -361,12 +272,12 @@
             $('#sidebarCollapse2').on('click', function () {
                 $('#sidebar').toggleClass('active2');
                 $('.brand').toggleClass('active');
-            })
+            });
 
             $('#userlayoutCollapse').on('click', function () {
                 $('#user-layout').toggleClass('active');
                 $('.main-content .posts').toggleClass('active');
-            })
+            });
 
             function hideSidepanel() {
                 $('#sidebar').toggleClass('active2');
