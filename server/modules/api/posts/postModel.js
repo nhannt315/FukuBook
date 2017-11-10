@@ -16,7 +16,7 @@ const createNewPost = (newPost, callback) => {
 }
 
 const deleteDatabase = () => {
-  postModel.remove({}, function(err) {
+  postModel.remove({}, function (err) {
     if (err) {
       console.log('deleteDatabase ERROR ', err);
     } else {
@@ -48,19 +48,20 @@ const updateCollection = (listUrl, range) => {
     var listDataGlasses = fuse.search("kính glasses glass");
     var listDataJewellery = fuse.search("vòng khuyên nhẫn lắc ring rings");
     deleteDatabase();
-    createPostWithCategory(listDataPants, "quần");
-    createPostWithCategory(listDataShirts, "áo");
-    createPostWithCategory(listDataShoes, "giày");
-    createPostWithCategory(listDataSocks, "tất");
-    createPostWithCategory(listDataWallets, "ví");
-    createPostWithCategory(listDataGlasses, "kính");
-    createPostWithCategory(listDataJewellery, "trang sức");
+    createPostWithCategory(listDataPants, "quan");
+    createPostWithCategory(listDataShirts, "ao");
+    createPostWithCategory(listDataShoes, "giay");
+    createPostWithCategory(listDataSocks, "tat");
+    createPostWithCategory(listDataWallets, "vi");
+    createPostWithCategory(listDataGlasses, "kinh");
+    createPostWithCategory(listDataJewellery, "trang_suc");
   });
 }
 
 const createPostWithCategory = (list, category) => {
-  list.forEach(function(item) {
-    if (item.error) {} else if (!item.error) {
+  list.forEach(function (item) {
+    if (item.error) {
+    } else if (!item.error) {
       let newPost = {
         id: item.id,
         permalink_url: item.permalink_url,
@@ -71,7 +72,8 @@ const createPostWithCategory = (list, category) => {
       createNewPost(newPost, (err, doc) => {
         if (err) {
           console.log('updateCollection ERROR ', err);
-        } else {}
+        } else {
+        }
       });
     }
   })
@@ -84,7 +86,7 @@ const getPostsFromDBWithCategory = (category, page, callback) => {
     if (err) {
       callback(err);
     } else {
-      callback(result);
+      callback(null, result);
     }
   });
 }
@@ -94,7 +96,7 @@ const getAllPostsFromDB = (page, callback) => {
     if (err) {
       callback(err);
     } else {
-      callback(result);
+      callback(null, result);
     }
   });
 }
@@ -108,5 +110,6 @@ const updateDatabase = () => {
 module.exports = {
   updateCollection,
   getPostsFromDBWithCategory,
+  getAllPostsFromDB,
   updateDatabase
 }

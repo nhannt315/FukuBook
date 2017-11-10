@@ -12,6 +12,8 @@ const postModel = require('./server/modules/api/posts/postModel.js');
 const config = require('./server/config.json');
 
 const userApi = require('./server/modules/api/users/userController');
+const postApi = require('./server/modules/api/posts/postController');
+
 
 var app = express();
 app.use(cors());
@@ -39,7 +41,8 @@ mongoose.connect(config.connectionDatabase, (err) => {
   }
 });
 
-app.use('/api/user', userApi);
+app.use('/user', userApi);
+app.use('/post', postApi);
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
