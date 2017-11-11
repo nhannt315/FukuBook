@@ -41,13 +41,13 @@ export class HomeComponent implements OnInit, AfterContentInit {
     this.initFacebook();
     this.getAllPost();
     this.fbPostService.setRootContainer('#post-container');
+    setInterval(this.layoutIfNeeded, 200);
   }
 
   initFacebook() {
     FB.init({
       appId: FB_CONFIG.app_id,
       cookie: false,  // enable cookies to allow the server to access
-      // the session
       xfbml: true,  // parse social plugins on this page
       version: 'v2.8' // use graph api version 2.5
     });
@@ -59,8 +59,21 @@ export class HomeComponent implements OnInit, AfterContentInit {
     }
     FB.XFBML.parse(this.fbPostService.getRootContainer()[0], () => {
       this.isDataLoaded = true;
-      console.log('done');
+      this.fbPostService.relayout();
+      this.notifyService.printSuccessMessage('Dataloaded');
     });
+  }
+
+  layoutIfNeeded() {
+    let needUpdate = false;
+    this.fbPostService.getRootContainer().find('.grid-item').each((index, item) => {
+      if ($(item).height() !== $(item).attr('data-height')) {
+        needUpdate = true;
+      }
+    });
+    if (needUpdate) {
+      this.fbPostService.relayout();
+    }
   }
 
   getAllPost() {
@@ -69,7 +82,6 @@ export class HomeComponent implements OnInit, AfterContentInit {
       this.post = this.postList[0];
       this.isDataDownloaded = true;
       this.loadFbPost();
-      console.log(response);
     });
   }
 

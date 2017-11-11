@@ -7,7 +7,7 @@ declare let Isotope: any;
 @Injectable()
 export class FbpostService {
 
-  private postContainer: any;
+  postContainer;
   dataCache;
   pageCount = 1;
   startedSearch = false;
@@ -17,10 +17,8 @@ export class FbpostService {
   iframeWidth = $(window).width() < 768 ? $(window).width() : 360;
   numberOfCategoriesLoaded = 0;
 
-  $grid: any;
 
   constructor() {
-
 
   }
 
@@ -46,9 +44,14 @@ export class FbpostService {
   }
 
   appendPost(postUrl: String) {
-    const postContent = `<div class="fb-post" data-href="${postUrl}" data-width="${this.iframeWidth}" data-show-text="true"></div>`;
+    const postContent = `<div class="fb-post grid-item" data-href="${postUrl}" data-width="${this.iframeWidth}"
+                              data-show-text="true"></div>`;
     const $postContent = $(postContent);
     this.postContainer.append($postContent).isotope('appended', $postContent);
+    this.postContainer.isotope('layout');
+  }
+
+  relayout() {
     this.postContainer.isotope('layout');
   }
 
