@@ -4,12 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "build": "",
+    "build": "nodemon --watch server server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "client": "ng build --watch",
-    "server": "nodemon server.js",
+    "server": "nodemon --watch server server.js",
     "start": "ng build --watch & nodemon --watch server server.js"
   },
   "private": true,

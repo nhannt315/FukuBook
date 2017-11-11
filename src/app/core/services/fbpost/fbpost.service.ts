@@ -8,18 +8,9 @@ declare let Isotope: any;
 export class FbpostService {
 
   postContainer;
-  dataCache;
-  pageCount = 1;
-  startedSearch = false;
-  searchType = 0;
-  isLoading = false;
-  isEndPage = false;
   iframeWidth = $(window).width() < 768 ? $(window).width() : 360;
-  numberOfCategoriesLoaded = 0;
-
 
   constructor() {
-
   }
 
   setRootContainer(containerId: String) {
@@ -48,7 +39,20 @@ export class FbpostService {
                               data-show-text="true"></div>`;
     const $postContent = $(postContent);
     this.postContainer.append($postContent).isotope('appended', $postContent);
-    this.postContainer.isotope('layout');
+    this.relayout();
+  }
+
+  layoutIfNeeded() {
+    let needUpdate = false;
+    this.postContainer.find('.grid-item').each((index, item) => {
+      if ($(item).height() !== $(item).attr('data-height')) {
+        $(item).attr('data-height', $(item).height());
+        needUpdate = true;
+      }
+    });
+    if (needUpdate) {
+      this.relayout();
+    }
   }
 
   relayout() {

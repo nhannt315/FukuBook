@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {MainComponent} from './main.component';
 import {MainRouterModule} from './main.routes';
 import {FbpostService} from '../core/services/fbpost/fbpost.service';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
 
 @NgModule({
   imports: [
@@ -10,7 +11,7 @@ import {FbpostService} from '../core/services/fbpost/fbpost.service';
     MainRouterModule
   ],
   providers: [FbpostService],
-  declarations: [MainComponent]
+  declarations: [MainComponent, SidebarComponent]
 })
 export class MainModule {
 }

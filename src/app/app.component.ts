@@ -1,16 +1,18 @@
-import {AfterViewChecked, Component, ElementRef} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, ElementRef} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewChecked {
+export class AppComponent implements AfterViewInit, AfterViewChecked {
+
   ngAfterViewChecked(): void {
-    const s = document.createElement('script');
-    s.type = 'text/javascript';
-    s.src = '/assets/js/homepage.js';
-    this.elementRef.nativeElement.appendChild(s);
+
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   constructor(private elementRef: ElementRef) {
