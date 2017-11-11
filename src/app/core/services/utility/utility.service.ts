@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {UrlConstants} from '../common/url.constants';
+import {UrlConstants} from '../../common/url.constants';
 import {Http} from '@angular/http';
 import {Router} from '@angular/router';
-import {AuthenticationService} from './authentication.service';
+import {AuthenticationService} from '../authentication/authentication.service';
 
 @Injectable()
 export class UtilityService {

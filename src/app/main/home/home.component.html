@@ -1,3 +1,9 @@
-<p>
-  home works!
-</p>
+<div *ngIf="!isDataLoaded" class="sk-folding-cube loading">
+  <div class="sk-cube1 sk-cube"></div>
+  <div class="sk-cube2 sk-cube"></div>
+  <div class="sk-cube4 sk-cube"></div>
+  <div class="sk-cube3 sk-cube"></div>
+</div>
+<div id="post-container" [hidden]="!isDataLoaded" class="grid">
+
+</div>

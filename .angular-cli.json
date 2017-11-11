@@ -32,6 +32,7 @@
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../node_modules/alertifyjs/build/alertify.js",
+        "../node_modules/isotope-layout/dist/isotope.pkgd.js",
         "./assets/js/homepage.js"
       ],
       "environmentSource": "environments/environment.ts",

@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "client": "ng build --watch",
     "server": "nodemon server.js",
-    "start": "ng build --watch & nodemon --watch server server.js"
+    "start": "ng build && nodemon --watch server server.js"
   },
   "private": true,
   "dependencies": {
@@ -24,8 +24,6 @@
     "@angular/platform-browser-dynamic": "^4.4.6",
     "@angular/router": "^4.4.6",
     "alertifyjs": "^1.11.0",
-    "angular2-isotope": "0.0.2",
-    "angular2-masonry": "^0.4.0",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "bootstrap": "^3.3.7",
@@ -37,11 +35,11 @@
     "fb": "^2.0.0",
     "font-awesome": "^4.7.0",
     "fuse.js": "^3.2.0",
+    "isotope-layout": "^3.0.4",
     "jquery": "^3.2.1",
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.13.0",
     "ngx-bootstrap": "^1.9.3",
-    "ngx-facebook": "^2.4.0",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1",
     "passport-local": "^1.0.0",
