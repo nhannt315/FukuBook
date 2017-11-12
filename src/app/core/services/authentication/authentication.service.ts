@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
-import {SystemConstants} from '../common/system.constants';
-import {ApiUrlConstants} from '../common/api.url.constants';
+import {SystemConstants} from '../../common/system.constants';
+import {ApiUrlConstants} from '../../common/api.url.constants';
 import 'rxjs/add/operator/map';
-import {User} from '../models/models.component';
+import {User} from '../../models/models.component';
 
 @Injectable()
 export class AuthenticationService {
