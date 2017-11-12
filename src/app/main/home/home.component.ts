@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterContentInit, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {PostService} from '../../core/services/post/post.service';
 import {Post} from '../../core/models/models.component';
 import {NotificationService} from '../../core/services/notification/notification.service';
@@ -7,6 +7,7 @@ import {FbpostService} from '../../core/services/fbpost/fbpost.service';
 import {Observable} from 'rxjs/Rx';
 
 declare let FB: any;
+declare let $: any;
 
 @Component({
   selector: 'app-home',
@@ -15,26 +16,36 @@ declare let FB: any;
 })
 export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   pageIndex = 1;
-  public postList: Post[];
-  public post: Post;
+  public postList: Post[] = [];
   public isDataLoaded = false;
-  public isDataDownloaded = false;
+  public isLoading = true;
+  private isEndPage = false;
   private mySubscribe;
 
   constructor(public postService: PostService,
               private notifyService: NotificationService,
-              private fbPostService: FbpostService) {
-
+              private fbPostService: FbpostService,
+              private ngZone: NgZone) {
+    window.onscroll = () => {
+      if ($(window).height() * 3 / 2 + $(window).scrollTop() > $(document).height() - 100) {
+        ngZone.run(() => {
+          if (!this.isEndPage && !this.isLoading) {
+            this.pageIndex++;
+            this.isLoading = true;
+            this.loadPost();
+          }
+        });
+      }
+    };
   }
 
   ngAfterContentInit(): void {
-    window.addEventListener('scroll', this.onScroll, true);
   }
 
   ngOnInit() {
     this.initFacebook();
-    this.getAllPost();
-    this.fbPostService.setRootContainer('#post-container');
+    this.loadPost();
+    this.fbPostService.setRootContainer('#post-container-main', '#post-container-temp');
     this.mySubscribe = Observable.interval(200).subscribe(x => {
       this.fbPostService.layoutIfNeeded();
     });
@@ -49,32 +60,23 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
     });
   }
 
-  loadFbPost() {
-    for (const post of this.postList) {
-      this.fbPostService.appendPost(post.permalink_url);
-    }
-    FB.XFBML.parse(this.fbPostService.getRootContainer()[0], () => {
-      this.isDataLoaded = true;
-      this.fbPostService.relayout();
-      this.notifyService.printSuccessMessage('Dataloaded');
-    });
-  }
-
-
-  getAllPost() {
+  private loadPost() {
     this.postService.getAllPost(this.pageIndex).subscribe((response: Post[]) => {
-      this.postList = response;
-      this.post = this.postList[0];
-      this.isDataDownloaded = true;
-      this.loadFbPost();
+      // this.postList.concat(response);
+      if (!response) {
+        this.isEndPage = true;
+      }
+      this.postList.push(...response);
+      this.fbPostService.addPost(response, () => {
+        this.isDataLoaded = true;
+        this.isLoading = false;
+        this.fbPostService.relayout();
+      });
     }, error => this.notifyService.printErrorMessage(error));
   }
 
   ngOnDestroy(): void {
     this.mySubscribe.unsubscribe();
-  }
-
-  onScroll(event: any) {
   }
 
 }
