@@ -1,0 +1,22 @@
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {HomeComponent} from './home.component';
+import {RouterModule, Routes} from '@angular/router';
+import {AuthenticationService} from '../../core/services/authentication/authentication.service';
+import {PostService} from '../../core/services/post/post.service';
+import {NotificationService} from '../../core/services/notification/notification.service';
+
+const routes: Routes = [
+  {path: '', component: HomeComponent}
+];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes)
+  ],
+  providers: [AuthenticationService, PostService, NotificationService],
+  declarations: [HomeComponent]
+})
+export class HomeModule {
+}

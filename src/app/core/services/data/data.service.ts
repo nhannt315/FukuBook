@@ -1,12 +1,12 @@
-import {UtilityService} from './utility.service';
-import {NotificationService} from './notification.service';
-import {MessageConstants} from './../common/message.constants';
-import {SystemConstants} from './../common/system.constants';
+import {UtilityService} from '../utility/utility.service';
+import {NotificationService} from '../notification/notification.service';
+import {MessageConstants} from '../../common/message.constants';
+import {SystemConstants} from '../../common/system.constants';
 import {Http, Response, Headers} from '@angular/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Rx';
-import {AuthenticationService} from './authentication.service';
+import {AuthenticationService} from '../authentication/authentication.service';
 
 @Injectable()
 export class DataService {
@@ -23,6 +23,7 @@ export class DataService {
     }
 
     get(uri: string) {
+
     }
 
 }

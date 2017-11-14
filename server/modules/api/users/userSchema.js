@@ -22,30 +22,36 @@ const usersSchema = new Schema({
   avatar: {
     type: String
   },
-  email: {
-    type: String,
-    unique: true,
-    require: true
-  },
   active: {
     type: Boolean,
     default: true
   },
   profile: {
     type: ObjectId
+  },
+  postId: {
+    type: [String]
+  },
+  favUrls: [
+    {
+      name: { type : String},
+      id: { type : Number}
+    }
+  ],
+  postsFromFavUrls : {
+    type: [String]
   }
 }, {timestamps: {createAt: 'create_at', updateAt: 'update_at'}});
 
 usersSchema.pre('save', function(next) {
   let user = this;
-  if (user) {
-    bcrypt.genSalt(function(err, salt) {
-      bcrypt.hash(user.password, salt, function(err, hash) {
-        user.password = hash;
-        next();
-      });
+  if (!user.isModified('password')) return next();
+  bcrypt.genSalt(10, function(err, salt) {
+    bcrypt.hash(user.password, salt, function(err, hash) {
+      user.password = hash;
+      next();
     });
-  }
+  });
 })
 
 module.exports = usersSchema;
