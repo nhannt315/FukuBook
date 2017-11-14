@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const pageSchema = new Schema({
+const categorySchema = new Schema({
   id: {
     type: String,
     require: true,
@@ -9,15 +9,7 @@ const pageSchema = new Schema({
   name: {
     type: String,
     require: true
-  },
-  permalink_url: {
-    type: String,
-    require: true
-  },
-  category: {
-    type: String,
-    require: true
   }
 });
 
-module.exports = pageSchema;
+module.exports = categorySchema;
