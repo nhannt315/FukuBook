@@ -5,7 +5,7 @@ const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
 const passportJWT = require("passport-jwt");
 const jwt = require('jsonwebtoken');
-const postsController = require('../posts/postsController');
+const postController = require('../posts/postController.js');
 var LocalStrategy = require('passport-local').Strategy;
 var ExtractJwt = passportJWT.ExtractJwt;
 var JwtStrategy = passportJWT.Strategy;
@@ -158,7 +158,7 @@ const saveFavUrl = (url, userId, callback) => {
     if (err) {
       callback(err);
     } else {
-      postsController.getDataFromPageUrl(url, (data) => {
+      postController.getDataFromPageUrl(url, (data) => {
         doc.favUrls.push(data);
         doc.save((err, updatedDoc) => {
           if (err) {
@@ -239,7 +239,7 @@ const updatePostsFromFavUrls = (userId, callback) => {
         doc.favUrls.forEach(function (data) {
           listFavPageId.push(data.id);
         })
-        postsController.getPostsOfMultiplePagesWithinRange(listFavPageId, 7, (listData) => {
+        postController.getPostsOfMultiplePagesWithinRange(listFavPageId, 7, (listData) => {
           listData.forEach(function (item) {
             doc.postsFromFavUrls.push(item.permalink_url);
           });

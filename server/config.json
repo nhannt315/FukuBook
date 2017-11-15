@@ -2,5 +2,6 @@
     "connectionDatabase": "mongodb://admin:admin@ds251985.mlab.com:51985/web-project",
     "port": "6969",
     "app_id": "324580694617212",
+    "app_secret": "b7b2f2229834eb9a92e6e6799180bd56",
     "access_token": "324580694617212|A_fXF5bQrffoQ18Qf8Uu9p-NpJc"
 }

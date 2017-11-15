@@ -21,10 +21,15 @@ const postSchema = new Schema({
     type: Number,
     default: 0
   },
+  message: {
+    type: String
+  },
   category: {
     type: String,
     require: true
   }
 });
+
+postSchema.index({'$**': 'text'});
 
 module.exports = postSchema;
