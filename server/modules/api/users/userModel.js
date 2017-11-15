@@ -15,25 +15,17 @@ jwtOptions.secretOrKey = 'secret';
 
 let userModel = mongoose.model('users', userSchema);
 
-passport.serializeUser(function(user, done) {
+const serializeUser = (user, expire) => {
   var payload = {
     id: user.id
   };
   var token = jwt.sign(payload, jwtOptions.secretOrKey, {
-    expiresIn: 60 * 60 * 24 * 3
+    expiresIn: expire
   });
-  done(null, token);
-});
-
-passport.deserializeUser(function(token, done) {
-  decoded = jwt.decode(token);
-  userModel.findById(decoded.id, function(err, user) {
-    done(err, user);
-  });
-});
+  return token;
+}
 
 const createUser = (user, callback) => {
-
   userModel.create(user, (err, doc) => {
     if (err) {
       callback(err);
@@ -316,4 +308,5 @@ module.exports = {
   deleteFavUrl,
   updatePostsFromFavUrls,
   getPostsFromFavUrls,
+  serializeUser
 }

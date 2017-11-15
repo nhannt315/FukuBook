@@ -3,162 +3,106 @@ const Router = express.Router();
 const userModel = require('./userModel');
 const passport = require('passport');
 
-Router.post('/savePost', (req, res, next) => {
-  if (req.user != undefined) {
-    userModel.savePost(req.body.post, req.user._id, (err, doc) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(doc);
-      }
-    });
-  } else {
-    res.send({message: '401'});
-  }
-});
-
-Router.get('/getPosts/:page', (req, res, next) => {
-  if (req.user != undefined) {
-    userModel.getPosts(req.user._id, req.params.page, (err, doc) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(doc);
-      }
-    });
-  } else {
-    res.send({message: '401'});
-  }
-});
-
-Router.post('/deletePost', (req, res) => {
-  if (req.user != undefined) {
-    userModel.deletePost(req.body.post, req.user._id, (err, doc) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(doc);
-      }
-    });
-  } else {
-    res.send({message: '401'});
-  }
-});
-
-Router.get('/getPostsURL', (req, res, next) => {
-  if (req.user != undefined) {
-    userModel.getPostsURL(req.user._id, (err, doc) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(doc);
-      }
-    });
-  } else {
-    res.send({message: '401'});
-  }
-});
-
-Router.post('/saveFavUrl', (req, res, next) => {
-  if (req.user != undefined) {
-    userModel.saveFavUrl(req.body.url, req.user._id, (err, doc) => {
-      if (err) {
-        res.send(err);
-      } else {
-        userModel.updatePostsFromFavUrls(req.user._id, (err, doc) => {
-          if (err) {
-            // console.log(err);
-          } else {
-            res.send(doc);
-          }
-        });
-      }
-    })
-  } else {
-    res.send({message: '401'});
-  }
-});
-
-
-Router.get('/getFavUrls', (req, res, next) => {
-  if (req.user != undefined) {
-    userModel.getFavUrls(req.user._id, (err, doc) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(doc);
-      }
-    });
-  } else {
-    res.send('401');
-  }
-})
-
-Router.post('/deleteFavUrl', (req, res, next) => {
-  if (req.user != undefined) {
-    userModel.deleteFavUrl(req.user._id, req.body.id, (err, doc) => {
-      if (err) {
-        res.send(err);
-      } else {
-        userModel.updatePostsFromFavUrls(req.user._id, (err, doc) => {
-          if (err) {
-            // console.log(err);
-          } else {
-            // console.log("update posts from favorite urls to database success");
-            res.send(doc);
-          }
-        });
-      }
-    })
-  } else {
-    res.send('401')
-  }
-});
-
-Router.get('/getPostsFromFavUrls/:page', (req, res, next) => {
-  if (req.user != undefined) {
-    userModel.getPostsFromFavUrls(req.user._id, req.params.page, (err, doc) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(doc);
-      }
-    });
-  } else {
-    res.send('401');
-  }
-})
-
-
-Router.post('/login', (req, res, next) => {
-  passport.authenticate('local', function(err, user, info) {
+Router.post('/savePost', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  userModel.savePost(req.body.post, req.user._id, (err, doc) => {
     if (err) {
-      return next(err);
+      res.send(err);
+    } else {
+      res.send(doc);
     }
-    if (!user) {
-      return res.send(info);
+  });
+});
+
+Router.get('/getPosts/:page', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  userModel.getPosts(req.user._id, req.params.page, (err, doc) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(doc);
     }
-    req.logIn(user, function(err) {
-      if (err) {
-        return next(err);
-      } else {
-        if (req.body.remember === 'true') {
-          res.cookie('remember', req.session.passport.user,  { maxAge: 900000});
+  });
+});
+
+Router.post('/deletePost', passport.authenticate('jwt', { session: false }), (req, res) => {
+  userModel.deletePost(req.body.post, req.user._id, (err, doc) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(doc);
+    }
+  });
+});
+
+Router.get('/getPostsURL', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  userModel.getPostsURL(req.user._id, (err, doc) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(doc);
+    }
+  });
+});
+
+Router.post('/saveFavUrl', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  userModel.saveFavUrl(req.body.url, req.user._id, (err, doc) => {
+    if (err) {
+      res.send(err);
+    } else {
+      userModel.updatePostsFromFavUrls(req.user._id, (err, doc) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send(doc);
         }
-        return res.send({user: req.user, token: req.session.passport.user});
-      }
-    });
-  })(req, res, next);
+      });
+    }
+  })
+});
+
+Router.get('/getFavUrls', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  userModel.getFavUrls(req.user._id, (err, doc) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(doc);
+    }
+  });
+})
+
+Router.post('/deleteFavUrl', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  userModel.deleteFavUrl(req.user._id, req.body.id, (err, doc) => {
+    if (err) {
+      res.send(err);
+    } else {
+      userModel.updatePostsFromFavUrls(req.user._id, (err, doc) => {
+        if (err) {
+        } else {
+          res.send(doc);
+        }
+      });
+    }
+  });
+});
+
+Router.get('/getPostsFromFavUrls/:page', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  userModel.getPostsFromFavUrls(req.user._id, req.params.page, (err, doc) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(doc);
+    }
+  });
+});
+
+Router.post('/login', passport.authenticate('local', { session: false }), (req, res, next) => {
+  let token = userModel.serializeUser(req.user, 60 * 60 * 24 * 3);
+  return res.send({user: req.user, token: token});
 });
 
 Router.post('/register', function(req, res, next) {
   let newUser = {
     username: req.body.username,
-    password: req.body.password,
-    fullname: req.body.fullname,
-    email: req.body.email,
-    avatar: req.body.avatar,
-    dob: req.body.dob
+    password: req.body.password
   }
 
   userModel.createUser(newUser, (err, doc) => {
@@ -171,65 +115,13 @@ Router.post('/register', function(req, res, next) {
         }
         if (!user) {
           return res.send(info);
+        } else {
+          let token = userModel.serializeUser(user, 60 * 60 * 24 * 3);
+          return res.send({user: user, token: token});
         }
-        req.logIn(user, function(err) {
-          if (err) {
-            return next(err);
-          } else {
-            return res.send({user: req.user, token: req.session.passport.user});
-          }
-        });
       })(req, res, next);
     }
   });
-});
-
-Router.get('/logout', (req, res) => {
-  res.clearCookie("remember");
-  req.logout();
-  res.send(req.session);
-});
-
-Router.get('/', (req, res, next) => {
-  // console.log(req.session);
-  // console.log(req.cookies);
-
-  if (req.isAuthenticated()) {
-    // console.log('authenticated login');
-    return res.send(req.user);
-  } else {
-    if (req.cookies.remember) {
-      req.headers.authorization = "JWT " + req.cookies.remember;
-    } else {
-      if ((req.session.passport == {})) {
-        req.headers.authorization = "JWT " + req.session.passport.user;
-      } else {
-        // console.log('Unauthorized');
-        return res.send("Unauthorized");
-      }
-    }
-    passport.authenticate('jwt', {
-        session: false
-      },
-      (err, user, info) => {
-        if (err) {
-          return next(err);
-        }
-        if (!user) {
-          return res.send(info);
-        } else {
-          req.logIn(user, function(err) {
-            if (err) {
-              return next(err);
-            } else {
-              // console.log('access token login');
-              res.cookie('remember', req.session.passport.user,  { maxAge: 900000});
-              return res.send({user: req.user, token: req.session.passport.user});
-            }
-          });
-        }
-      })(req, res, next);
-  }
 });
 
 Router.get('/auth/facebook', passport.authenticate('facebook'));
