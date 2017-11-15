@@ -76,6 +76,20 @@ export class FbpostService {
 
   relayout() {
     this.postContainer.isotope('layout');
+    const width = this.postContainer.width();
+    let padding = 0;
+    if (width > 1080) {
+      padding = (width - 1080) / 2;
+      this.postContainer.css('padding-left', padding);
+      // this.postContainer.css('padding-right', padding);
+      return;
+    }
+    if (width > 720) {
+      padding = (width - 720) / 2;
+      this.postContainer.css('padding-left', padding);
+      // this.postContainer.css('padding-right', padding);
+      return;
+    }
   }
 
 }
