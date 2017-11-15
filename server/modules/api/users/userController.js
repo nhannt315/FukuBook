@@ -13,7 +13,7 @@ Router.post('/savePost', (req, res, next) => {
       }
     });
   } else {
-    res.send('401');
+    res.send({message: '401'});
   }
 });
 
@@ -27,7 +27,7 @@ Router.get('/getPosts/:page', (req, res, next) => {
       }
     });
   } else {
-    res.send('401');
+    res.send({message: '401'});
   }
 });
 
@@ -41,7 +41,7 @@ Router.post('/deletePost', (req, res) => {
       }
     });
   } else {
-    res.send('401');
+    res.send({message: '401'});
   }
 });
 
@@ -55,7 +55,7 @@ Router.get('/getPostsURL', (req, res, next) => {
       }
     });
   } else {
-    res.send('401');
+    res.send({message: '401'});
   }
 });
 
@@ -69,14 +69,13 @@ Router.post('/saveFavUrl', (req, res, next) => {
           if (err) {
             // console.log(err);
           } else {
-            // console.log("update posts from favorite urls to database success");
             res.send(doc);
           }
         });
       }
     })
   } else {
-    res.send('401');
+    res.send({message: '401'});
   }
 });
 
@@ -146,7 +145,7 @@ Router.post('/login', (req, res, next) => {
         if (req.body.remember === 'true') {
           res.cookie('remember', req.session.passport.user,  { maxAge: 900000});
         }
-        return res.send(req.user);
+        return res.send({user: req.user, token: req.session.passport.user});
       }
     });
   })(req, res, next);
@@ -177,7 +176,7 @@ Router.post('/register', function(req, res, next) {
           if (err) {
             return next(err);
           } else {
-            return res.send(req.user);
+            return res.send({user: req.user, token: req.session.passport.user});
           }
         });
       })(req, res, next);
@@ -225,7 +224,7 @@ Router.get('/', (req, res, next) => {
             } else {
               // console.log('access token login');
               res.cookie('remember', req.session.passport.user,  { maxAge: 900000});
-              return res.send(req.user);
+              return res.send({user: req.user, token: req.session.passport.user});
             }
           });
         }
