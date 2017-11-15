@@ -20,7 +20,7 @@ export class FbpostService {
       masonry: {
         columnWidth: this.iframeWidth,
         gutter: 10,
-        fitWidth: false
+        fitWidth: true
       },
       itemSelector: '.grid-item',
       isAnimated: true,
@@ -29,6 +29,9 @@ export class FbpostService {
         easing: 'linear',
         queue: false
       }
+    });
+    this.postContainer.resize(() => {
+
     });
     this.tempPostContainer = $(tempContainerID);
   }
@@ -49,6 +52,7 @@ export class FbpostService {
       this.tempPostContainer.children().each((index, obj) => {
         this.postContainer.append($(obj)).isotope('appended', $(obj));
         this.relayout();
+
       });
       this.tempPostContainer.empty();
       this.relayout();
@@ -76,20 +80,6 @@ export class FbpostService {
 
   relayout() {
     this.postContainer.isotope('layout');
-    const width = this.postContainer.width();
-    let padding = 0;
-    if (width > 1080) {
-      padding = (width - 1080) / 2;
-      this.postContainer.css('padding-left', padding);
-      // this.postContainer.css('padding-right', padding);
-      return;
-    }
-    if (width > 720) {
-      padding = (width - 720) / 2;
-      this.postContainer.css('padding-left', padding);
-      // this.postContainer.css('padding-right', padding);
-      return;
-    }
   }
 
 }

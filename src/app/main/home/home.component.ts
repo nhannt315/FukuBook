@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.initFacebook();
     this.loadPost();
     this.fbPostService.setRootContainer('#post-container-main', '#post-container-temp');
-    this.mySubscribe = Observable.interval(200).subscribe(x => {
+    this.mySubscribe = Observable.interval(500).subscribe(x => {
       this.fbPostService.layoutIfNeeded();
     });
   }
