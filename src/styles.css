@@ -1,35 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
-#username {
-  display: none
-}
+/*!* You can add global styles to this file, and also import other style files *!*/
 
-#userImg {
-  display: none
-}
+/*#userImg {*/
+  /*display: none*/
+/*}*/
 
-#usernameRes {
-  display: none
-}
+/*#usernameRes {*/
+  /*display: none*/
+/*}*/
 
-#userImgRes {
-  display: none
-}
+/*#userImgRes {*/
+  /*display: none*/
+/*}*/
 
-#logout_btn {
-  display: none
-}
+/*#logout_btn {*/
+  /*display: none*/
+/*}*/
 
-#logout_btn_res {
-  display: none
-}
+/*#logout_btn_res {*/
+  /*display: none*/
+/*}*/
 
-#loginedPanel {
-  display: none
-}
+/*#loginedPanel {*/
+  /*display: none*/
+/*}*/
 
-#loginedCollapse {
-  display: none;
-}
+/*#loginedCollapse {*/
+  /*display: none;*/
+/*}*/
 
 .addFavUrl {
   display: none;

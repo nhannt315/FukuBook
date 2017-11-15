@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AuthenticationService} from '../../core/services/authentication/authentication.service';
+import {User} from '../../core/models/models.component';
+import {NotificationService} from '../../core/services/notification/notification.service';
+import {MessageConstants} from '../../core/common/message.constants';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +11,48 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  @Output() onLoginSuccess = new EventEmitter();
+  @Input() isLogin = true;
+  user: User;
+  remember = false;
+  userSignup: User;
+  repeatPassword: String;
+  isPassWordMatch = false;
+  isLoadingLogin = false;
+  isLoadingSignup = false;
 
-  ngOnInit() {
+  constructor(public authService: AuthenticationService, private notifyService: NotificationService) {
   }
 
+  ngOnInit() {
+    this.user = new User();
+    this.userSignup = new User();
+    this.isPassWordMatch = this.userSignup.password === this.repeatPassword;
+  }
+
+  login() {
+    if (!this.user.password || !this.user.username) {
+      return;
+    }
+    this.isLoadingLogin = true;
+    this.authService.login(this.user.username, this.user.password, this.remember).subscribe(data => {
+      this.onLoginSuccess.emit(MessageConstants.LOGIN_SUCCESS);
+    }, error => {
+      this.notifyService.printErrorMessage(MessageConstants.LOGIN_FAILED);
+      this.isLoadingLogin = false;
+    });
+  }
+
+  signUp() {
+    if (!this.userSignup.password || !this.userSignup.username || (this.repeatPassword !== this.userSignup.password)) {
+      return;
+    }
+    this.isLoadingSignup = true;
+    this.authService.signUp(this.userSignup.username, this.userSignup.password).subscribe(data => {
+      this.onLoginSuccess.emit(MessageConstants.REGISTER_SUCCESS);
+    }, error => {
+      this.notifyService.printErrorMessage(MessageConstants.REGISTER_FAILED);
+      this.isLoadingSignup = false;
+    });
+  }
 }
