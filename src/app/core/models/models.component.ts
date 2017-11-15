@@ -1,5 +1,10 @@
 export class User {
-
+  username: String;
+  password: String;
+  favUrls: String[];
+  postsFromFavUrls: String[];
+  postId: String[];
+  token: String;
 }
 
 export class Post {

@@ -5,4 +5,5 @@ export class MessageConstants {
     public static CREATED_OK_MSG = 'Thêm mới thành công';
     public static UPDATED_OK_MSG = 'Cập nhật thành công';
     public static DELETED_OK_MSG = 'Xóa thành công';
+    public static LOGIN_SUCCESS = 'Đăng nhập thành công';
 }

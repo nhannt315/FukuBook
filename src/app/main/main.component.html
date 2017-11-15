@@ -65,23 +65,29 @@
 
     <ul class="nav navbar-nav navbar-right">
 
-      <li class="user"><span id="username"></span> <i id="userImg" class="fa fa-user-circle"
-                                                      aria-hidden="true"></i></li>
-      <li>
-        <button type="button" class="btn" data-toggle="modal" data-target="#login" id="login_btn" (click)="showLoginModal()">
+      <li class="user" *ngIf="authService.isLoggedIn()">
+        <span id="username">{{authService.getCurrentUser().username}}</span>
+        <i id="userImg"
+           class="fa fa-user-circle"
+           aria-hidden="true">
+        </i>
+      </li>
+      <li *ngIf="!authService.isLoggedIn()">
+        <button type="button" class="btn" data-toggle="modal" data-target="#login" id="login_btn"
+                (click)="showLoginModal()">
           <span class="glyphicon glyphicon-user"></span>
           Đăng nhập
         </button>
       </li>
-      <li>
+      <li *ngIf="!authService.isLoggedIn()">
         <button type="button" class="btn" data-toggle="modal" data-target="#signup"
-                style="margin-right: 20px;" id="signup_btn" (click)="showLoginModal()">
+                style="margin-right: 40px;" id="signup_btn" (click)="showLoginModal()">
           <span class="glyphicon glyphicon-log-in"></span>
           Đăng ký
         </button>
       </li>
-      <li>
-        <button type="button" class="btn" id="logout_btn" style="margin-right: 40px;">
+      <li *ngIf="authService.isLoggedIn()">
+        <button type="button" class="btn" id="logout_btn" style="margin-right: 40px;" (click)="authService.logout()">
           <span class="glyphicon glyphicon-log-in"></span>
           Đăng xuất
         </button>
@@ -120,9 +126,9 @@
        aria-labelledby="myLargeModalLabel"
        aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-body">
-          <app-login></app-login>
-        </div>
+      <div class="modal-body">
+        <app-login (onLoginSuccess)="loggedIn()"></app-login>
+      </div>
     </div>
   </div>
 

@@ -1,5 +1,8 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ModalDirective} from 'ngx-bootstrap';
+import {AuthenticationService} from '../core/services/authentication/authentication.service';
+import {NotificationService} from '../core/services/notification/notification.service';
+import {MessageConstants} from '../core/common/message.constants';
 
 declare const $: any;
 
@@ -13,7 +16,7 @@ export class MainComponent implements OnInit {
 
   loadAPI: Promise<any>;
 
-  constructor() {
+  constructor(public authService: AuthenticationService, private notifyService: NotificationService) {
   }
 
   ngOnInit() {
@@ -36,6 +39,7 @@ export class MainComponent implements OnInit {
     node2.async = true;
     node2.charset = 'utf-8';
     document.getElementsByTagName('head')[0].appendChild(node2);
+
   }
 
   showLoginModal() {
@@ -44,6 +48,11 @@ export class MainComponent implements OnInit {
 
   showSignupModal() {
     this.modalLoginSignup.show();
+  }
+
+  loggedIn() {
+    this.modalLoginSignup.hide();
+    this.notifyService.printSuccessMessage(MessageConstants.LOGIN_SUCCESS);
   }
 
 

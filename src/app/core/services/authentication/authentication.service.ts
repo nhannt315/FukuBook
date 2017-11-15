@@ -11,7 +11,7 @@ export class AuthenticationService {
   constructor(private http: Http) {
   }
 
-  login(username: string, password: string, remember: boolean) {
+  login(username: String, password: String, remember: boolean) {
     const body = {
       username: username,
       password: password,
@@ -20,7 +20,8 @@ export class AuthenticationService {
 
     return this.http.post(ApiUrlConstants.LOGIN, body)
       .map((response: Response) => {
-        const user: User = response.json();
+        const user: User = response.json().user;
+        user.token = response.json().token;
         if (user && user.token) {
           localStorage.removeItem(SystemConstants.CURRENT_USER);
           localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
@@ -28,13 +29,18 @@ export class AuthenticationService {
       });
   }
 
+
   logout() {
+    localStorage.removeItem(SystemConstants.CURRENT_USER);
   }
 
-
-  isAuthenticated(): boolean {
-    const user = localStorage.getItem(SystemConstants.CURRENT_USER);
-    return !!user;
+  getCurrentUser(): User {
+    return JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
   }
+
+  isLoggedIn(): boolean {
+    return this.getCurrentUser() !== null;
+  }
+
 
 }

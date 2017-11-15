@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {AuthenticationService} from '../../core/services/authentication/authentication.service';
+import {User} from '../../core/models/models.component';
+import {NotificationService} from '../../core/services/notification/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  @Output() onLoginSuccess = new EventEmitter();
+  user: User;
+  remember = false;
 
-  ngOnInit() {
+  constructor(public authService: AuthenticationService, private notifyService: NotificationService) {
   }
 
+  ngOnInit() {
+    this.user = new User();
+  }
+
+  login() {
+    this.authService.login(this.user.username, this.user.password, this.remember).subscribe(data => {
+      this.onLoginSuccess.emit();
+    }, error => this.notifyService.printErrorMessage(error));
+  }
 }
