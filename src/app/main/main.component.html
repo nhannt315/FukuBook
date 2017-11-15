@@ -68,14 +68,14 @@
       <li class="user"><span id="username"></span> <i id="userImg" class="fa fa-user-circle"
                                                       aria-hidden="true"></i></li>
       <li>
-        <button type="button" class="btn" data-toggle="modal" data-target="#login" id="login_btn">
+        <button type="button" class="btn" data-toggle="modal" data-target="#login" id="login_btn" (click)="showLoginModal()">
           <span class="glyphicon glyphicon-user"></span>
           Đăng nhập
         </button>
       </li>
       <li>
         <button type="button" class="btn" data-toggle="modal" data-target="#signup"
-                style="margin-right: 20px;" id="signup_btn">
+                style="margin-right: 20px;" id="signup_btn" (click)="showLoginModal()">
           <span class="glyphicon glyphicon-log-in"></span>
           Đăng ký
         </button>
@@ -90,38 +90,6 @@
   </nav>
 
   <div class="posts">
-    <div id="index" style="display:none">
-      <div class="aboutNews">
-        <h3>Tin tức</h3>
-        <div class="gridNews">
-
-        </div>
-      </div>
-      <div class="aboutFood">
-        <h3>Ăn uống</h3>
-        <div class="gridFood">
-
-        </div>
-      </div>
-      <div class="aboutFashion">
-        <h3>Thời trang</h3>
-        <div class="gridFashion">
-
-        </div>
-      </div>
-      <div class="aboutFilms">
-        <h3>Phim ảnh</h3>
-        <div class="gridFilms">
-
-        </div>
-      </div>
-      <div class="aboutSports">
-        <h3>Thể thao</h3>
-        <div class="gridSports">
-
-        </div>
-      </div>
-    </div>
 
     <!-- Tùy chọn -->
     <div class="addFavUrl">
@@ -146,6 +114,17 @@
     </div>
     <!-- Kết thúc tùy chọn -->
     <router-outlet></router-outlet>
+  </div>
+
+  <div id="modalLoginSignup" bsModal #modalLoginSignup="bs-modal" class="modal fade modal-backdrop" tabindex="-1"
+       aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="">
+        <div class="modal-body">
+          <app-login></app-login>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
