@@ -8,32 +8,33 @@ import {User} from '../../models/models.component';
 @Injectable()
 export class AuthenticationService {
 
-    constructor(private http: Http) {
-    }
+  constructor(private http: Http) {
+  }
 
-    login(username: string, password: string) {
-        const body = {
-            username: username,
-            password: password
-        };
+  login(username: string, password: string, remember: boolean) {
+    const body = {
+      username: username,
+      password: password,
+      remember: remember
+    };
 
-        return this.http.post(ApiUrlConstants.LOGIN, body)
-            .map((response: Response) => {
-                const user: User = response.json();
-                if (user && user.token) {
-                    localStorage.removeItem(SystemConstants.CURRENT_USER);
-                    localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
-                }
-            });
-    }
+    return this.http.post(ApiUrlConstants.LOGIN, body)
+      .map((response: Response) => {
+        const user: User = response.json();
+        if (user && user.token) {
+          localStorage.removeItem(SystemConstants.CURRENT_USER);
+          localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
+        }
+      });
+  }
 
-    logout() {
-    }
+  logout() {
+  }
 
 
-    isAuthenticated(): boolean {
-        const user = localStorage.getItem(SystemConstants.CURRENT_USER);
-        return !!user;
-    }
+  isAuthenticated(): boolean {
+    const user = localStorage.getItem(SystemConstants.CURRENT_USER);
+    return !!user;
+  }
 
 }

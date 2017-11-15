@@ -116,14 +116,13 @@
     <router-outlet></router-outlet>
   </div>
 
-  <div id="modalLoginSignup" bsModal #modalLoginSignup="bs-modal" class="modal fade modal-backdrop" tabindex="-1"
+  <div id="modalLoginSignup" bsModal #modalLoginSignup="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+       aria-labelledby="myLargeModalLabel"
        aria-hidden="true">
     <div class="modal-dialog">
-      <div class="">
         <div class="modal-body">
           <app-login></app-login>
         </div>
-      </div>
     </div>
   </div>
 
