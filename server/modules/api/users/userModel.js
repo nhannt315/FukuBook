@@ -272,8 +272,8 @@ const getPostsFromFavUrls = (userId, page, callback) => {
 }
 
 passport.use(new FacebookStrategy({
-    clientID: '132173900762693',
-    clientSecret: '56f136ea643b35d30a1c58a9be496e04',
+    clientID: '324580694617212',
+    clientSecret: 'b7b2f2229834eb9a92e6e6799180bd56',
     callbackURL: "https://trendez.herokuapp.com/user/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
