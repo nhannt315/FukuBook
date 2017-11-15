@@ -34,7 +34,24 @@ export class AuthenticationService {
     localStorage.removeItem(SystemConstants.CURRENT_USER);
   }
 
-  getCurrentUser(): User {
+  signUp(username: String, password: String) {
+    const body = {
+      username: username,
+      password: password
+    };
+
+    return this.http.post(ApiUrlConstants.SIGN_UP, body)
+      .map((response: Response) => {
+        const user: User = response.json().user;
+        user.token = response.json().token;
+        if (user && user.token) {
+          localStorage.removeItem(SystemConstants.CURRENT_USER);
+          localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
+        }
+      });
+  }
+
+  getCurrentUser(): any {
     return JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
   }
 

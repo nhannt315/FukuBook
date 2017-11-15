@@ -15,6 +15,7 @@ export class MainComponent implements OnInit {
   @ViewChild('modalLoginSignup') modalLoginSignup: ModalDirective;
 
   loadAPI: Promise<any>;
+  isLogin = true;
 
   constructor(public authService: AuthenticationService, private notifyService: NotificationService) {
   }
@@ -43,15 +44,18 @@ export class MainComponent implements OnInit {
   }
 
   showLoginModal() {
+    this.isLogin = true;
     this.modalLoginSignup.show();
   }
 
   showSignupModal() {
+    this.isLogin = false;
     this.modalLoginSignup.show();
   }
 
   loggedIn() {
     this.modalLoginSignup.hide();
+    console.log(this.authService.getCurrentUser());
     this.notifyService.printSuccessMessage(MessageConstants.LOGIN_SUCCESS);
   }
 

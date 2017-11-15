@@ -1,7 +1,7 @@
 export class ApiUrlConstants {
   public static DOMAIN = 'localhost:6969';
   public static LOGIN = `/user/login`;
-  public static SIGN_UP = '';
+  public static SIGN_UP = '/user/register';
   public static GET_ALL_POST = (page: number) => {
     return `/post/all?page={page}`;
   }

@@ -81,7 +81,7 @@
       </li>
       <li *ngIf="!authService.isLoggedIn()">
         <button type="button" class="btn" data-toggle="modal" data-target="#signup"
-                style="margin-right: 40px;" id="signup_btn" (click)="showLoginModal()">
+                style="margin-right: 40px;" id="signup_btn" (click)="showSignupModal()">
           <span class="glyphicon glyphicon-log-in"></span>
           Đăng ký
         </button>
@@ -127,7 +127,7 @@
        aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-body">
-        <app-login (onLoginSuccess)="loggedIn()"></app-login>
+        <app-login (onLoginSuccess)="loggedIn()" [isLogin]="isLogin"></app-login>
       </div>
     </div>
   </div>
