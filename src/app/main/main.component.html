@@ -127,7 +127,7 @@
        aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-body">
-        <app-login (onLoginSuccess)="loggedIn()" [isLogin]="isLogin"></app-login>
+        <app-login (onLoginSuccess)="loggedIn($event)" [isLogin]="isLogin"></app-login>
       </div>
     </div>
   </div>

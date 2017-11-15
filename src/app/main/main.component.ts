@@ -53,10 +53,9 @@ export class MainComponent implements OnInit {
     this.modalLoginSignup.show();
   }
 
-  loggedIn() {
+  loggedIn(event) {
     this.modalLoginSignup.hide();
-    console.log(this.authService.getCurrentUser());
-    this.notifyService.printSuccessMessage(MessageConstants.LOGIN_SUCCESS);
+    this.notifyService.printSuccessMessage(event);
   }
 
 
