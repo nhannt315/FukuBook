@@ -21,25 +21,25 @@
     </div>
   </div>
 
-  <div class="user-layout visible-xs" id="user-layout">
-    <div class="login-panel" id="unloginPanel">
+  <div class="user-layout visible-xs" id="user-layout" >
+    <div class="login-panel" id="unloginPanel" *ngIf="!authService.isLoggedIn()">
       <div class="">
-        <button type="button" name="button" data-toggle="modal" data-target="#login">
+        <button type="button" name="button" data-toggle="modal" data-target="#login" (click)="showLoginModal()">
           <span class="glyphicon glyphicon-user"></span>
           Đăng nhập
         </button>
       </div>
       <div class="">
-        <button type="button" name="button" data-toggle="modal" data-target="#signup">
+        <button type="button" name="button" data-toggle="modal" data-target="#signup" (click)="showSignupModal()">
           <span class="glyphicon glyphicon-log-in"></span>
           Đăng ký
         </button>
       </div>
     </div>
 
-    <div class="login-panel" id="loginedPanel">
+    <div class="login-panel" id="loginedPanel" *ngIf="authService.isLoggedIn()">
       <div class="user">
-        <span id="usernameRes"></span>
+        <span id="usernameRes">{{authService.getCurrentUser().username}}</span>
         <i id="userImgRes" class="fa fa-user-circle" aria-hidden="true"></i>
       </div>
       <div class="">
@@ -49,7 +49,7 @@
         </button>
       </div>
       <div class="">
-        <button type="button" id="logout_btn_res">
+        <button type="button" id="logout_btn_res" (click)="authService.logout()">
           <i class="fa fa-sign-out" aria-hidden="true"></i>
           Đăng xuất
         </button>

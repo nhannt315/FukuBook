@@ -16,3 +16,4 @@ function hideSidepanel() {
   $('#sidebar').toggleClass('active2');
   $('.brand').toggleClass('active');
 }
+

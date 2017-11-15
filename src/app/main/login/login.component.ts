@@ -4,6 +4,8 @@ import {User} from '../../core/models/models.component';
 import {NotificationService} from '../../core/services/notification/notification.service';
 import {MessageConstants} from '../../core/common/message.constants';
 
+declare const $: any;
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +14,7 @@ import {MessageConstants} from '../../core/common/message.constants';
 export class LoginComponent implements OnInit {
 
   @Output() onLoginSuccess = new EventEmitter();
-  @Input() isLogin = true;
+  @Input() isLogin = false;
   user: User;
   remember = false;
   userSignup: User;
@@ -28,6 +30,11 @@ export class LoginComponent implements OnInit {
     this.user = new User();
     this.userSignup = new User();
     this.isPassWordMatch = this.userSignup.password === this.repeatPassword;
+    if (this.isLogin) {
+      $('#login-li').trigger('click');
+    } else {
+      $('#signup-li').trigger('click');
+    }
   }
 
   login() {
