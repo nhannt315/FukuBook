@@ -8,7 +8,6 @@ const cors = require('cors');
 const path = require('path');
 const http = require('http');
 const postModel = require('./server/modules/api/posts/postModel.js');
-const flash = require('connect-flash');
 const config = require('./server/config.json');
 
 const userApi = require('./server/modules/api/users/userController');
@@ -31,7 +30,6 @@ app.use(session({
   saveUninitialized: false
 }));
 app.use(passport.initialize());
-app.use(flash());
 mongoose.connect(config.connectionDatabase, (err) => {
   if (err) {
     console.log(err);
@@ -52,8 +50,10 @@ app.get('*', (req, res) => {
 // app.use(express.static(__dirname + "/public"));
 
 const server = http.createServer(app);
-server.listen(config.port, () => {
-  console.log(`App listen on ${config.port}`);
+
+let port = process.env.PORT || config.port;
+server.listen(port, () => {
+  console.log(`App listen on ${port}`);
 });
 
 setInterval(function() {
