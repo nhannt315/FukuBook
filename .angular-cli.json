@@ -36,8 +36,7 @@
         "../node_modules/isotope-layout/dist/isotope.pkgd.min.js",
         "../node_modules/isotope-layout/dist/isotope.pkgd.js",
         "./assets/js/homepage.js",
-        "./assets/js/login.js",
-        "./assets/js/resize.js"
+        "./assets/js/login.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
