@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ModalDirective} from 'ngx-bootstrap';
 import {AuthenticationService} from '../core/services/authentication/authentication.service';
 import {NotificationService} from '../core/services/notification/notification.service';
-import {MessageConstants} from '../core/common/message.constants';
 
 declare const $: any;
 

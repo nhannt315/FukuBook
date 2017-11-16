@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthenticationService} from '../../core/services/authentication/authentication.service';
 import {User} from '../../core/models/models.component';
 import {NotificationService} from '../../core/services/notification/notification.service';
@@ -11,10 +11,10 @@ declare const $: any;
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-
+export class LoginComponent implements OnInit, AfterViewChecked {
   @Output() onLoginSuccess = new EventEmitter();
-  @Input() isLogin = false;
+
+  @Input() isLogin;
   user: User;
   remember = false;
   userSignup: User;
@@ -24,6 +24,15 @@ export class LoginComponent implements OnInit {
   isLoadingSignup = false;
 
   constructor(public authService: AuthenticationService, private notifyService: NotificationService) {
+
+  }
+
+  ngAfterViewChecked(): void {
+    if (this.isLogin) {
+      $('#login-li').click();
+    } else {
+      $('#signup-li').click();
+    }
   }
 
   ngOnInit() {

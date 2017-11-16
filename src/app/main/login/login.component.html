@@ -3,21 +3,21 @@
     <span class="logmod__close">Close</span>
     <div class="logmod__container">
       <ul class="logmod__tabs">
-        <li id="login-li" data-tabtar="lgm-2"><a href="#">Login</a></li>
-        <li id="signup-li" data-tabtar="lgm-1"><a href="#">Sign Up</a></li>
+        <li id="login-li" data-tabtar="lgm-2"><a href="#">Đăng nhập</a></li>
+        <li id="signup-li" data-tabtar="lgm-1"><a href="#">Đăng ký</a></li>
       </ul>
       <div class="logmod__tab-wrapper">
         <div class="logmod__tab lgm-1">
           <div class="logmod__heading">
             <span
-              class="logmod__heading-subtitle">Enter your personal details <strong>to create an acount</strong></span>
+              class="logmod__heading-subtitle">Điền thông tin của bạn <strong>để tạo tài khoản mới</strong></span>
           </div>
           <div class="logmod__form">
             <form name="formSignup" (ngSubmit)="signUp()" #fSignup="ngForm" novalidate accept-charset="utf-8" action="#"
                   class="simform">
               <div class="sminputs">
                 <div [ngClass]="{'has-error': fSignup.submitted && !usernameSignup.valid}" class="input full">
-                  <label class="string optional" for="user-name">Username*</label>
+                  <label class="string optional" for="user-name">Tên đăng nhập*</label>
                   <input type="text" class="string optional" placeholder="Username" name="usernameSignup"
                          [(ngModel)]="userSignup.username"
                          #usernameSignup="ngModel" required/>
@@ -28,7 +28,7 @@
                 [ngClass]="{'has-error': fSignup.submitted && (!passwordSignup.valid || !rePasswordSignup.valid || (userSignup.password !== repeatPassword)) }"
                 class="sminputs">
                 <div class="input string optional">
-                  <label class="string optional" for="user-pw">Password *</label>
+                  <label class="string optional" for="user-pw">Mật khẩu *</label>
                   <input name="passwordSignup" class="string optional" maxlength="255" id="user-pw"
                          placeholder="Password"
                          type="text" #passwordSignup="ngModel"
@@ -39,7 +39,7 @@
                   </div>
                 </div>
                 <div class="input string optional">
-                  <label class="string optional" for="user-pw-repeat">Repeat password *</label>
+                  <label class="string optional" for="user-pw-repeat">Xác nhận mật khẩu *</label>
                   <input name="rePasswordSignup" class="string optional" maxlength="255" id="user-pw-repeat"
                          placeholder="Repeat password" #rePasswordSignup="ngModel" [(ngModel)]="repeatPassword"
                          type="text" size="50" validateEqual="passwordSignup" required/>
@@ -57,11 +57,11 @@
                         [disabled]="fSignup.submitted && (!passwordSignup.valid || !rePasswordSignup.valid || (userSignup.password !== repeatPassword))">
                   Create Account
                 </button>
-                <span class="simform__actions-sidetext">By creating an account you agree to our
+                <span class="simform__actions-sidetext">Bằng cách tạo một tài khoản bạn đồng ý với
                   <a class="special"
                      href="#"
                      target="_blank"
-                     role="link">Terms & Privacy
+                     role="link">Điều khoản & Bảo mật của chúng tôi
                   </a>
                 </span>
                 <img
@@ -78,7 +78,7 @@
                   <i class="fa fa-facebook"></i>
                 </div>
                 <div class="connect__context">
-                  <span>Create an account with <strong>Facebook</strong></span>
+                  <span>Tạo tài khoản với <strong>Facebook</strong></span>
                 </div>
               </a>
             </div>
@@ -86,7 +86,7 @@
         </div>
         <div class="logmod__tab lgm-2">
           <div class="logmod__heading">
-            <span class="logmod__heading-subtitle">Enter your username and password <strong>to sign in</strong></span>
+            <span class="logmod__heading-subtitle">Nhập tài khoản và mật khẩu <strong>để đăng nhập</strong></span>
           </div>
           <div class="logmod__form">
             <form name="formLogin" (ngSubmit)="login()" accept-charset="utf-8" #fLogin="ngForm" novalidate action="#"
@@ -107,7 +107,7 @@
                          [(ngModel)]="user.password"
                          #password="ngModel" required/>
                   <div *ngIf="fLogin.submitted && !password.valid" class="help-block">Mật khẩu được yêu cầu</div>
-                  <span class="hide-password">Show</span>
+                  <span class="hide-password">Hiện</span>
                 </div>
               </div>
               <div class="simform__actions">
@@ -120,7 +120,7 @@
                   Log In
                 </button>
                 <span class="simform__actions-sidetext"><a class="special" role="link"
-                                                           href="#">Forgot your password?<br>Click here</a></span>
+                                                           href="#">Quên mật khẩu?<br>Nhấn vào đây</a></span>
               </div>
             </form>
           </div>
@@ -131,7 +131,7 @@
                   <i class="fa fa-facebook"></i>
                 </div>
                 <div class="connect__context">
-                  <span>Sign in with <strong>Facebook</strong></span>
+                  <span>Đăng nhập với <strong>Facebook</strong></span>
                 </div>
               </a>
             </div>
