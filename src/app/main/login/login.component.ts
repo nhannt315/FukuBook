@@ -13,8 +13,8 @@ declare const $: any;
 })
 export class LoginComponent implements OnInit, AfterViewChecked {
   @Output() onLoginSuccess = new EventEmitter();
-  @Input() isLogin;
 
+  @Input() isLogin;
   user: User;
   remember = false;
   userSignup: User;
@@ -39,6 +39,11 @@ export class LoginComponent implements OnInit, AfterViewChecked {
     this.user = new User();
     this.userSignup = new User();
     this.isPassWordMatch = this.userSignup.password === this.repeatPassword;
+    if (this.isLogin) {
+      $('#login-li').trigger('click');
+    } else {
+      $('#signup-li').trigger('click');
+    }
   }
 
   login() {
