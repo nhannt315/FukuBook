@@ -1,38 +1,51 @@
 const mongoose = require('mongoose');
 const pageSchema = require('./pageSchema');
+const categoryModel = require('../categories/categoryModel.js');
+const categoryHelper = require('../categories/categoryHelper.js');
 
 const pageModel = mongoose.model('pages', pageSchema);
 
 const getAllPagesFromDB = (callback) => {
-  pageModel.find({}).exec((err, result) => {
+  pageModel.find({}).lean().exec((err, result) => {
     if (err) {
       callback(err);
     } else {
-      callback(null, result);
+      callback(result);
     }
   });
 }
 
-const createNewPage = (newPage, callback) => {
-  pageModel.create(newPage, (err, doc) => {
-    if (err) {
-      console.log('createNewPage ERROR ', err);
-    } else {
-      callback(null, doc);
+const createNewPage = (pageName, pageUrl, pageCategory, callback) => {
+  categoryModel.getAllCategoriesFromDB((listCategory) => {
+    var categoryId = [];
+    for (category in pageCategory) {
+      categoryId.push(categoryHelper.getCategoryIdFromNameWithList(listCategory, pageCategory[category]));
     }
-  })
+    var newPage = {
+      name: pageName,
+      permalink_url: pageUrl,
+      category: categoryId
+    }
+    pageModel.create(newPage, (err, doc) => {
+      if (err) {
+        console.log('createNewPage ERROR ', err);
+      } else {
+        callback(null, doc);
+      }
+    });
+  });
 }
 
 const deletePageById = (id) => {
   pageModel.remove({
-    id: id
+    _id: id
   }, function(err) {
     if (err) {
       console.log('deletePageById ERROR ', err);
     } else {
       console.log("deletePageById SUCCESS");
     }
-  })
+  });
 }
 
 module.exports = {

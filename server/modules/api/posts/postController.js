@@ -11,8 +11,9 @@ Router.get('/:category', (req, res) => {
     var page = (req.query.hasOwnProperty("page")) ? parseInt(req.query.page) : 0;
     var limit = (req.query.hasOwnProperty("limit")) ? parseInt(req.query.limit) : 0;
     var filter = (req.query.hasOwnProperty("filter")) ? req.query.filter : null;
-    console.log("page " + page + " limit " + limit + " filter " + filter);
-    postModel.getPostsFromDBWithCategoryWithFilterWithPageWithLimit(req.params.category, filter, page, limit, (err, result) => {
+    var shop = (req.query.hasOwnProperty("shop")) ? req.query.shop : null;
+    console.log("page " + page + " limit " + limit + " filter " + filter + " shop " + shop);
+    postModel.getPostsFromDBWithCategoryWithFilterWithPageWithLimitWithShop(req.params.category, filter, page, limit, shop, (err, result) => {
       if (err) {
         res.send(err);
       } else {
