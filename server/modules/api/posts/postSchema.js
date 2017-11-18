@@ -7,7 +7,7 @@ const categoryModel = mongoose.model('categories', categorySchema);
 const pageModel = mongoose.model('pages', pageSchema);
 
 const postSchema = new Schema({
-  id: {
+  fb_id: {
     type: String,
     require: true,
   },
@@ -30,7 +30,7 @@ const postSchema = new Schema({
     type: String
   },
   category: {
-    type: Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
     ref: 'categories',
     require: true
   },

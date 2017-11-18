@@ -8,11 +8,28 @@ const getCategoryIdFromNameWithList = (listCategory, name) => {
 
 const getCategoryKeywordsFromID = (listCategory, id) => {
   for (category in listCategory) {
-    // console.log("listCategory[category]._id:\n", listCategory[category]._id);
-    if (listCategory[category]._id.toString() === id.toString()) {
+    if (listCategory[category]._id.toString() == id.toString()) {
       return listCategory[category].keywords;
     }
   }
+}
+
+const cloneJSON = (obj) => {
+  if (obj === null || obj === undefined || typeof obj !== 'object') {
+    return obj
+  }
+  if (obj instanceof Array) {
+    var cloneA = [];
+    for (var i = 0; i < obj.length; ++i) {
+      cloneA[i] = cloneJSON(obj[i]);
+    }
+    return cloneA;
+  }
+  var cloneO = {};
+  for (var i in obj) {
+    cloneO[i] = cloneJSON(obj[i]);
+  }
+  return cloneO;
 }
 
 module.exports = {

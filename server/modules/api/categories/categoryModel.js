@@ -39,6 +39,17 @@ const deleteCategoryById = (id) => {
   });
 }
 
+const updateCategoryById = (id, fields, callback) => {
+  categoryModel.findOneAndUpdate({
+    _id: id
+  }, fields, (err, doc) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, doc);
+    }
+  });
+}
 
 module.exports = {
   getAllCategoriesFromDB,

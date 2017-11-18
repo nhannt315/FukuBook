@@ -33,19 +33,6 @@ const updateCollection = (listUrl, range) => {
   postHelper.getPostsOfMultiplePagesWithinRange(listUrl, range, (listData) => {
     categoryModel.getAllCategoriesFromDB((listCategory) => {
       pageModel.getAllPagesFromDB((listPage) => {
-        var options = {
-          tokenize: true,
-          threshold: 0,
-          location: 0,
-          distance: 100,
-          maxPatternLength: 32,
-          minMatchCharLength: 1,
-          keys: [
-            "message"
-          ]
-        };
-        var fuse = new Fuse(listData, options);
-        var listDataShirts = fuse.search("áo shirts shirt");
         deleteDatabase();
         createPostWithCategory(listData, listCategory, listPage);
       });
@@ -58,15 +45,34 @@ const createPostWithCategory = (listData, listCategory, listPage) => {
     if (item.error) {} else if (!item.error) {
       var pageId = pageHelper.getPageIdFromUrl(listPage, item.permalink_url);
       var pageCategory = pageHelper.getPageCategoryFromUrl(listPage, item.permalink_url);
-      var categoryId;
-      // console.log("pageId:\n", pageId);
-      // console.log("pageCategory:\n", pageCategory);
+      var categoryId = [];
+      console.log("pageId:\n", pageId);
+      console.log("pageCategory:\n", pageCategory);
+      console.log("pageCategory.length:\n", pageCategory.length);
       if (pageCategory.length == 1) {
-        categoryId = pageCategory[0];
+        categoryId.push(pageCategory[0]);
+      } else if (pageCategory.length > 1) {
+        for (i = 0; i < pageCategory.length; i++) {
+          console.log("pageCategory[category]:\n", pageCategory[i]);
+          var keywords = categoryHelper.getCategoryKeywordsFromID(listCategory, pageCategory[i]);
+          console.log("pageCategory[category] after keywords:\n", pageCategory[i]);
+          console.log("keywords:\n", keywords);
+          for (j = 0; j < keywords.length; j++) {
+            if (item.message != undefined && item.message.includes(keywords[j])) {
+              console.log("Found Match\n");
+              console.log("Pushing category: ", pageCategory[i]);
+              categoryId.push(pageCategory[i]);
+              break;
+            }
+          }
+        }
+      }
+      console.log("categoryId:\n", categoryId);
+      if (categoryId.length > 0) {
         var newPost;
         if (item.hasOwnProperty("shares")) {
           newPost = {
-            id: item.id,
+            fb_id: item.id,
             permalink_url: item.permalink_url,
             likes: item.likes.summary.total_count,
             comments: item.comments.summary.total_count,
@@ -77,7 +83,7 @@ const createPostWithCategory = (listData, listCategory, listPage) => {
           }
         } else {
           newPost = {
-            id: item.id,
+            fb_id: item.id,
             permalink_url: item.permalink_url,
             likes: item.likes.summary.total_count,
             comments: item.comments.summary.total_count,
@@ -91,48 +97,6 @@ const createPostWithCategory = (listData, listCategory, listPage) => {
             console.log('updateCollection ERROR ', err);
           } else {}
         });
-      } else {
-        for (category in pageCategory) {
-          // console.log("pageCategory[category]:\n", pageCategory[category]);
-          var keywords = categoryHelper.getCategoryKeywordsFromID(listCategory, pageCategory[category]);
-          // console.log("keywords:\n", keywords);
-          for (keyword in keywords) {
-            if (item.message != undefined) {
-              if (item.message.includes(keywords[keyword])) {
-                categoryId = pageCategory[category];
-                var newPost;
-                if (item.hasOwnProperty("shares")) {
-                  newPost = {
-                    id: item.id,
-                    permalink_url: item.permalink_url,
-                    likes: item.likes.summary.total_count,
-                    comments: item.comments.summary.total_count,
-                    message: item.message,
-                    category: categoryId,
-                    shares: item.shares.count,
-                    page: pageId
-                  }
-                } else {
-                  newPost = {
-                    id: item.id,
-                    permalink_url: item.permalink_url,
-                    likes: item.likes.summary.total_count,
-                    comments: item.comments.summary.total_count,
-                    message: item.message,
-                    category: categoryId,
-                    page: pageId
-                  }
-                }
-                createNewPost(newPost, (err, doc) => {
-                  if (err) {
-                    console.log('updateCollection ERROR ', err);
-                  } else {}
-                });
-                break;
-              }
-            }
-          }
-        }
       }
     }
   });
@@ -553,8 +517,34 @@ const updateDatabase = () => {
   });
 }
 
+const deletePostById = (id) => {
+  postModel.remove({
+    id: id
+  }, function(err) {
+    if (err) {
+      console.log('deletePageById ERROR ', err);
+    } else {
+      console.log("deletePageById SUCCESS");
+    }
+  });
+}
+
+const updatePostById = (id, fields, callback) => {
+  postModel.findOneAndUpdate({
+    id: id
+  }, fields, (err, doc) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, doc);
+    }
+  });
+}
+
 module.exports = {
   getAllPostsFromDBWithCategory,
   getPostsFromDBWithCategoryWithFilterWithPageWithLimitWithShop,
-  updateDatabase
+  updateDatabase,
+  deletePostById,
+  updatePostById
 }

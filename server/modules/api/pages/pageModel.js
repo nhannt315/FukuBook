@@ -48,6 +48,18 @@ const deletePageById = (id) => {
   });
 }
 
+const updatePageById = (id, fields, callback) => {
+  pageModel.findOneAndUpdate({
+    _id: id
+  }, fields, (err, doc) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, doc);
+    }
+  });
+}
+
 module.exports = {
   getAllPagesFromDB,
   createNewPage,
