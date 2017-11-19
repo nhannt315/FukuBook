@@ -57,9 +57,45 @@ const getCategoryById = (id, callback) => {
     _id: id
   }, (err, doc) => {
     if (err) {
-      res.send(err);
+      callback(err);
     } else {
-      res.send(null, doc);
+      callback(null, doc);
+    }
+  })
+}
+
+const deleteCategoryByName = (name) => {
+  categoryModel.remove({
+    name: name
+  }, function(err) {
+    if (err) {
+      console.log('deleteCategoryById ERROR ', err);
+    } else {
+      console.log("deleteCategoryById SUCCESS");
+    }
+  });
+}
+
+const updateCategoryByName = (name, fields, callback) => {
+  categoryModel.findOneAndUpdate({
+    name: name
+  }, fields, (err, doc) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, doc);
+    }
+  });
+}
+
+const getCategoryByName = (name, callback) => {
+  categoryModel.findOne({
+    name: name
+  }, (err, doc) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, doc);
     }
   })
 }
@@ -69,5 +105,8 @@ module.exports = {
   createNewCategory,
   deleteCategoryById,
   updateCategoryById,
-  getCategoryById
+  getCategoryById,
+  deleteCategoryByName,
+  updateCategoryByName,
+  getCategoryByName
 }

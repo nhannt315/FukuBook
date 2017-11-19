@@ -65,9 +65,45 @@ const getPageById = (id, callback) => {
     _id: id
   }, (err, doc) => {
     if (err) {
-      res.send(err);
+      callback(err);
     } else {
-      res.send(null, doc);
+      callback(null, doc);
+    }
+  })
+}
+
+const deletePageByUrl = (url) => {
+  pageModel.remove({
+    permalink_url: url
+  }, function(err) {
+    if (err) {
+      console.log('deletePageById ERROR ', err);
+    } else {
+      console.log("deletePageById SUCCESS");
+    }
+  });
+}
+
+const updatePageByUrl = (url, fields, callback) => {
+  pageModel.findOneAndUpdate({
+    permalink_url: url
+  }, fields, (err, doc) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, doc);
+    }
+  });
+}
+
+const getPageByUrl = (url, callback) => {
+  pageModel.findOne({
+    permalink_url: url
+  }, (err, doc) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, doc);
     }
   })
 }
@@ -77,5 +113,8 @@ module.exports = {
   createNewPage,
   deletePageById,
   updatePageById,
-  getPageById
+  getPageById,
+  deletePageByUrl,
+  updatePageByUrl,
+  getPageByUrl
 }

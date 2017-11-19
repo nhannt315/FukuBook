@@ -13,8 +13,8 @@ Router.get("/all", (req, res) => {
   });
 });
 
-Router.get("/:id", (req, res) => {
-  categoryModel.getCategoryById(req.params.id, (err, result) => {
+Router.get("/:name", (req, res) => {
+  categoryModel.getCategoryByName(req.params.name, (err, result) => {
     if (err) {
       res.send(err);
     } else {
@@ -33,8 +33,8 @@ Router.post("/", (req, res) => {
   });
 });
 
-Router.put("/:id", (req, res) => {
-  categoryModel.updateCategoryById(req.params.id, req.body, (err, result) => {
+Router.put("/:name", (req, res) => {
+  categoryModel.updateCategoryByName(req.params.name, req.body, (err, result) => {
     if (err) {
       res.send(err);
     } else {
@@ -43,8 +43,8 @@ Router.put("/:id", (req, res) => {
   });
 });
 
-Router.delete("/:id", (req, res) => {
-  categoryModel.deleteCategoryById(req.params.id, (err, result) => {
+Router.delete("/:name", (req, res) => {
+  categoryModel.deleteCategoryByName(req.params.name, (err, result) => {
     if (err) {
       res.send(err);
     } else {
