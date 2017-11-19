@@ -20,7 +20,7 @@ export class FbpostService {
       masonry: {
         columnWidth: this.iframeWidth,
         gutter: 10,
-        fitWidth: false
+        fitWidth: true
       },
       itemSelector: '.grid-item',
       isAnimated: true,
@@ -29,6 +29,9 @@ export class FbpostService {
         easing: 'linear',
         queue: false
       }
+    });
+    this.postContainer.resize(() => {
+
     });
     this.tempPostContainer = $(tempContainerID);
   }
@@ -49,6 +52,7 @@ export class FbpostService {
       this.tempPostContainer.children().each((index, obj) => {
         this.postContainer.append($(obj)).isotope('appended', $(obj));
         this.relayout();
+
       });
       this.tempPostContainer.empty();
       this.relayout();

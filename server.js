@@ -8,6 +8,7 @@ const cors = require('cors');
 const path = require('path');
 const http = require('http');
 const postModel = require('./server/modules/api/posts/postModel.js');
+
 const pageModel = require('./server/modules/api/pages/pageModel.js');
 const categoryModel = require('./server/modules/api/categories/categoryModel.js');
 
@@ -33,8 +34,6 @@ app.use(session({
   saveUninitialized: false
 }));
 app.use(passport.initialize());
-app.use(passport.session());
-
 mongoose.connect(config.connectionDatabase, (err) => {
   if (err) {
     console.log(err);
@@ -55,8 +54,10 @@ app.get('*', (req, res) => {
 // app.use(express.static(__dirname + "/public"));
 
 const server = http.createServer(app);
-server.listen(config.port, () => {
-  console.log(`App listen on ${config.port}`);
+
+let port = process.env.PORT || config.port;
+server.listen(port, () => {
+  console.log(`App listen on ${port}`);
 });
 
 // categoryModel.createNewCategory("quan", ["quần", "jogger", "pants"], () => {});

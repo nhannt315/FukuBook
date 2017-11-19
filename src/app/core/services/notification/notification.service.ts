@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
-
+import {SystemConstants} from '../../common/system.constants';
+import {MessageConstants} from '../../common/message.constants';
+import {Observable} from 'rxjs/Rx';
 declare let alertify: any;
 
 @Injectable()
@@ -76,5 +78,15 @@ export class NotificationService {
             }
         });
     }
+
+  public handleError(error: any) {
+    if (error.status === 401) {
+      localStorage.removeItem(SystemConstants.CURRENT_USER);
+      this.printErrorMessage(MessageConstants.LOGIN_AGAIN_MSG);
+    } else {
+      const errMsg = JSON.parse(error._body).errmsg || JSON.parse(error._body).message;
+      this.printErrorMessage(errMsg);
+    }
+  }
 
 }

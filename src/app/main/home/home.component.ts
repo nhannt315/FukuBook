@@ -1,10 +1,11 @@
-import {AfterContentInit, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
+import {AfterContentInit, Component, NgZone, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PostService} from '../../core/services/post/post.service';
 import {Post} from '../../core/models/models.component';
 import {NotificationService} from '../../core/services/notification/notification.service';
 import {FB_CONFIG} from '../../core/common/fb.config';
 import {FbpostService} from '../../core/services/fbpost/fbpost.service';
 import {Observable} from 'rxjs/Rx';
+import {ModalDirective} from 'ngx-bootstrap';
 
 declare let FB: any;
 declare let $: any;
@@ -15,6 +16,8 @@ declare let $: any;
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
+
+
   pageIndex = 1;
   public postList: Post[] = [];
   public isDataLoaded = false;
@@ -46,7 +49,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
     this.initFacebook();
     this.loadPost();
     this.fbPostService.setRootContainer('#post-container-main', '#post-container-temp');
-    this.mySubscribe = Observable.interval(200).subscribe(x => {
+    this.mySubscribe = Observable.interval(500).subscribe(x => {
       this.fbPostService.layoutIfNeeded();
     });
   }
