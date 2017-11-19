@@ -63,4 +63,14 @@ Router.delete("/:id", (req, res) => {
   });
 });
 
+Router.get("/:id", (req, res) => {
+  pageModel.getPostById(req.params.id, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 module.exports = Router;

@@ -6,7 +6,7 @@ const getCategoryIdFromNameWithList = (listCategory, name) => {
   }
 }
 
-const getCategoryKeywordsFromID = (listCategory, id) => {
+const getCategoryKeywordsFromId = (listCategory, id) => {
   for (category in listCategory) {
     if (listCategory[category]._id.toString() == id.toString()) {
       return listCategory[category].keywords;
@@ -34,5 +34,5 @@ const cloneJSON = (obj) => {
 
 module.exports = {
   getCategoryIdFromNameWithList,
-  getCategoryKeywordsFromID
+  getCategoryKeywordsFromId
 }

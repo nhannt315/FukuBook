@@ -60,9 +60,22 @@ const updatePageById = (id, fields, callback) => {
   });
 }
 
+const getPageById = (id, callback) => {
+  pageModel.findOne({
+    _id: id
+  }, (err, doc) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(null, doc);
+    }
+  })
+}
+
 module.exports = {
   getAllPagesFromDB,
   createNewPage,
   deletePageById,
-  updatePageById
+  updatePageById,
+  getPageById
 }
