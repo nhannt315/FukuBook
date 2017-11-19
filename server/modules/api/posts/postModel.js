@@ -239,6 +239,7 @@ const getPostsFromDBWithFilterWithPageWithLimitWithShop = (filter, page, limit, 
   }
   if (shop == null) {
     getPostsFromDBWithFilterWithPageWithLimit(filter, page, limit, callback);
+    return;
   }
   if (page == 0 && limit == 0) {
     getAllPostsFromDBWithFilterWithShop(filter, shop, callback);
@@ -440,6 +441,7 @@ const getAllPostsFromDBWithFilterWithShop = (filter, shop, callback) => {
   console.log("getAllPostsFromDBWithFilterWithShop");
   if (shop == null) {
     getAllPostsFromDBWithFilter(filter, callback);
+    return;
   }
   if (filter == null) {
     getAllPostsFromDBWithShop(shop, callback);
