@@ -13,21 +13,12 @@ const usersSchema = new Schema({
     type: String,
     require: true
   },
-  fullname: {
-    type: String
-  },
-  dob: {
-    type: Date
-  },
   avatar: {
     type: String
   },
   active: {
     type: Boolean,
     default: true
-  },
-  profile: {
-    type: ObjectId
   },
   postId: {
     type: [String]
@@ -40,6 +31,10 @@ const usersSchema = new Schema({
   ],
   postsFromFavUrls : {
     type: [String]
+  },
+  facebookId: {
+    type: string,
+    unique: true
   }
 }, {timestamps: {createAt: 'create_at', updateAt: 'update_at'}});
 

@@ -272,28 +272,50 @@ const getPostsFromFavUrls = (userId, page, callback) => {
 }
 
 passport.use(new FacebookStrategy({
-    clientID: '132173900762693',
-    clientSecret: '56f136ea643b35d30a1c58a9be496e04',
-    callbackURL: "https://trendez.herokuapp.com/user/auth/facebook/callback"
+    clientID: '324580694617212',
+    clientSecret: 'b7b2f2229834eb9a92e6e6799180bd56',
+    callbackURL: "https://flea-marketer.herokuapp.com/user/auth/facebook/callback",
+    passReqToCallback: true
   },
-  function(accessToken, refreshToken, profile, done) {
-    userModel.findOne({username : profile.displayName + '<span style="display:none">' + profile.id + '</span>'}, function(err, user) {
-      if (err) {
-        // console.log('err', err);
-        return done(err);
-      }
-      if (!user) {
-        user = {
-          username: profile.displayName + '<span style="display:none">' + profile.id + '</span>',
-          password: profile.displayName,
-        }
-        createUser(user, (err, doc) => {
-          return done(null, doc);
+  function(req, accessToken, refreshToken, profile, done) {
+    if (req.user) {
+      if (req.user.facebookId == undefined) {
+        userModel.findOne({_id: req.user._id}, function(err, user) {
+          if (err) {
+            return done(err);
+          } else {
+            user.facebookId = profile.id;
+            user.save((error, updatedUser) => {
+              if (error) {
+                return done(error);
+              } else return done(null, user);
+            });
+          }
         });
       } else {
-        return done(null, user);
+        if (req.user.facebookId != profile.id) {
+          return done('already has a facebook account before');
+        }
       }
-    });
+    } else {
+      userModel.findOne({facebookId : profile.id}, function(err, user) {
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          user = {
+            username: profile.displayName + '<span style="display:none">' + profile.id + '</span>',
+            password: profile.displayName,
+            facebookId: profile.id
+          }
+          createUser(user, (err, doc) => {
+            return done(null, doc);
+          });
+        } else {
+          return done(null, user);
+        }
+      });
+    }
   }
 ));
 
