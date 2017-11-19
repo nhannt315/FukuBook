@@ -271,32 +271,6 @@ const getPostsFromFavUrls = (userId, page, callback) => {
   });
 }
 
-passport.use(new FacebookStrategy({
-    clientID: '324580694617212',
-    clientSecret: 'b7b2f2229834eb9a92e6e6799180bd56',
-    callbackURL: "https://trendez.herokuapp.com/user/auth/facebook/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    userModel.findOne({username : profile.displayName + '<span style="display:none">' + profile.id + '</span>'}, function(err, user) {
-      if (err) {
-        // console.log('err', err);
-        return done(err);
-      }
-      if (!user) {
-        user = {
-          username: profile.displayName + '<span style="display:none">' + profile.id + '</span>',
-          password: profile.displayName,
-        }
-        createUser(user, (err, doc) => {
-          return done(null, doc);
-        });
-      } else {
-        return done(null, user);
-      }
-    });
-  }
-));
-
 module.exports = {
   createUser,
   savePost,

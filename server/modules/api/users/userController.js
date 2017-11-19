@@ -135,25 +135,5 @@ Router.post('/register', function(req, res, next) {
   });
 });
 
-Router.get('/auth/facebook', passport.authenticate('facebook'));
-
-Router.get('/auth/facebook/callback', (req, res, next) => {
-  passport.authenticate('facebook', function(err, user, info) {
-    if (err) {
-      res.status(400);
-      return next(err);
-    }
-    if (!user) {
-      return res.send(info);
-    }
-    req.logIn(user, function(err) {
-      if (err) {
-        return next(err);
-      } else {
-        return res.redirect('/');
-      }
-    });
-  })(req, res, next);
-});
 
 module.exports = Router;
