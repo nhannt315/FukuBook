@@ -546,5 +546,6 @@ module.exports = {
   getPostsFromDBWithCategoryWithFilterWithPageWithLimitWithShop,
   updateDatabase,
   deletePostById,
-  updatePostById
+  updatePostById,
+  createNewPost
 }
