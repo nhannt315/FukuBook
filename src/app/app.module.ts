@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppRoutesModule} from './app.routes';
 import {HttpModule} from '@angular/http';
+import {CookieService} from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import {HttpModule} from '@angular/http';
     HttpModule,
     AppRoutesModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

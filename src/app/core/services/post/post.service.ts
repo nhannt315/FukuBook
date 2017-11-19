@@ -18,6 +18,18 @@ export class PostService {
       .map(this.extractData);
   }
 
+  public getPostByCategory(category: String, page: number) {
+    return this.http
+      .get(ApiUrlConstants.GET_POST_BY_CATEGORY(category, page))
+      .map(this.extractData);
+  }
+
+  public searchPost(keyword: String, shop: String, category: String, page: number, pageSize: number) {
+    return this.http
+      .get(ApiUrlConstants.SEARCH_POST(keyword, shop, category, page, pageSize))
+      .map(this.extractData);
+  }
+
   private extractData(res: Response) {
     const body = res.json();
     return body || {};

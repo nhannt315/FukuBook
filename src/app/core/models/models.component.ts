@@ -17,3 +17,17 @@ export class Post {
   __v: number;
   shares: number;
 }
+
+export class Category {
+  _id: string;
+  name: string;
+  alias: string;
+  keywords: string[];
+}
+
+export class Shop {
+  _id: string;
+  name: string;
+  permalink_url: string;
+  category: string[];
+}

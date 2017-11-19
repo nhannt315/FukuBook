@@ -12,38 +12,24 @@
     </button>
   </div>
 
-  <nav class="ps-container">
+  <nav class="ps-container" *ngIf="categoryList">
     <ul class="nav">
       <li>
-        <a onClick="hideSidepanel()">
-          <i class="fa fa-home" aria-hidden="true"></i> <span>Trang chủ</span>
+        <a onClick="hideSidepanel()" routerLink="/main/home/all" routerLinkActive="active">
+          <i class="fa fa-home" aria-hidden="true"></i> <span>Tất cả</span>
         </a>
       </li>
       <li>
-        <a onClick="hideSidepanel()">
-          <i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>Tin tức</span>
+        <a onClick="hideSidepanel()" routerLink="/main/search" routerLinkActive="active">
+          <i class="fa fa-search" aria-hidden="true"></i> <span>Tìm kiếm</span>
         </a>
       </li>
-      <li>
+      <li *ngFor="let category of categoryList" [routerLink]="['/main/home', category.name]" routerLinkActive="active">
         <a onClick="hideSidepanel()">
-          <i class="fa fa-cutlery" aria-hidden="true"></i> <span>Ăn uống</span>
+          <i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>{{category.alias}}</span>
         </a>
       </li>
-      <li>
-        <a onClick="hideSidepanel()">
-          <i class="fa fa-shirtsinbulk" aria-hidden="true"></i> <span>Thời trang</span>
-        </a>
-      </li>
-      <li>
-        <a onClick="hideSidepanel()">
-          <i class="fa fa-film" aria-hidden="true"></i> <span>Phim ảnh</span>
-        </a>
-      </li>
-      <li>
-        <a onClick="hideSidepanel()">
-          <i class="fa fa-futbol-o" aria-hidden="true"></i> <span>Thể thao</span>
-        </a>
-      </li>
+
       <li>
         <a onclick="hideSidepanel()">
           <i class="fa fa-eye" aria-hidden="true"></i> <span>Trang theo dõi</span>
