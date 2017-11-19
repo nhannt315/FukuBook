@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Post} from '../../models/models.component';
+import {FB_CONFIG} from '../../common/fb.config';
 
 declare let $: any;
 declare let FB: any;
@@ -13,6 +14,19 @@ export class FbpostService {
   iframeWidth = $(window).width() < 768 ? $(window).width() : 360;
 
   constructor() {
+  }
+
+  initFacebook() {
+    FB.init({
+      appId: FB_CONFIG.app_id,
+      cookie: false,  // enable cookies to allow the server to access
+      xfbml: true,  // parse social plugins on this page
+      version: 'v2.8' // use graph api version 2.5
+    });
+  }
+
+  clearRootContainer() {
+    this.postContainer.empty();
   }
 
   setRootContainer(containerId: String, tempContainerID: String) {

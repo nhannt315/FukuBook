@@ -7,7 +7,9 @@ import {PostService} from '../../core/services/post/post.service';
 import {NotificationService} from '../../core/services/notification/notification.service';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent}
+  {path: '', redirectTo: 'all', pathMatch: 'full'},
+  {path: 'all', component: HomeComponent},
+  {path: ':category', component: HomeComponent}
 ];
 
 @NgModule({

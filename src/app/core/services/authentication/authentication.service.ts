@@ -4,11 +4,12 @@ import {SystemConstants} from '../../common/system.constants';
 import {ApiUrlConstants} from '../../common/api.url.constants';
 import 'rxjs/add/operator/map';
 import {User} from '../../models/models.component';
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable()
 export class AuthenticationService {
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private cookieService: CookieService) {
   }
 
   login(username: String, password: String, remember: boolean) {
@@ -25,6 +26,8 @@ export class AuthenticationService {
         if (user && user.token) {
           localStorage.removeItem(SystemConstants.CURRENT_USER);
           localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
+          // this.cookieService.delete(SystemConstants.CURRENT_USER);
+          // this.cookieService.set(SystemConstants.CURRENT_USER, JSON.stringify(user));
         }
       });
   }
@@ -32,6 +35,7 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem(SystemConstants.CURRENT_USER);
+    // this.cookieService.delete(SystemConstants.CURRENT_USER);
   }
 
   signUp(username: String, password: String) {
@@ -47,12 +51,15 @@ export class AuthenticationService {
         if (user && user.token) {
           localStorage.removeItem(SystemConstants.CURRENT_USER);
           localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
+          // this.cookieService.delete(SystemConstants.CURRENT_USER);
+          // this.cookieService.set(SystemConstants.CURRENT_USER, JSON.stringify(user));
         }
       });
   }
 
   getCurrentUser(): any {
     return JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
+    // return this.cookieService.get(SystemConstants.CURRENT_USER);
   }
 
   isLoggedIn(): boolean {

@@ -1,4 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
+import {CategoryService} from '../../../core/services/category/category.service';
+import {Category} from '../../../core/models/models.component';
 
 declare let $: any;
 
@@ -9,10 +11,19 @@ declare let $: any;
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() {
+  categoryList: Category[];
+
+  constructor(private categoryService: CategoryService) {
   }
 
   ngOnInit() {
+    this.loadCategory();
+  }
+
+  loadCategory() {
+    this.categoryService.getAllCategory().subscribe((response: Category[]) => {
+      this.categoryList = response;
+    });
   }
 
 

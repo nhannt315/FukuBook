@@ -15,9 +15,9 @@ export class LoginComponent implements OnInit, AfterViewChecked {
   @Output() onLoginSuccess = new EventEmitter();
 
   @Input() isLogin;
-  user: User;
+  user: User = new User();
   remember = false;
-  userSignup: User;
+  userSignup: User = new User();
   repeatPassword: String;
   isPassWordMatch = false;
   isLoadingLogin = false;
