@@ -4,35 +4,51 @@ const categorySchema = require('./categorySchema');
 const categoryModel = mongoose.model('categories', categorySchema);
 
 const getAllCategoriesFromDB = (callback) => {
-  categoryModel.find({}).exec((err, result) => {
+  categoryModel.find({}).lean().exec((err, result) => {
     if (err) {
       callback(err);
     } else {
-      callback(null, result);
+      callback(result);
     }
   });
 }
 
-const createNewCategory = (newCategory, callback) => {
+const createNewCategory = (categoryName, keywords, callback) => {
+  var newCategory = {
+    name: categoryName,
+    keywords: keywords
+  }
   categoryModel.create(newCategory, (err, doc) => {
     if (err) {
       console.log('createNewCategory ERROR ', err);
     } else {
       callback(null, doc);
     }
-  })
+  });
 }
 
 const deleteCategoryById = (id) => {
   categoryModel.remove({
-    id: id
+    _id: id
   }, function(err) {
     if (err) {
       console.log('deleteCategoryById ERROR ', err);
     } else {
       console.log("deleteCategoryById SUCCESS");
     }
-  })
+  });
+}
+
+const updateCategoryById = (id, fields, callback) => {
+  categoryModel.findOneAndUpdate({
+    _id: id
+  }, fields, (err, doc) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, doc);
+    }
+  });
 }
 
 module.exports = {

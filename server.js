@@ -8,6 +8,10 @@ const cors = require('cors');
 const path = require('path');
 const http = require('http');
 const postModel = require('./server/modules/api/posts/postModel.js');
+
+const pageModel = require('./server/modules/api/pages/pageModel.js');
+const categoryModel = require('./server/modules/api/categories/categoryModel.js');
+
 const config = require('./server/config.json');
 
 const userApi = require('./server/modules/api/users/userController');
@@ -56,9 +60,28 @@ server.listen(port, () => {
   console.log(`App listen on ${port}`);
 });
 
+// categoryModel.createNewCategory("quan", ["quần", "jogger", "pants"], () => {});
+// categoryModel.createNewCategory("giay", ["giầy", "shoes"], () => {});
+// categoryModel.createNewCategory("tat", ["tất", "vớ", "sock", "socks"], () => {});
+// categoryModel.createNewCategory("vi", ["ví", "wallet"], () => {});
+// categoryModel.createNewCategory("kinh", ["kính", "glasses"], () => {});
+// categoryModel.createNewCategory("balo", ["ba lô", "balô", "ba lo", "balo", "cặp", "túi"], () => {});
+// categoryModel.createNewCategory("trang_suc", ["nhẫn", "dây chuyền", "khuyên tai", "vòng"], () => {});
+// categoryModel.createNewCategory("ao", ["áo", "bomber", "hoodie", "jacket", "khoác"], () => {});
+
+// pageModel.createNewPage("Torano", "torano.vn", ["ao", "quan"], () => {});
+// pageModel.createNewPage("PartTime", "parttime.co", ["ao", "quan", "giay", "balo"], () => {});
+// pageModel.createNewPage("Riverway", "RVSZRM", ["ao", "quan"], () => {});
+// pageModel.createNewPage("AGOSTO", "agosto.store", ["ao", "quan"], () => {});
+// pageModel.createNewPage("ZBROM", "zbromhanghieuxuatkhau", ["ao", "quan"], () => {});
+// pageModel.createNewPage("OzHomeland", "ozhomelandstore", ["ao", "quan"], () => {});
+// pageModel.createNewPage("UrbanStoreVN", "urbanstorevn", ["ao", "quan"], () => {});
+// pageModel.createNewPage("MenEto", "Menetohn", ["ao", "quan"], () => {});
+// pageModel.createNewPage("Valento", "thoitrangvalento", ["ao", "quan"], () => {});
+
 setInterval(function() {
   postModel.updateDatabase();
-}, 60 * 1000 * 3);
+}, 60 * 1000 * 1);
 
 // app.listen(config.port , () => {
 //   console.log(`App listen on ${config.port}`);
