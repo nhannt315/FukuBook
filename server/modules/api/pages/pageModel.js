@@ -63,5 +63,6 @@ const updatePageById = (id, fields, callback) => {
 module.exports = {
   getAllPagesFromDB,
   createNewPage,
-  deletePageById
+  deletePageById,
+  updatePageById
 }

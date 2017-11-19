@@ -33,4 +33,34 @@ Router.get('/:category', (req, res) => {
   }
 });
 
+Router.post("/", (req, res) => {
+  postModel.createNewPost(req.body, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+Router.put("/:id", (req, res) => {
+  postModel.updatePostById(req.params.id, req.body, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+Router.delete("/:id", (req, res) => {
+  postModel.deletePostById(req.params.id, (err, result) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 module.exports = Router;

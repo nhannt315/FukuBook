@@ -12,6 +12,10 @@ const categorySchema = new Schema({
     require: true,
     unique: true
   },
+  alias: {
+    type: String,
+    require: true
+  },
   keywords: {
     type: [String],
     require: true

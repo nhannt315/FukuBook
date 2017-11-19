@@ -13,9 +13,10 @@ const getAllCategoriesFromDB = (callback) => {
   });
 }
 
-const createNewCategory = (categoryName, keywords, callback) => {
+const createNewCategory = (categoryAlias, categoryName, keywords, callback) => {
   var newCategory = {
     name: categoryName,
+    alias: categoryAlias,
     keywords: keywords
   }
   categoryModel.create(newCategory, (err, doc) => {
@@ -54,5 +55,6 @@ const updateCategoryById = (id, fields, callback) => {
 module.exports = {
   getAllCategoriesFromDB,
   createNewCategory,
-  deleteCategoryById
+  deleteCategoryById,
+  updateCategoryById
 }
