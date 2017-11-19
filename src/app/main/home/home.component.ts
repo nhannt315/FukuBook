@@ -32,6 +32,11 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
               private ngZone: NgZone,
               private route: ActivatedRoute) {
     window.onscroll = () => {
+      if ($(window).scrollTop() >= 100) { // If page is scrolled more than 50px
+        $('#return-to-top').fadeIn(200); // Fade in the arrow
+      } else {
+        $('#return-to-top').fadeOut(200); // Else fade out the arrow
+      }
       if ($(window).height() * 3 / 2 + $(window).scrollTop() > $(document).height() - 100) {
         ngZone.run(() => {
           if (!this.isEndPage && !this.isLoading) {
@@ -91,6 +96,12 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
         this.fbPostService.relayout();
       });
     }, error => this.notifyService.printErrorMessage(error));
+  }
+
+  scrollToTop() {
+    $('body,html').animate({
+      scrollTop: 0 // Scroll to top of body
+    }, 500);
   }
 
   ngOnDestroy(): void {

@@ -56,6 +56,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(private shopService: ShopService, private categoryService: CategoryService, private ngZone: NgZone,
               private fbPostService: FbpostService, private postService: PostService) {
     window.onscroll = () => {
+      if ($(window).scrollTop() >= 100) { // If page is scrolled more than 50px
+        $('#return-to-top').fadeIn(200); // Fade in the arrow
+      } else {
+        $('#return-to-top').fadeOut(200); // Else fade out the arrow
+      }
       if ($(window).height() * 3 / 2 + $(window).scrollTop() > $(document).height() - 100) {
         ngZone.run(() => {
           if (!this.isEndPage && !this.isLoading) {
@@ -128,6 +133,12 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.loadPost();
     console.log(ApiUrlConstants.SEARCH_POST(this.keyword, this.selectedShop, this.selectedCategory, this.pageIndex, this.pageSize))
+  }
+
+  scrollToTop() {
+    $('body,html').animate({
+      scrollTop: 0 // Scroll to top of body
+    }, 500);
   }
 
   ngOnDestroy(): void {
