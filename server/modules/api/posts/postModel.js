@@ -54,7 +54,7 @@ const createPostWithCategory = (listData, listCategory, listPage) => {
       } else if (pageCategory.length > 1) {
         for (i = 0; i < pageCategory.length; i++) {
           console.log("pageCategory[category]:\n", pageCategory[i]);
-          var keywords = categoryHelper.getCategoryKeywordsFromID(listCategory, pageCategory[i]);
+          var keywords = categoryHelper.getCategoryKeywordsFromId(listCategory, pageCategory[i]);
           console.log("pageCategory[category] after keywords:\n", pageCategory[i]);
           console.log("keywords:\n", keywords);
           for (j = 0; j < keywords.length; j++) {
@@ -541,11 +541,24 @@ const updatePostById = (id, fields, callback) => {
   });
 }
 
+const getPostById = (id, callback) => {
+  postModel.findOne({
+    _id: id
+  }, (err, doc) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(null, doc);
+    }
+  })
+}
+
 module.exports = {
   getAllPostsFromDBWithCategory,
   getPostsFromDBWithCategoryWithFilterWithPageWithLimitWithShop,
   updateDatabase,
   deletePostById,
   updatePostById,
-  createNewPost
+  createNewPost,
+  getPostById
 }

@@ -52,9 +52,22 @@ const updateCategoryById = (id, fields, callback) => {
   });
 }
 
+const getCategoryById = (id, callback) => {
+  categoryModel.findOne({
+    _id: id
+  }, (err, doc) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(null, doc);
+    }
+  })
+}
+
 module.exports = {
   getAllCategoriesFromDB,
   createNewCategory,
   deleteCategoryById,
-  updateCategoryById
+  updateCategoryById,
+  getCategoryById
 }

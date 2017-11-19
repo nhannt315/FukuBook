@@ -17,7 +17,8 @@ const pageSchema = new Schema({
   },
   permalink_url: {
     type: String,
-    require: true
+    require: true,
+    unique: true
   },
   category: {
     type: [Schema.Types.ObjectId],
