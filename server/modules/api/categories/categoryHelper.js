@@ -11,7 +11,7 @@ const getCategoryKeywordsFromId = (listCategory, id) => {
   console.log("id getCategoryKeywordsFromId:\n", id);
   for (category in listCategory) {
     console.log("for loop listCategory[category]:\n", listCategory[category]);
-    if (listCategory[category]._id.toString() == id._id.toString()) {
+    if (listCategory[category]._id.toString() == id.toString()) {
       return listCategory[category].keywords;
     }
   }

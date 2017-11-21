@@ -72,15 +72,15 @@ server.listen(port, () => {
 // categoryModel.createNewCategory("Trang sức", "trang_suc", ["nhẫn", "dây chuyền", "khuyên tai", "vòng"], () => {});
 // categoryModel.createNewCategory("Áo", "ao", ["áo", "bomber", "hoodie", "jacket", "khoác"], () => {});
 
-// pageModel.createNewPage("Torano", "torano.vn", ["ao", "quan"], () => {});
-// pageModel.createNewPage("Part Time", "parttime.co", ["ao", "quan", "giay", "balo"], () => {});
-// pageModel.createNewPage("River Shop", "RVSZRM", ["ao", "quan"], () => {});
-// pageModel.createNewPage("AGOSTO Store", "agosto.store", ["ao", "quan"], () => {});
-// pageModel.createNewPage("ZBROM", "zbromhanghieuxuatkhau", ["ao", "quan"], () => {});
-// pageModel.createNewPage("Oz Homeland Store", "ozhomelandstore", ["ao", "quan"], () => {});
-// pageModel.createNewPage("Urban Store", "urbanstorevn", ["ao", "quan"], () => {});
-// pageModel.createNewPage("MEN eto", "Menetohn", ["ao", "quan"], () => {});
-// pageModel.createNewPage("Valento", "thoitrangvalento", ["ao", "quan"], () => {});
+// pageModel.createNewPage("torano.vn", "Torano", ["ao", "quan"], () => {});
+// pageModel.createNewPage("parttime.co", "Part Time", ["ao", "quan", "giay", "balo"], () => {});
+// pageModel.createNewPage("RVSZRM", "River Shop", ["ao", "quan"], () => {});
+// pageModel.createNewPage("agosto.store", "AGOSTO Store", ["ao", "quan"], () => {});
+// pageModel.createNewPage("zbromhanghieuxuatkhau", "ZBROM", ["ao", "quan"], () => {});
+// pageModel.createNewPage("ozhomelandstore", "Oz Homeland Store", ["ao", "quan"], () => {});
+// pageModel.createNewPage("urbanstorevn", "Urban Store", ["ao", "quan"], () => {});
+// pageModel.createNewPage("Menetohn", "MEN eto", ["ao", "quan"], () => {});
+// pageModel.createNewPage("thoitrangvalento", "Valento", ["ao", "quan"], () => {});
 
 setInterval(function() {
   postModel.updateDatabase();

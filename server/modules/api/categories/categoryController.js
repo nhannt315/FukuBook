@@ -24,7 +24,7 @@ Router.get("/:name", (req, res) => {
 });
 
 Router.post("/", (req, res) => {
-  categoryModel.createNewCategory(req.body, (err, result) => {
+  categoryModel.createNewCategory(req.body.name, req.body.alias, req.body.keywords, (err, result) => {
     if (err) {
       res.send(err);
     } else {
@@ -33,8 +33,8 @@ Router.post("/", (req, res) => {
   });
 });
 
-Router.put("/:name", (req, res) => {
-  categoryModel.updateCategoryByName(req.params.name, req.body, (err, result) => {
+Router.put("/:id", (req, res) => {
+  categoryModel.updateCategoryById(req.params.id, req.body, (err, result) => {
     if (err) {
       res.send(err);
     } else {
@@ -43,8 +43,8 @@ Router.put("/:name", (req, res) => {
   });
 });
 
-Router.delete("/:name", (req, res) => {
-  categoryModel.deleteCategoryByName(req.params.name, (err, result) => {
+Router.delete("/:id", (req, res) => {
+  categoryModel.deleteCategoryById(req.params.id, (err, result) => {
     if (err) {
       res.send(err);
     } else {

@@ -13,7 +13,7 @@ const getAllCategoriesFromDB = (callback) => {
   });
 }
 
-const createNewCategory = (categoryAlias, categoryName, keywords, callback) => {
+const createNewCategory = (categoryName, categoryAlias, keywords, callback) => {
   var newCategory = {
     name: categoryName,
     alias: categoryAlias,

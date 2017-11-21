@@ -6,7 +6,7 @@ const categoryHelper = require('../categories/categoryHelper.js');
 const pageModel = mongoose.model('pages', pageSchema);
 
 const getAllPagesFromDB = (callback) => {
-  pageModel.find({}).populate('category').lean().exec((err, result) => {
+  pageModel.find({}).lean().exec((err, result) => {
     if (err) {
       callback(err);
     } else {
@@ -99,7 +99,7 @@ const updatePageByUrl = (url, fields, callback) => {
 const getPageByUrl = (url, callback) => {
   pageModel.findOne({
     permalink_url: url
-  }).populate('category').exec((err, doc) => {
+  }).exec((err, doc) => {
     if (err) {
       callback(err);
     } else {
