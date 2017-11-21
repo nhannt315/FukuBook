@@ -10,6 +10,7 @@ import {LoginComponent} from './login/login.component';
 import {AuthenticationService} from '../core/services/authentication/authentication.service';
 import {NotificationService} from '../core/services/notification/notification.service';
 import {CategoryService} from '../core/services/category/category.service';
+import {PostService} from '../core/services/post/post.service';
 
 @NgModule({
   imports: [
@@ -19,7 +20,7 @@ import {CategoryService} from '../core/services/category/category.service';
     FormsModule
 
   ],
-  providers: [FbpostService, AuthenticationService, NotificationService, CategoryService],
+  providers: [FbpostService, AuthenticationService, NotificationService, CategoryService, PostService],
   declarations: [MainComponent, SidebarComponent, LoginComponent]
 })
 export class MainModule {

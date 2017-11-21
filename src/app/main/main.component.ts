@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {ModalDirective} from 'ngx-bootstrap';
 import {AuthenticationService} from '../core/services/authentication/authentication.service';
 import {NotificationService} from '../core/services/notification/notification.service';
+import {SharedService} from '../core/services/shared/shared.service';
 
 declare const $: any;
 
@@ -16,7 +17,9 @@ export class MainComponent implements OnInit {
   loadAPI: Promise<any>;
   isLogin = true;
 
-  constructor(public authService: AuthenticationService, private notifyService: NotificationService) {
+  constructor(public authService: AuthenticationService,
+              private notifyService: NotificationService,
+              private sharedService: SharedService) {
   }
 
   ngOnInit() {
@@ -54,6 +57,12 @@ export class MainComponent implements OnInit {
   loggedIn(event) {
     this.modalLoginSignup.hide();
     this.notifyService.printSuccessMessage(event);
+    this.sharedService.emitChange('LoggedIn');
+  }
+
+  logout() {
+    this.authService.logout();
+    this.sharedService.emitChange('LoggedOut');
   }
 
 

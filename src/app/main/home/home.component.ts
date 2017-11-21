@@ -1,10 +1,11 @@
-import {AfterContentInit, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
+import {AfterContentInit, Component, ElementRef, NgZone, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {PostService} from '../../core/services/post/post.service';
 import {Post} from '../../core/models/models.component';
 import {NotificationService} from '../../core/services/notification/notification.service';
 import {FbpostService} from '../../core/services/fbpost/fbpost.service';
 import {Observable} from 'rxjs/Rx';
 import {ActivatedRoute} from '@angular/router';
+import {SharedService} from '../../core/services/shared/shared.service';
 
 declare let $: any;
 
@@ -30,7 +31,8 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
               private notifyService: NotificationService,
               private fbPostService: FbpostService,
               private ngZone: NgZone,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private sharedService: SharedService) {
     window.onscroll = () => {
       if ($(window).scrollTop() >= 100) { // If page is scrolled more than 50px
         $('#return-to-top').fadeIn(200); // Fade in the arrow
@@ -94,6 +96,13 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
         this.isDataLoaded = true;
         this.isLoading = false;
         this.fbPostService.relayout();
+        this.sharedService.changeEmitted$.subscribe(text => {
+          if (text === 'LoggedIn') {
+            this.fbPostService.updateFavoriteButton();
+          } else {
+            this.fbPostService.resetFavoriteButton();
+          }
+        });
       });
     }, error => this.notifyService.printErrorMessage(error));
   }

@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
     });
   }
 
+
   signUp() {
     if (!this.userSignup.password || !this.userSignup.username || (this.repeatPassword !== this.userSignup.password)) {
       return;
