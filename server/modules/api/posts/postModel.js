@@ -548,9 +548,9 @@ const getPostById = (id, callback) => {
     _id: id
   }, (err, doc) => {
     if (err) {
-      res.send(err);
+      callback(err);
     } else {
-      res.send(null, doc);
+      callback(null, doc);
     }
   })
 }

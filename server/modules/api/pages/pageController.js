@@ -23,8 +23,8 @@ Router.post("/", (req, res) => {
   });
 });
 
-Router.put("/:id", (req, res) => {
-  pageModel.updatePageById(req.params.id, req.body, (err, result) => {
+Router.put("/:url", (req, res) => {
+  pageModel.updatePageByUrl(req.params.url, req.body, (err, result) => {
     if (err) {
       res.send(err);
     } else {
@@ -33,8 +33,8 @@ Router.put("/:id", (req, res) => {
   });
 });
 
-Router.delete("/:id", (req, res) => {
-  pageModel.deletePageById(req.params.id, (err, result) => {
+Router.delete("/:url", (req, res) => {
+  pageModel.deletePageByUrl(req.params.url, (err, result) => {
     if (err) {
       res.send(err);
     } else {
@@ -43,8 +43,8 @@ Router.delete("/:id", (req, res) => {
   });
 });
 
-Router.get("/:id", (req, res) => {
-  pageModel.getPageById(req.params.id, (err, result) => {
+Router.get("/:url", (req, res) => {
+  pageModel.getPageByUrl(req.params.url, (err, result) => {
     if (err) {
       res.send(err);
     } else {

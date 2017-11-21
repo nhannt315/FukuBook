@@ -25,6 +25,7 @@ const getPageIdFromUrl = (listPage, url) => {
 
 const getPageCategoryFromUrl = (listPage, url) => {
   var urlParts = url.split("/");
+  var result = [];
   if (urlParts[3] == undefined) {
     for (page in listPage) {
       if ((listPage[page].permalink_url).toLowerCase() == url.toLowerCase()) {
