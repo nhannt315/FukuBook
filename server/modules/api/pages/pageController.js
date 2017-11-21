@@ -14,7 +14,7 @@ Router.get("/all", (req, res) => {
 });
 
 Router.post("/", (req, res) => {
-  pageModel.createNewPage(req.body, (err, result) => {
+  pageModel.createNewPage(req.body.name, req.body.permalink_url, req.body.category, (err, result) => {
     if (err) {
       res.send(err);
     } else {
@@ -23,8 +23,8 @@ Router.post("/", (req, res) => {
   });
 });
 
-Router.put("/:url", (req, res) => {
-  pageModel.updatePageByUrl(req.params.url, req.body, (err, result) => {
+Router.put("/:id", (req, res) => {
+  pageModel.updatePageById(req.params.id, req.body, (err, result) => {
     if (err) {
       res.send(err);
     } else {
@@ -33,8 +33,8 @@ Router.put("/:url", (req, res) => {
   });
 });
 
-Router.delete("/:url", (req, res) => {
-  pageModel.deletePageByUrl(req.params.url, (err, result) => {
+Router.delete("/:id", (req, res) => {
+  pageModel.deletePageById(req.params.id, (err, result) => {
     if (err) {
       res.send(err);
     } else {
