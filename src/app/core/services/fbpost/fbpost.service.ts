@@ -3,6 +3,8 @@ import {Post} from '../../models/models.component';
 import {FB_CONFIG} from '../../common/fb.config';
 import {AuthenticationService} from '../authentication/authentication.service';
 import {PostService} from '../post/post.service';
+import {NotificationService} from '../notification/notification.service';
+import {MessageConstants} from '../../common/message.constants';
 
 declare let $: any;
 declare let FB: any;
@@ -15,7 +17,7 @@ export class FbpostService {
   private tempPostContainer;
   iframeWidth = $(window).width() < 768 ? $(window).width() : 360;
 
-  constructor(private authService: AuthenticationService, private postService: PostService) {
+  constructor(private authService: AuthenticationService, private postService: PostService, private notifyService: NotificationService) {
   }
 
   initFacebook() {
@@ -80,6 +82,7 @@ export class FbpostService {
     if (!this.authService.isLoggedIn()) {
       this.postContainer.find('.grid-item').each((index, item) => {
         if ($(item).find('.save-btn').length === 0) {
+
           const favoriteBtn = document.createElement('img');
           favoriteBtn.className = 'save-btn';
           favoriteBtn.setAttribute('data-toggled', 'false');
@@ -94,27 +97,32 @@ export class FbpostService {
       this.updateFavoriteButton();
     }
 
-    $('body').on('click', '.save-btn', (item) => {
-      const btn = $(item.target);
-      const postUrl = btn.attr('data-href');
-      if (btn.attr('data-toggled') === 'false') {
-        this.postService.saveFavoritePost(postUrl).subscribe(() => {
-          btn.attr('src', '/assets/res/favorite_fill.png');
-          btn.attr('data-toggled', 'true');
-          btn.prop('disabled', false);
-        }, error => {
-          btn.attr('src', '/assets/res/favorite_border.png');
-          btn.prop('disabled', false);
-        });
+    $('body').off('click').on('click', '.save-btn', (item) => {
+      if (!this.authService.isLoggedIn()) {
+        this.notifyService.printErrorMessage(MessageConstants.LOGIN_REQUIRED);
       } else {
-        this.postService.deleteFavoritePost(postUrl).subscribe(() => {
-          btn.attr('src', '/assets/res/favorite_border.png');
-          btn.attr('data-toggled', 'false');
-          btn.prop('disabled', false);
-        }, error => {
-          btn.attr('src', '/assets/res/favorite_fill.png');
-          btn.prop('disabled', false);
-        });
+        const btn = $(item.target);
+        const postUrl = btn.attr('data-href');
+        btn.attr('src', '/assets/res/loading_2.gif');
+        if (btn.attr('data-toggled') === 'false') {
+          this.postService.saveFavoritePost(postUrl).subscribe(() => {
+            btn.attr('src', '/assets/res/favorite_fill.png');
+            btn.attr('data-toggled', 'true');
+            btn.prop('disabled', false);
+          }, error => {
+            btn.attr('src', '/assets/res/favorite_border.png');
+            btn.prop('disabled', false);
+          });
+        } else {
+          this.postService.deleteFavoritePost(postUrl).subscribe(() => {
+            btn.attr('src', '/assets/res/favorite_border.png');
+            btn.attr('data-toggled', 'false');
+            btn.prop('disabled', false);
+          }, error => {
+            btn.attr('src', '/assets/res/favorite_fill.png');
+            btn.prop('disabled', false);
+          });
+        }
       }
     });
   }
@@ -128,7 +136,7 @@ export class FbpostService {
   }
 
   updateFavoriteButton() {
-    this.postService.getUserFavoritePosts().subscribe((response: any[]) => {
+    this.postService.getUserFavoritePostsUrl().subscribe((response: any[]) => {
       this.postContainer.find('.grid-item').each((index, item) => {
         const favoriteBtn = document.createElement('img');
         favoriteBtn.className = 'save-btn';

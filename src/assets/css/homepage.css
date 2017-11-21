@@ -37,6 +37,13 @@ iframe {
   z-index: 1;
 }
 
+.loading-save-btn{
+  position: absolute;
+  bottom: 12px;
+  right: 30px;
+  z-index: 1;
+}
+
 .save-btn:hover {
   cursor: pointer;
 }

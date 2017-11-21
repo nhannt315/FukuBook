@@ -30,13 +30,22 @@ export class PostService {
       .map(this.extractData);
   }
 
-  public getUserFavoritePosts() {
+  public getUserFavoritePostsUrl() {
     const headers = new Headers();
     headers.append('Authorization', 'JWT ' + this.authService.getCurrentUser().token);
     return this.http
-      .get(ApiUrlConstants.GET_FAVORITE_POSTS, {headers: headers})
+      .get(ApiUrlConstants.GET_FAVORITE_POSTS_URL, {headers: headers})
       .map(this.extractData);
   }
+
+  public getUserFavoritePosts(page: number) {
+    const headers = new Headers();
+    headers.append('Authorization', 'JWT ' + this.authService.getCurrentUser().token);
+    return this.http
+      .get(ApiUrlConstants.GET_FAVORITE_POSTS(page), {headers: headers})
+      .map(this.extractData);
+  }
+
 
   public saveFavoritePost(postUrl: String) {
     const headers = new Headers();

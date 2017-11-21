@@ -6,10 +6,12 @@ export class ApiUrlConstants {
   public static GET_ALL_SHOP = '/page/all';
   public static SAVE_FAVORITE_PAGE = '/saveFavUrl';
   public static GET_FAVORITE_PAGES = '/getFavUrls';
-  public static GET_FAVORITE_POSTS = '/user/getPostsURL';
+  public static GET_FAVORITE_POSTS_URL = '/user/getPostsURL';
   public static SAVE_FAVORITE_POST = '/user/savePost';
   public static DELETE_FAVORITE_POST = '/user/deletePost';
-
+  public static GET_FAVORITE_POSTS = (page: number) => {
+    return `/user/getPosts/${page}`;
+  }
   public static GET_ALL_POST = (page: number) => {
     return `/post/all?page={page}`;
   }
