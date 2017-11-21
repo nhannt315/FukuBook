@@ -14,7 +14,7 @@ Router.get("/all", (req, res) => {
 });
 
 Router.post("/", (req, res) => {
-  pageModel.createNewPage(req.body.name, req.body.permalink_url, req.body.category, (err, result) => {
+  pageModel.createNewPageWithCategoryId(req.body.permalink_url, req.body.name, req.body.category, (err, result) => {
     if (err) {
       res.send(err);
     } else {

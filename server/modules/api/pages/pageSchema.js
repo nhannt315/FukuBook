@@ -11,20 +11,20 @@ const pageSchema = new Schema({
     require: true,
     auto: true
   },
-  name: {
-    type: String,
-    require: true
-  },
   permalink_url: {
     type: String,
     require: true,
     unique: true
   },
-  category: [{
-    type: Schema.Types.ObjectId,
+  name: {
+    type: String,
+    require: true
+  },
+  category: {
+    type: [Schema.Types.ObjectId],
     ref: 'categories',
     required: true
-  }]
+  }
 });
 
 module.exports = pageSchema;
