@@ -20,11 +20,11 @@ const pageSchema = new Schema({
     require: true,
     unique: true
   },
-  category: {
-    type: [Schema.Types.ObjectId],
+  category: [{
+    type: Schema.Types.ObjectId,
     ref: 'categories',
     required: true
-  }
+  }]
 });
 
 module.exports = pageSchema;

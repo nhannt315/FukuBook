@@ -7,8 +7,11 @@ const getCategoryIdFromNameWithList = (listCategory, name) => {
 }
 
 const getCategoryKeywordsFromId = (listCategory, id) => {
+  console.log("listCategory getCategoryKeywordsFromId:\n", listCategory);
+  console.log("id getCategoryKeywordsFromId:\n", id);
   for (category in listCategory) {
-    if (listCategory[category]._id.toString() == id.toString()) {
+    console.log("for loop listCategory[category]:\n", listCategory[category]);
+    if (listCategory[category]._id.toString() == id._id.toString()) {
       return listCategory[category].keywords;
     }
   }
