@@ -2,6 +2,7 @@ const express = require('express');
 const Router = express.Router();
 const config = require('../../../config.json');
 const categoryModel = require('./categoryModel.js');
+const passport = require('passport');
 
 Router.get("/all", (req, res) => {
   categoryModel.getAllCategoriesFromDB((err, result) => {
