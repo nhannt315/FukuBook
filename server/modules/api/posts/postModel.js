@@ -12,7 +12,7 @@ const postModel = mongoose.model('posts', postSchema);
 const createNewPost = (newPost, callback) => {
   postModel.create(newPost, (err, doc) => {
     if (err) {
-      console.log('createNewPost ERROR ', err);
+      callback(err);
     } else {
       callback(null, doc);
     }
@@ -41,33 +41,34 @@ const updateCollection = (listUrl, range) => {
 }
 
 const createPostWithCategory = (listData, listCategory, listPage) => {
+  console.log("listData:\n", listData);
   listData.forEach(function(item) {
     if (item.error) {} else if (!item.error) {
       var pageId = pageHelper.getPageIdFromUrl(listPage, item.permalink_url);
       var pageCategory = pageHelper.getPageCategoryFromUrl(listPage, item.permalink_url);
       var categoryId = [];
-      console.log("pageId:\n", pageId);
-      console.log("pageCategory:\n", pageCategory);
-      console.log("pageCategory.length:\n", pageCategory.length);
+      // console.log("pageId:\n", pageId);
+      // console.log("pageCategory:\n", pageCategory);
+      // console.log("pageCategory.length:\n", pageCategory.length);
       if (pageCategory.length == 1) {
         categoryId.push(pageCategory[0]);
       } else if (pageCategory.length > 1) {
         for (i = 0; i < pageCategory.length; i++) {
-          console.log("pageCategory[category]:\n", pageCategory[i]);
+          // console.log("pageCategory[category]:\n", pageCategory[i]);
           var keywords = categoryHelper.getCategoryKeywordsFromId(listCategory, pageCategory[i]);
-          console.log("pageCategory[category] after keywords:\n", pageCategory[i]);
-          console.log("keywords:\n", keywords);
+          // console.log("pageCategory[category] after keywords:\n", pageCategory[i]);
+          // console.log("keywords:\n", keywords);
           for (j = 0; j < keywords.length; j++) {
             if (item.message != undefined && item.message.includes(keywords[j])) {
-              console.log("Found Match\n");
-              console.log("Pushing category: ", pageCategory[i]);
+              // console.log("Found Match\n");
+              // console.log("Pushing category: ", pageCategory[i]);
               categoryId.push(pageCategory[i]);
               break;
             }
           }
         }
       }
-      console.log("categoryId:\n", categoryId);
+      // console.log("categoryId:\n", categoryId);
       if (categoryId.length > 0) {
         var newPost;
         if (item.hasOwnProperty("shares")) {
@@ -519,14 +520,14 @@ const updateDatabase = () => {
   });
 }
 
-const deletePostById = (id) => {
+const deletePostById = (id, callback) => {
   postModel.remove({
     id: id
-  }, function(err) {
+  }, function(err, doc) {
     if (err) {
-      console.log('deletePageById ERROR ', err);
+      callback(err);
     } else {
-      console.log("deletePageById SUCCESS");
+      callback(null, doc);
     }
   });
 }

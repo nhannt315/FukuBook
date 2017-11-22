@@ -84,7 +84,7 @@ server.listen(port, () => {
 
 setInterval(function() {
   postModel.updateDatabase();
-}, 60 * 1000 * 3);
+}, 60 * 1000 * 1);
 
 // app.listen(config.port , () => {
 //   console.log(`App listen on ${config.port}`);

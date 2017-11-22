@@ -28,7 +28,7 @@ const createNewPageWithCategoryName = (pageUrl, pageName, pageCategory, callback
     }
     pageModel.create(newPage, (err, doc) => {
       if (err) {
-        console.log('createNewPage ERROR ', err);
+        callback(err);
       } else {
         callback(null, doc);
       }
@@ -44,21 +44,21 @@ const createNewPageWithCategoryId = (pageUrl, pageName, pageCategory, callback) 
   }
   pageModel.create(newPage, (err, doc) => {
     if (err) {
-      console.log('createNewPage ERROR ', err);
+      callback(err);
     } else {
       callback(null, doc);
     }
   });
 }
 
-const deletePageById = (id) => {
+const deletePageById = (id, callback) => {
   pageModel.remove({
     _id: id
-  }, function(err) {
+  }, function(err, doc) {
     if (err) {
-      console.log('deletePageById ERROR ', err);
+      callback(err);
     } else {
-      console.log("deletePageById SUCCESS");
+      callback(null, doc);
     }
   });
 }
@@ -87,14 +87,14 @@ const getPageById = (id, callback) => {
   })
 }
 
-const deletePageByUrl = (url) => {
+const deletePageByUrl = (url, callback) => {
   pageModel.remove({
     permalink_url: url
-  }, function(err) {
+  }, function(err, doc) {
     if (err) {
-      console.log('deletePageById ERROR ', err);
+      callback(err)
     } else {
-      console.log("deletePageById SUCCESS");
+      callback(null, doc);
     }
   });
 }
