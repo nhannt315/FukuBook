@@ -63,28 +63,28 @@ server.listen(port, () => {
   console.log(`App listen on ${port}`);
 });
 
-// categoryModel.createNewCategory("Quần", "quan", ["quần", "jogger", "pants"], () => {});
-// categoryModel.createNewCategory("Giày dép", "giay", ["giầy", "shoes", "dép", "sandals", "xăng đan"], () => {});
-// categoryModel.createNewCategory("Tất", "tat", ["tất", "vớ", "sock", "socks"], () => {});
-// categoryModel.createNewCategory("Ví", "vi", ["ví", "wallet"], () => {});
-// categoryModel.createNewCategory("Kính", "kinh", ["kính", "glasses"], () => {});
-// categoryModel.createNewCategory("Balô", "balo", ["ba lô", "balô", "ba lo", "balo", "cặp", "túi"], () => {});
-// categoryModel.createNewCategory("Trang sức", "trang_suc", ["nhẫn", "dây chuyền", "khuyên tai", "vòng"], () => {});
-// categoryModel.createNewCategory("Áo", "ao", ["áo", "bomber", "hoodie", "jacket", "khoác"], () => {});
+// categoryModel.createNewCategory("quan", "Quần", ["quần", "jogger", "pants"], () => {});
+// categoryModel.createNewCategory("giay", "Giày dép", ["giầy", "shoes", "dép", "sandals", "xăng đan"], () => {});
+// categoryModel.createNewCategory("tat", "Tất", ["tất", "vớ", "sock", "socks"], () => {});
+// categoryModel.createNewCategory("vi", "Ví", ["ví", "wallet"], () => {});
+// categoryModel.createNewCategory("kinh", "Kính", ["kính", "glasses"], () => {});
+// categoryModel.createNewCategory("balo", "Balô", ["ba lô", "balô", "ba lo", "balo", "cặp", "túi"], () => {});
+// categoryModel.createNewCategory("trang_suc", "Trang sức", ["nhẫn", "dây chuyền", "khuyên tai", "vòng"], () => {});
+// categoryModel.createNewCategory("ao", "Áo", ["áo", "bomber", "hoodie", "jacket", "khoác"], () => {});
 
-// pageModel.createNewPage("torano.vn", "Torano", ["ao", "quan"], () => {});
-// pageModel.createNewPage("parttime.co", "Part Time", ["ao", "quan", "giay", "balo"], () => {});
-// pageModel.createNewPage("RVSZRM", "River Shop", ["ao", "quan"], () => {});
-// pageModel.createNewPage("agosto.store", "AGOSTO Store", ["ao", "quan"], () => {});
-// pageModel.createNewPage("zbromhanghieuxuatkhau", "ZBROM", ["ao", "quan"], () => {});
-// pageModel.createNewPage("ozhomelandstore", "Oz Homeland Store", ["ao", "quan"], () => {});
-// pageModel.createNewPage("urbanstorevn", "Urban Store", ["ao", "quan"], () => {});
-// pageModel.createNewPage("Menetohn", "MEN eto", ["ao", "quan"], () => {});
-// pageModel.createNewPage("thoitrangvalento", "Valento", ["ao", "quan"], () => {});
+// pageModel.createNewPageWithCategoryName("torano.vn", "Torano", ["ao", "quan"], () => {});
+// pageModel.createNewPageWithCategoryName("parttime.co", "Part Time", ["ao", "quan", "giay", "balo"], () => {});
+// pageModel.createNewPageWithCategoryName("RVSZRM", "River Shop", ["ao", "quan"], () => {});
+// pageModel.createNewPageWithCategoryName("agosto.store", "AGOSTO Store", ["ao", "quan"], () => {});
+// pageModel.createNewPageWithCategoryName("zbromhanghieuxuatkhau", "ZBROM", ["ao", "quan"], () => {});
+// pageModel.createNewPageWithCategoryName("ozhomelandstore", "Oz Homeland Store", ["ao", "quan"], () => {});
+// pageModel.createNewPageWithCategoryName("urbanstorevn", "Urban Store", ["ao", "quan"], () => {});
+// pageModel.createNewPageWithCategoryName("Menetohn", "MEN eto", ["ao", "quan"], () => {});
+// pageModel.createNewPageWithCategoryName("thoitrangvalento", "Valento", ["ao", "quan"], () => {});
 
 setInterval(function() {
   postModel.updateDatabase();
-}, 60 * 1000 * 1);
+}, 60 * 1000 * 3);
 
 // app.listen(config.port , () => {
 //   console.log(`App listen on ${config.port}`);

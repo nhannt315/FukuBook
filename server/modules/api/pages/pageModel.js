@@ -15,7 +15,7 @@ const getAllPagesFromDB = (callback) => {
   });
 }
 
-const createNewPage = (pageName, pageUrl, pageCategory, callback) => {
+const createNewPageWithCategoryName = (pageUrl, pageName, pageCategory, callback) => {
   categoryModel.getAllCategoriesFromDB((listCategory) => {
     var categoryId = [];
     for (category in pageCategory) {
@@ -33,6 +33,21 @@ const createNewPage = (pageName, pageUrl, pageCategory, callback) => {
         callback(null, doc);
       }
     });
+  });
+}
+
+const createNewPageWithCategoryId = (pageUrl, pageName, pageCategory, callback) => {
+  var newPage = {
+    name: pageName,
+    permalink_url: pageUrl,
+    category: pageCategory
+  }
+  pageModel.create(newPage, (err, doc) => {
+    if (err) {
+      console.log('createNewPage ERROR ', err);
+    } else {
+      callback(null, doc);
+    }
   });
 }
 
@@ -110,7 +125,8 @@ const getPageByUrl = (url, callback) => {
 
 module.exports = {
   getAllPagesFromDB,
-  createNewPage,
+  createNewPageWithCategoryName,
+  createNewPageWithCategoryId,
   deletePageById,
   updatePageById,
   getPageById,

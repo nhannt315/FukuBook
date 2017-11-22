@@ -14,7 +14,11 @@ Router.get("/all", (req, res) => {
 });
 
 Router.post("/", (req, res) => {
-  pageModel.createNewPage(req.body.name, req.body.permalink_url, req.body.category, (err, result) => {
+  console.log("req.body:\n", req.body);
+  console.log("req.body.permalink_url:\n", req.body.permalink_url);
+  console.log("req.body.name:\n", req.body.name);
+  console.log("req.body.category:\n", req.body.category);
+  pageModel.createNewPageWithCategoryId(req.body.permalink_url, req.body.name, req.body.category, (err, result) => {
     if (err) {
       res.send(err);
     } else {
