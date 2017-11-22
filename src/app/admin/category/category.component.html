@@ -1,0 +1,31 @@
+<ul class="nav" style="margin: 10px">
+  <li>
+    <button class="btn btn-success" (click)="openModal(newShop)">Thêm mới
+    </button>
+  </li>
+</ul>
+<table class="table table-responsive table-hover table-bordered" style="margin-left: 10px; background-color: white">
+  <thead>
+    <tr>
+      <th>Category name</th>
+      <th>Alias</th>
+      <th>Keyword</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="categoryList">
+    <tr *ngFor="let category of categoryList">
+      <td>{{category.alias}}</td>
+      <td>{{category.name}}</td>
+      <td><span *ngFor="let keyword of category.keywords">{{keyword}},</span></td>
+      <td>
+        <button class="btn btn-primary" (click)="openModal(editShop, shop)">
+          <i class="fa fa-pencil-square-o"></i>
+        </button>
+        <button class="btn btn-danger" (click)="showDialogConfirmDelete(shop)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

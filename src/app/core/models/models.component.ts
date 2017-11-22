@@ -30,4 +30,5 @@ export class Shop {
   name: string;
   permalink_url: string;
   category: string[];
+  categoryName: string[];
 }

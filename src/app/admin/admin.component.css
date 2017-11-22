@@ -1,0 +1,19 @@
+.form-horizontal .control-label {
+  padding-top: 8px;
+}
+
+.form-control:focus {
+  border-color: #CCD0D7;
+  box-shadow: none !important;
+}
+
+
+
+.form-horizontal .form-group {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}

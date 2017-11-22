@@ -9,6 +9,13 @@ export class ApiUrlConstants {
   public static GET_FAVORITE_POSTS_URL = '/user/getPostsURL';
   public static SAVE_FAVORITE_POST = '/user/savePost';
   public static DELETE_FAVORITE_POST = '/user/deletePost';
+  public static CREATE_NEW_SHOP = '/page/';
+  public static UPDATE_SHOP = (url: String) => {
+    return `/page/${url}`;
+  }
+  public static DELETE_SHOP = (url: String) => {
+    return `/page/${url}`;
+  }
   public static GET_FAVORITE_POSTS = (page: number) => {
     return `/user/getPosts/${page}`;
   }
