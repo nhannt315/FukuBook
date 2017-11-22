@@ -15,8 +15,10 @@ Router.get('/:category', (req, res) => {
     console.log("page " + page + " limit " + limit + " filter " + filter + " shop " + shop);
     postModel.getPostsFromDBWithCategoryWithFilterWithPageWithLimitWithShop(req.params.category, filter, page, limit, shop, (err, result) => {
       if (err) {
+        res.status(400);
         res.send(err);
       } else {
+        res.status(200);
         res.send(result);
       }
     });
@@ -25,8 +27,10 @@ Router.get('/:category', (req, res) => {
     console.log("category " + req.params.category);
     postModel.getAllPostsFromDBWithCategory(req.params.category, (err, result) => {
       if (err) {
+        res.status(400);
         res.send(err);
       } else {
+        res.status(200);
         res.send(result);
       }
     });
@@ -36,8 +40,10 @@ Router.get('/:category', (req, res) => {
 Router.post("/", (req, res) => {
   postModel.createNewPost(req.body, (err, result) => {
     if (err) {
+      res.status(400);
       res.send(err);
     } else {
+      res.status(200);
       res.send(result);
     }
   });
@@ -46,8 +52,10 @@ Router.post("/", (req, res) => {
 Router.put("/:id", (req, res) => {
   postModel.updatePostById(req.params.id, req.body, (err, result) => {
     if (err) {
+      res.status(400);
       res.send(err);
     } else {
+      res.status(200);
       res.send(result);
     }
   });
@@ -56,8 +64,10 @@ Router.put("/:id", (req, res) => {
 Router.delete("/:id", (req, res) => {
   postModel.deletePostById(req.params.id, (err, result) => {
     if (err) {
+      res.status(400);
       res.send(err);
     } else {
+      res.status(200);
       res.send(result);
     }
   });
@@ -66,8 +76,10 @@ Router.delete("/:id", (req, res) => {
 Router.get("/:id", (req, res) => {
   pageModel.getPostById(req.params.id, (err, result) => {
     if (err) {
+      res.status(400);
       res.send(err);
     } else {
+      res.status(200);
       res.send(result);
     }
   });

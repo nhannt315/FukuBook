@@ -7,8 +7,10 @@ const passport = require('passport');
 Router.get("/all", (req, res) => {
   categoryModel.getAllCategoriesFromDB((err, result) => {
     if (err) {
+      res.status(400);
       res.send(err);
     } else {
+      res.status(200);
       res.send(result);
     }
   });
@@ -17,8 +19,10 @@ Router.get("/all", (req, res) => {
 Router.get("/:name", (req, res) => {
   categoryModel.getCategoryByName(req.params.name, (err, result) => {
     if (err) {
+      res.status(400);
       res.send(err);
     } else {
+      res.status(200);
       res.send(result);
     }
   });
@@ -28,8 +32,10 @@ Router.post("/", passport.authenticate('jwt', { session: false }), (req, res) =>
   if (req.user.admin) {
     categoryModel.createNewCategory(req.body.name, req.body.alias, req.body.keywords, (err, result) => {
       if (err) {
+        res.status(400);
         res.send(err);
       } else {
+        res.status(200);
         res.send(result);
       }
     });
@@ -43,8 +49,10 @@ Router.put("/:id", passport.authenticate('jwt', { session: false }), (req, res) 
   if (req.user.admin) {
     categoryModel.updateCategoryById(req.params.id, req.body, (err, result) => {
       if (err) {
+        res.status(400);
         res.send(err);
       } else {
+        res.status(200);
         res.send(result);
       }
     });
@@ -58,8 +66,10 @@ Router.delete("/:id", passport.authenticate('jwt', { session: false }), (req, re
   if (req.user.admin) {
     categoryModel.deleteCategoryById(req.params.id, (err, result) => {
       if (err) {
+        res.status(400);
         res.send(err);
       } else {
+        res.status(200);
         res.send(result);
       }
     });
