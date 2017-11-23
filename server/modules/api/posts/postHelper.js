@@ -37,7 +37,7 @@ const getPostsOfMultiplePagesWithinRange = (listPageId, range, callback) => {
   var timeStart = timeEnd - range * 86400000;
   var listData = [];
   var len = listPageId.length - 1;
-
+  console.log(listPageId);
   listPageId.forEach(function(item) {
     FB.api(item + '/posts?fields=permalink_url,shares,likes.summary(true),comments.summary(true),message&limit=50&since=' + parseInt(timeStart / 1000) + '&until=' + parseInt(timeEnd / 1000), (result) => {
       if (!result || result.error) {
