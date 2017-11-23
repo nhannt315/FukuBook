@@ -7,8 +7,10 @@ const passport = require('passport');
 Router.get("/all", (req, res) => {
   pageModel.getAllPagesFromDB((err, result) => {
     if (err) {
+      res.status(400);
       res.send(err);
     } else {
+      res.status(200);
       res.send(result);
     }
   });
@@ -18,8 +20,10 @@ Router.post("/", passport.authenticate('jwt', { session: false }), (req, res) =>
   if (req.user.admin) {
     pageModel.createNewPageWithCategoryId(req.body.permalink_url, req.body.name, req.body.category, (err, result) => {
       if (err) {
+        res.status(400);
         res.send(err);
       } else {
+        res.status(200);
         res.send(result);
       }
     });
@@ -33,8 +37,10 @@ Router.put("/:id", passport.authenticate('jwt', { session: false }), (req, res) 
   if (req.user.admin) {
     pageModel.updatePageById(req.params.id, req.body, (err, result) => {
       if (err) {
+        res.status(400);
         res.send(err);
       } else {
+        res.status(200);
         res.send(result);
       }
     });
@@ -48,8 +54,10 @@ Router.delete("/:id", passport.authenticate('jwt', { session: false }), (req, re
   if (req.user.admin) {
     pageModel.deletePageById(req.params.id, (err, result) => {
       if (err) {
+        res.status(400);
         res.send(err);
       } else {
+        res.status(200);
         res.send(result);
       }
     });
@@ -62,8 +70,10 @@ Router.delete("/:id", passport.authenticate('jwt', { session: false }), (req, re
 Router.get("/:url", (req, res) => {
   pageModel.getPageByUrl(req.params.url, (err, result) => {
     if (err) {
+      res.status(400);
       res.send(err);
     } else {
+      res.status(200);
       res.send(result);
     }
   });

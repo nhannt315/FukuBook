@@ -17,10 +17,12 @@ const postSchema = new Schema({
   },
   likes: {
     type: Number,
-    require: true
+    require: true,
+    default: 0
   },
   comments: {
     type: Number,
+    default: 0
   },
   shares: {
     type: Number,

@@ -21,21 +21,21 @@ const createNewCategory = (categoryName, categoryAlias, keywords, callback) => {
   }
   categoryModel.create(newCategory, (err, doc) => {
     if (err) {
-      console.log('createNewCategory ERROR ', err);
+      callback(err);
     } else {
       callback(null, doc);
     }
   });
 }
 
-const deleteCategoryById = (id) => {
+const deleteCategoryById = (id, callback) => {
   categoryModel.remove({
     _id: id
-  }, function(err) {
+  }, function(err, doc) {
     if (err) {
-      console.log('deleteCategoryById ERROR ', err);
+      callback(err);
     } else {
-      console.log("deleteCategoryById SUCCESS");
+      callback(null, doc);
     }
   });
 }
@@ -64,14 +64,14 @@ const getCategoryById = (id, callback) => {
   })
 }
 
-const deleteCategoryByName = (name) => {
+const deleteCategoryByName = (name, callback) => {
   categoryModel.remove({
     name: name
-  }, function(err) {
+  }, function(err, doc) {
     if (err) {
-      console.log('deleteCategoryById ERROR ', err);
+      callback(err);
     } else {
-      console.log("deleteCategoryById SUCCESS");
+      callback(null, doc);
     }
   });
 }

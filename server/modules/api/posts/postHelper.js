@@ -46,8 +46,9 @@ const getPostsOfMultiplePagesWithinRange = (listPageId, range, callback) => {
         result.data.forEach(function(object) {
           if (isNote(`${object.permalink_url}`) == 1) {
             result.data.splice(result.data.indexOf(object), 1);
-          } else if (!object.permalink_url) {
-            result.data.splice(result.data.indexOf(object), 1);
+          } else if (!object.hasOwnProperty("permalink_url")) {
+            var idParts = object.id.split("_");
+            object.permalink_url = "https://www.facebook.com/" + item + "/posts/" + idParts[1];
           }
         });
 
