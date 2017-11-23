@@ -21,16 +21,18 @@
     </div>
   </div>
 
-  <div class="user-layout visible-xs" id="user-layout" >
+  <div class="user-layout visible-xs" id="user-layout">
     <div class="login-panel" id="unloginPanel" *ngIf="!authService.isLoggedIn()">
       <div class="">
-        <button type="button" name="button" data-toggle="modal" data-target="#login" (click)="showLoginModal()">
+        <button type="button" name="button" data-toggle="modal" data-target="#login"
+                (click)="openModal(loginSignup,true)">
           <span class="glyphicon glyphicon-user"></span>
           Đăng nhập
         </button>
       </div>
       <div class="">
-        <button type="button" name="button" data-toggle="modal" data-target="#signup" (click)="showSignupModal()">
+        <button type="button" name="button" data-toggle="modal" data-target="#signup"
+                (click)="openModal(loginSignup,false)">
           <span class="glyphicon glyphicon-log-in"></span>
           Đăng ký
         </button>
@@ -74,14 +76,14 @@
       </li>
       <li *ngIf="!authService.isLoggedIn()">
         <button type="button" class="btn" data-toggle="modal" data-target="#login" id="login_btn"
-                (click)="showLoginModal()">
+                (click)="openModal(loginSignup,true)">
           <span class="glyphicon glyphicon-user"></span>
           Đăng nhập
         </button>
       </li>
       <li *ngIf="!authService.isLoggedIn()">
         <button type="button" class="btn" data-toggle="modal" data-target="#signup"
-                style="margin-right: 40px;" id="signup_btn" (click)="showSignupModal()">
+                style="margin-right: 40px;" id="signup_btn" (click)="openModal(loginSignup,false)">
           <span class="glyphicon glyphicon-log-in"></span>
           Đăng ký
         </button>
@@ -127,10 +129,12 @@
        aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-body">
-        <app-login (onLoginSuccess)="loggedIn($event)"  [isLogin]="isLogin"></app-login>
+        <app-login (onLoginSuccess)="loggedIn($event)" [(isLoadingLogin)]="isChildLoading"
+                   [(isLoadingSignup)]="isChildLoading" [isLogin]="isLogin"></app-login>
       </div>
     </div>
   </div>
+
 
 </div>
 

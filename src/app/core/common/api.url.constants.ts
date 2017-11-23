@@ -10,6 +10,10 @@ export class ApiUrlConstants {
   public static SAVE_FAVORITE_POST = '/user/savePost';
   public static DELETE_FAVORITE_POST = '/user/deletePost';
   public static CREATE_NEW_SHOP = '/page/';
+  public static CREATE_NEW_CATEGORY = '/category/';
+  public static UPDATE_CATEGORY = (categoryId: string) => {
+    return `/category/${categoryId}`;
+  }
   public static UPDATE_SHOP = (url: String) => {
     return `/page/${url}`;
   }

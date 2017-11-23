@@ -8,6 +8,7 @@ import {AuthenticationService} from './core/services/authentication/authenticati
 import {NotificationService} from './core/services/notification/notification.service';
 import {AuthGuard} from './core/guards/auth.guard';
 import {SharedService} from './core/services/shared/shared.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -17,9 +18,10 @@ import {SharedService} from './core/services/shared/shared.service';
   imports: [
     BrowserModule,
     HttpModule,
-    AppRoutesModule
+    AppRoutesModule,
+    BrowserAnimationsModule
   ],
-  providers: [CookieService, AuthenticationService, NotificationService, SharedService],
+  providers: [CookieService, AuthenticationService, NotificationService, SharedService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

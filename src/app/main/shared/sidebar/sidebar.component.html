@@ -14,6 +14,11 @@
 
   <nav class="ps-container" *ngIf="categoryList">
     <ul class="nav">
+      <li *ngIf="authService.isLoggedIn() && authService.getCurrentUser().admin">
+        <a routerLink="/admin/" routerLinkActive="active">
+          <i class="fa fa-home" aria-hidden="true"></i> <span>Trang quản trị</span>
+        </a>
+      </li>
       <li>
         <a onClick="hideSidepanel()" routerLink="/main/home/all" routerLinkActive="active">
           <i class="fa fa-home" aria-hidden="true"></i> <span>Tất cả</span>

@@ -5,6 +5,7 @@ export class User {
   postsFromFavUrls: String[];
   postId: String[];
   token: String;
+  admin: boolean;
 }
 
 export class Post {

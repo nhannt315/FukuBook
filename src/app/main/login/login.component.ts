@@ -3,6 +3,7 @@ import {AuthenticationService} from '../../core/services/authentication/authenti
 import {User} from '../../core/models/models.component';
 import {NotificationService} from '../../core/services/notification/notification.service';
 import {MessageConstants} from '../../core/common/message.constants';
+import {SharedService} from '../../core/services/shared/shared.service';
 
 declare const $: any;
 
@@ -15,15 +16,17 @@ export class LoginComponent implements OnInit, AfterViewChecked {
   @Output() onLoginSuccess = new EventEmitter();
 
   @Input() isLogin;
+  @Input() isLoadingLogin = false;
+  @Input() isLoadingSignup = false;
   user: User = new User();
   remember = false;
   userSignup: User = new User();
   repeatPassword: String;
   isPassWordMatch = false;
-  isLoadingLogin = false;
-  isLoadingSignup = false;
 
-  constructor(public authService: AuthenticationService, private notifyService: NotificationService) {
+
+  constructor(public authService: AuthenticationService, private notifyService: NotificationService,
+              private sharedService: SharedService) {
 
   }
 
@@ -44,6 +47,10 @@ export class LoginComponent implements OnInit, AfterViewChecked {
     } else {
       $('#signup-li').trigger('click');
     }
+    this.sharedService.changeEmitted$.subscribe((text)=>{
+      this.isLoadingLogin = false;
+      this.isLoadingSignup = false;
+    });
   }
 
   login() {

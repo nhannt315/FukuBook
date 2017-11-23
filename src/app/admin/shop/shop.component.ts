@@ -42,12 +42,12 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
     this.loadShop();
-    this.loadCategory();
   }
 
   loadShop() {
     this.shopService.getAllShop().subscribe((response: Shop[]) => {
       this.shopList = response;
+      this.loadCategory();
     });
   }
 
@@ -67,6 +67,9 @@ export class ShopComponent implements OnInit {
           }
         }
       }
+    }, error2 => {
+      this.notifyService.printErrorMessage(MessageConstants.SYSTEM_ERROR_MSG);
+      this.notifyService.handleError(error2);
     });
   }
 
@@ -85,7 +88,10 @@ export class ShopComponent implements OnInit {
       this.notifyService.printSuccessMessage(MessageConstants.CREATED_OK_MSG);
       this.modalRef.hide();
       this.loadShop();
-    }, error => this.notifyService.printErrorMessage(MessageConstants.SYSTEM_ERROR_MSG));
+    }, error => {
+      this.notifyService.printErrorMessage(MessageConstants.SYSTEM_ERROR_MSG);
+      this.notifyService.handleError(error);
+    });
   }
 
   updateShop() {
@@ -94,7 +100,8 @@ export class ShopComponent implements OnInit {
       this.loadShop();
       this.modalRef.hide();
     }, error => {
-      this.notifyService.printSuccessMessage(MessageConstants.SYSTEM_ERROR_MSG);
+      this.notifyService.printErrorMessage(MessageConstants.SYSTEM_ERROR_MSG);
+      this.notifyService.handleError(error);
     });
   }
 
@@ -104,7 +111,8 @@ export class ShopComponent implements OnInit {
         this.notifyService.printSuccessMessage(MessageConstants.DELETED_OK_MSG);
         this.loadShop();
       }, error => {
-        this.notifyService.printSuccessMessage(MessageConstants.SYSTEM_ERROR_MSG);
+        this.notifyService.printErrorMessage(MessageConstants.SYSTEM_ERROR_MSG);
+        this.notifyService.handleError(error);
       });
     });
   }
@@ -113,7 +121,7 @@ export class ShopComponent implements OnInit {
   openModal(template: TemplateRef<any>, shop?: Shop) {
     this.modalRef = this.modalService.show(template);
     if (shop) {
-      this.currentEditShop = shop;
+      this.currentEditShop = Object.assign({}, shop);
     }
   }
 

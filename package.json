@@ -44,6 +44,7 @@
     "mongoose": "^4.13.4",
     "ng2-cookies": "^1.0.12",
     "ngx-bootstrap": "^1.9.3",
+    "ngx-chips": "^1.5.10",
     "ngx-cookie-service": "^1.0.9",
     "nodemon": "^1.12.1",
     "normalize": "^0.3.1",

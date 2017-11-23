@@ -18,7 +18,7 @@
               <div class="sminputs">
                 <div [ngClass]="{'has-error': fSignup.submitted && !usernameSignup.valid}" class="input full">
                   <label class="string optional" for="user-name">Tên đăng nhập*</label>
-                  <input type="text" class="string optional" placeholder="Username" name="usernameSignup"
+                  <input type="text" class="string optional" placeholder="Tên đăng nhập" name="usernameSignup"
                          [(ngModel)]="userSignup.username"
                          #usernameSignup="ngModel" required/>
                   <div *ngIf="fSignup.submitted && !usernameSignup.valid" class="help-block">Tên đăng nhập yêu cầu</div>
@@ -30,7 +30,7 @@
                 <div class="input string optional">
                   <label class="string optional" for="user-pw">Mật khẩu *</label>
                   <input name="passwordSignup" class="string optional" maxlength="255" id="user-pw"
-                         placeholder="Password"
+                         placeholder="Mật khẩu"
                          type="text" #passwordSignup="ngModel"
                          size="50" [(ngModel)]="userSignup.password" validateEqual="rePasswordSignup" required/>
                   <div
@@ -41,7 +41,7 @@
                 <div class="input string optional">
                   <label class="string optional" for="user-pw-repeat">Xác nhận mật khẩu *</label>
                   <input name="rePasswordSignup" class="string optional" maxlength="255" id="user-pw-repeat"
-                         placeholder="Repeat password" #rePasswordSignup="ngModel" [(ngModel)]="repeatPassword"
+                         placeholder="Nhập lại mật khẩu" #rePasswordSignup="ngModel" [(ngModel)]="repeatPassword"
                          type="text" size="50" validateEqual="passwordSignup" required/>
 
                   <div
@@ -55,7 +55,7 @@
               <div class="simform__actions">
                 <button class="sumbit" name="commit" type="submit"
                         [disabled]="fSignup.submitted && (!passwordSignup.valid || !rePasswordSignup.valid || (userSignup.password !== repeatPassword))">
-                  Create Account
+                  Tạo tài khoản
                 </button>
                 <span class="simform__actions-sidetext">Bằng cách tạo một tài khoản bạn đồng ý với
                   <a class="special"
@@ -71,18 +71,6 @@
               </div>
             </form>
           </div>
-          <div class="logmod__alter">
-            <div class="logmod__alter-container">
-              <a href="#" class="connect facebook">
-                <div class="connect__icon">
-                  <i class="fa fa-facebook"></i>
-                </div>
-                <div class="connect__context">
-                  <span>Tạo tài khoản với <strong>Facebook</strong></span>
-                </div>
-              </a>
-            </div>
-          </div>
         </div>
         <div class="logmod__tab lgm-2">
           <div class="logmod__heading">
@@ -93,8 +81,8 @@
                   class="simform">
               <div class="sminputs">
                 <div [ngClass]="{'has-error': fLogin.submitted && !username.valid}" class="input full">
-                  <label class="string optional" for="user-name">Username*</label>
-                  <input type="text" class="string optional" placeholder="Username" name="username"
+                  <label class="string optional" for="user-name">Tài khoản*</label>
+                  <input type="text" class="string optional" placeholder="Tài khoản" name="username"
                          [(ngModel)]="user.username"
                          #username="ngModel" required/>
                   <div *ngIf="fLogin.submitted && !username.valid" class="help-block">Tên đăng nhập yêu cầu</div>
@@ -102,8 +90,8 @@
               </div>
               <div class="sminputs">
                 <div [ngClass]="{'has-error': fLogin.submitted && !password.valid}" class="input full">
-                  <label class="string optional" for="user-pw">Password *</label>
-                  <input type="password" name="password" id="user-pw" class="string optional" placeholder="Password"
+                  <label class="string optional" for="user-pw">Mật khẩu*</label>
+                  <input type="password" name="password" id="user-pw" class="string optional" placeholder="Mật khẩu"
                          [(ngModel)]="user.password"
                          #password="ngModel" required/>
                   <div *ngIf="fLogin.submitted && !password.valid" class="help-block">Mật khẩu được yêu cầu</div>
@@ -117,24 +105,10 @@
                   alt="">
                 <button class="sumbit" type="sumbit"
                         [disabled]="fLogin.submitted && (!username.valid || !password.valid)">
-                  Log In
+                  Đăng nhập
                 </button>
-                <span class="simform__actions-sidetext"><a class="special" role="link"
-                                                           href="#">Quên mật khẩu?<br>Nhấn vào đây</a></span>
               </div>
             </form>
-          </div>
-          <div class="logmod__alter">
-            <div class="logmod__alter-container">
-              <a href="#" class="connect facebook">
-                <div class="connect__icon">
-                  <i class="fa fa-facebook"></i>
-                </div>
-                <div class="connect__context">
-                  <span>Đăng nhập với <strong>Facebook</strong></span>
-                </div>
-              </a>
-            </div>
           </div>
         </div>
       </div>

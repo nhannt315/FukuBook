@@ -80,13 +80,7 @@ export class NotificationService {
     }
 
   public handleError(error: any) {
-    if (error.status === 401) {
-      localStorage.removeItem(SystemConstants.CURRENT_USER);
-      this.printErrorMessage(MessageConstants.LOGIN_AGAIN_MSG);
-    } else {
-      const errMsg = JSON.parse(error._body).errmsg || JSON.parse(error._body).message;
-      this.printErrorMessage(errMsg);
-    }
+    Observable.throw(error);
   }
 
 }

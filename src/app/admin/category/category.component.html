@@ -1,6 +1,6 @@
 <ul class="nav" style="margin: 10px">
   <li>
-    <button class="btn btn-success" (click)="openModal(newShop)">Thêm mới
+    <button class="btn btn-success" (click)="openModal(newCategory)">Thêm mới
     </button>
   </li>
 </ul>
@@ -19,13 +19,105 @@
       <td>{{category.name}}</td>
       <td><span *ngFor="let keyword of category.keywords">{{keyword}},</span></td>
       <td>
-        <button class="btn btn-primary" (click)="openModal(editShop, shop)">
+        <button class="btn btn-primary" (click)="openModal(editCategory, category)">
           <i class="fa fa-pencil-square-o"></i>
         </button>
-        <button class="btn btn-danger" (click)="showDialogConfirmDelete(shop)">
+        <button class="btn btn-danger" (click)="deleteCategory(category._id)">
           <i class="fa fa-trash"></i>
         </button>
       </td>
     </tr>
   </tbody>
 </table>
+
+<ng-template #newCategory>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left text-black">Thêm mới Category</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal form-label-left" #addForm="ngForm" novalidate (ngSubmit)="addNewCategory()">
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Tên category</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <input type="text" #alias="ngModel" [(ngModel)]="newCategoryEntity.alias" required
+                 name="alias" class="form-control text-black" (input)="onInputAliasChange()">
+          <small [hidden]="alias.valid || (alias.pristine && !addForm.addForm)"
+                 class="text-danger">
+            Bạn phải nhập tên Category
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Alias</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <input type="text" #name="ngModel" [(ngModel)]="newCategoryEntity.name" required
+                 name="link" class="form-control text-black">
+          <!--<small [hidden]="link.valid || (link.pristine && !addForm.submitted)"-->
+          <!--class="text-danger">-->
+          <!--Bạn phải nhập link shop-->
+          <!--</small>-->
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Keywords</label>
+        <div class="col-md-9 col-sm-9 col-xs-12 text-black">
+          <tag-input [(ngModel)]='newKeyWords' theme='bootstrap'
+                     [ngModelOptions]="{standalone: true}"></tag-input>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+          <button type="submit" class="btn btn-success" [disabled]="!addForm.form.valid">Thêm mới</button>
+          <button type="button" (click)="modalRef.hide()" class="btn btn-primary">Hủy bỏ</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #editCategory>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left text-black">Thêm mới Category</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal form-label-left" #editForm="ngForm" novalidate (ngSubmit)="updateCategory()">
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Tên shop</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <input type="text" #alias="ngModel" [(ngModel)]="currentEditCategory.alias" required
+                 name="alias" class="form-control text-black" (input)="onInputAliasChange()">
+          <small [hidden]="alias.valid || (alias.pristine && !editForm.submitted)"
+                 class="text-danger">
+            Bạn phải nhập tên Category
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Alias</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <input type="text" #name="ngModel" [(ngModel)]="currentEditCategory.name" required
+                 name="link" class="form-control text-black">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Keywords</label>
+        <div class="col-md-9 col-sm-9 col-xs-12 text-black">
+          <tag-input [(ngModel)]='currentEditKeywords' theme='bootstrap'
+                     [ngModelOptions]="{standalone: true}"></tag-input>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+          <button type="submit" class="btn btn-success" [disabled]="!editForm.form.valid">Cập nhật</button>
+          <button type="button" (click)="modalRef.hide()" class="btn btn-primary">Hủy bỏ</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
