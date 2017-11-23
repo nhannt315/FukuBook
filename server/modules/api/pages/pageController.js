@@ -11,7 +11,7 @@ Router.get("/all", (req, res) => {
       res.send(err);
     } else {
       res.status(200);
-      res.send(null, result);
+      res.send(result);
     }
   });
 });

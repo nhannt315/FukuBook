@@ -10,7 +10,7 @@ const getAllPagesFromDB = (callback) => {
     if (err) {
       callback(err);
     } else {
-      callback(result);
+      callback(null, result);
     }
   });
 }
