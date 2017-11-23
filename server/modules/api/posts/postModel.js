@@ -30,9 +30,10 @@ const deleteDatabase = () => {
 }
 
 const updateCollection = (listUrl, range) => {
+  console.log(listUrl);
   postHelper.getPostsOfMultiplePagesWithinRange(listUrl, range, (listData) => {
-    categoryModel.getAllCategoriesFromDB((listCategory) => {
-      pageModel.getAllPagesFromDB((listPage) => {
+    categoryModel.getAllCategoriesFromDB((err, listCategory) => {
+      pageModel.getAllPagesFromDB((err, listPage) => {
         deleteDatabase();
         createPostWithCategory(listData, listCategory, listPage);
       });
@@ -41,7 +42,6 @@ const updateCollection = (listUrl, range) => {
 }
 
 const createPostWithCategory = (listData, listCategory, listPage) => {
-  console.log("listData:\n", listData);
   listData.forEach(function(item) {
     if (item.error) {} else if (!item.error) {
       var pageId = pageHelper.getPageIdFromUrl(listPage, item.permalink_url);
@@ -130,7 +130,7 @@ const getPostsFromDBWithPageWithLimitWithShop = (page, limit, shop, callback) =>
   if (page == 0 && limit == 0) {
     getAllPostsFromDBWithShop(shop, callback);
   } else {
-    pageModel.getAllPagesFromDB((listPage) => {
+    pageModel.getAllPagesFromDB((err, listPage) => {
       if (page == 0) page = 1;
       if (limit == 0) limit = 12;
       var pageId = pageHelper.getPageIdFromUrl(listPage, shop);
@@ -156,7 +156,7 @@ const getPostsFromDBWithCategoryWithPageWithLimit = (category, page, limit, call
   if (page == 0 && limit == 0) {
     getAllPostsFromDBWithCategory(category, callback);
   } else {
-    categoryModel.getAllCategoriesFromDB((listCategory) => {
+    categoryModel.getAllCategoriesFromDB((err, listCategory) => {
       if (page == 0) page = 1;
       if (limit == 0) limit = 12;
       var categoryId = categoryHelper.getCategoryIdFromNameWithList(listCategory, category);
@@ -186,8 +186,8 @@ const getPostsFromDBWithCategoryWithPageWithLimitWithShop = (category, page, lim
   if (page == 0 && limit == 0) {
     getAllPostsFromDBWithCategoryWithShop(category, shop, callback);
   } else {
-    categoryModel.getAllCategoriesFromDB((listCategory) => {
-      pageModel.getAllPagesFromDB((listPage) => {
+    categoryModel.getAllCategoriesFromDB((err, listCategory) => {
+      pageModel.getAllPagesFromDB((err, listPage) => {
         if (page == 0) page = 1;
         if (limit == 0) limit = 12;
         var categoryId = categoryHelper.getCategoryIdFromNameWithList(listCategory, category);
@@ -245,7 +245,7 @@ const getPostsFromDBWithFilterWithPageWithLimitWithShop = (filter, page, limit, 
   if (page == 0 && limit == 0) {
     getAllPostsFromDBWithFilterWithShop(filter, shop, callback);
   } else {
-    pageModel.getAllPagesFromDB((listPage) => {
+    pageModel.getAllPagesFromDB((err, listPage) => {
       if (page == 0) page = 1;
       if (limit == 0) limit = 12;
       var pageId = pageHelper.getPageIdFromUrl(listPage, shop);
@@ -278,7 +278,7 @@ const getPostsFromDBWithCategoryWithFilterWithPageWithLimit = (category, filter,
   if (page == 0 && limit == 0) {
     getAllPostsFromDBWithCategoryWithFilter(category, filter, callback);
   } else {
-    categoryModel.getAllCategoriesFromDB((listCategory) => {
+    categoryModel.getAllCategoriesFromDB((err, listCategory) => {
       if (page == 0) page = 1;
       if (limit == 0) limit = 12;
       var categoryId = categoryHelper.getCategoryIdFromNameWithList(listCategory, category);
@@ -315,8 +315,8 @@ const getPostsFromDBWithCategoryWithFilterWithPageWithLimitWithShop = (category,
   if (page == 0 && limit == 0) {
     getAllPostsFromDBWithCategoryWithFilterWithShop(category, filter, shop, callback);
   } else {
-    categoryModel.getAllCategoriesFromDB((listCategory) => {
-      pageModel.getAllPagesFromDB((listPage) => {
+    categoryModel.getAllCategoriesFromDB((err, listCategory) => {
+      pageModel.getAllPagesFromDB((err, listPage) => {
         if (page == 0) page = 1;
         if (limit == 0) limit = 12;
         var categoryId = categoryHelper.getCategoryIdFromNameWithList(listCategory, category);
@@ -356,7 +356,7 @@ const getAllPostsFromDBWithShop = (shop, callback) => {
     getAllPostsFromDB(callback);
     return;
   } else {
-    pageModel.getAllPagesFromDB((listPage) => {
+    pageModel.getAllPagesFromDB((err, listPage) => {
       var pageId = pageHelper.getPageIdFromUrl(listPage, shop);
       postModel.find({
         page: pageId
@@ -376,7 +376,7 @@ const getAllPostsFromDBWithCategory = (category, callback) => {
   if (category == "all") {
     getAllPostsFromDB(callback);
   } else {
-    categoryModel.getAllCategoriesFromDB((listCategory) => {
+    categoryModel.getAllCategoriesFromDB((err, listCategory) => {
       var categoryId = categoryHelper.getCategoryIdFromNameWithList(listCategory, category);
       postModel.find({
         category: categoryId
@@ -400,8 +400,8 @@ const getAllPostsFromDBWithCategoryWithShop = (category, shop, callback) => {
   if (category == "all") {
     getAllPostsFromDBWithShop(shop, callback);
   } else {
-    categoryModel.getAllCategoriesFromDB((listCategory) => {
-      pageModel.getAllPagesFromDB((listPage) => {
+    categoryModel.getAllCategoriesFromDB((err, listCategory) => {
+      pageModel.getAllPagesFromDB((err, listPage) => {
         var categoryId = categoryHelper.getCategoryIdFromNameWithList(listCategory, category);
         var pageId = pageHelper.getPageIdFromUrl(listPage, shop);
         postModel.find({
@@ -447,7 +447,7 @@ const getAllPostsFromDBWithFilterWithShop = (filter, shop, callback) => {
   if (filter == null) {
     getAllPostsFromDBWithShop(shop, callback);
   } else {
-    pageModel.getAllPagesFromDB((listPage) => {
+    pageModel.getAllPagesFromDB((err, listPage) => {
       var pageId = pageHelper.getPageIdFromUrl(listPage, shop);
       postModel.find({
         $text: {
@@ -467,7 +467,7 @@ const getAllPostsFromDBWithFilterWithShop = (filter, shop, callback) => {
 
 const getAllPostsFromDBWithCategoryWithFilter = (category, filter, callback) => {
   console.log("getAllPostsFromDBWithCategoryWithFilter");
-  categoryModel.getAllCategoriesFromDB((listCategory) => {
+  categoryModel.getAllCategoriesFromDB((err, listCategory) => {
     var categoryId = categoryHelper.getCategoryIdFromNameWithList(listCategory, category);
     postModel.find({
       $text: {
@@ -490,8 +490,8 @@ const getAllPostsFromDBWithCategoryWithFilterWithShop = (category, filter, shop,
     getAllPostsFromDBWithCategoryWithFilter(category, filter, callback);
     return;
   } else {
-    categoryModel.getAllCategoriesFromDB((listCategory) => {
-      pageModel.getAllPagesFromDB((listPage) => {
+    categoryModel.getAllCategoriesFromDB((err, listCategory) => {
+      pageModel.getAllPagesFromDB((err, listPage) => {
         var categoryId = categoryHelper.getCategoryIdFromNameWithList(listCategory, category);
         var pageId = pageHelper.getPageIdFromUrl(listPage, shop);
         postModel.find({
@@ -513,7 +513,7 @@ const getAllPostsFromDBWithCategoryWithFilterWithShop = (category, filter, shop,
 }
 
 const updateDatabase = () => {
-  pageModel.getAllPagesFromDB((listPage) => {
+  pageModel.getAllPagesFromDB((err, listPage) => {
     var listPageUrl = pageHelper.getAllPageUrlFromList(listPage);
     updateCollection(listPageUrl, 30);
     console.log("updateDatabase SUCCESS");

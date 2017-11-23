@@ -16,7 +16,7 @@ const getAllPagesFromDB = (callback) => {
 }
 
 const createNewPageWithCategoryName = (pageUrl, pageName, pageCategory, callback) => {
-  categoryModel.getAllCategoriesFromDB((listCategory) => {
+  categoryModel.getAllCategoriesFromDB((err, listCategory) => {
     var categoryId = [];
     for (category in pageCategory) {
       categoryId.push(categoryHelper.getCategoryIdFromNameWithList(listCategory, pageCategory[category]));
