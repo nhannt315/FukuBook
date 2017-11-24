@@ -37,7 +37,7 @@ const getPostsOfMultiplePagesWithinRange = (listPageId, range, callback) => {
   var timeStart = timeEnd - range * 86400000;
   var listData = [];
   var len = listPageId.length - 1;
-
+  console.log(listPageId);
   listPageId.forEach(function(item) {
     FB.api(item + '/posts?fields=permalink_url,shares,likes.summary(true),comments.summary(true),message&limit=50&since=' + parseInt(timeStart / 1000) + '&until=' + parseInt(timeEnd / 1000), (result) => {
       if (!result || result.error) {
@@ -46,8 +46,9 @@ const getPostsOfMultiplePagesWithinRange = (listPageId, range, callback) => {
         result.data.forEach(function(object) {
           if (isNote(`${object.permalink_url}`) == 1) {
             result.data.splice(result.data.indexOf(object), 1);
-          } else if (!object.permalink_url) {
-            result.data.splice(result.data.indexOf(object), 1);
+          } else if (!object.hasOwnProperty("permalink_url")) {
+            var idParts = object.id.split("_");
+            object.permalink_url = "https://www.facebook.com/" + item + "/posts/" + idParts[1];
           }
         });
 

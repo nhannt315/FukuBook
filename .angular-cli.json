@@ -34,9 +34,7 @@
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../node_modules/alertifyjs/build/alertify.js",
         "../node_modules/isotope-layout/dist/isotope.pkgd.min.js",
-        "../node_modules/isotope-layout/dist/isotope.pkgd.js",
-        "./assets/js/homepage.js",
-        "./assets/js/login.js"
+        "../node_modules/isotope-layout/dist/isotope.pkgd.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

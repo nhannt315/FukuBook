@@ -1,0 +1,25 @@
+<div style="text-align: center">
+  <h2>Bài viết yêu thích</h2>
+</div>
+<div style="width: 100%">
+  <div id="post-container-main" class="grid" [hidden]="!isDataLoaded">
+
+  </div>
+</div>
+<div *ngIf="isNotFound && authService.isLoggedIn()" class="alert" style="text-align: center">
+  <h2>Không có bài post nào cả</h2>
+</div>
+<div *ngIf="!authService.isLoggedIn()" class="alert" style="text-align: center">
+  <h2>Bạn cần phải đăng nhập trước</h2>
+</div>
+<div id="post-container-temp" hidden>
+
+</div>
+<div *ngIf="isLoading && authService.isLoggedIn()" class="sk-folding-cube loading">
+  <div class="sk-cube1 sk-cube"></div>
+  <div class="sk-cube2 sk-cube"></div>
+  <div class="sk-cube4 sk-cube"></div>
+  <div class="sk-cube3 sk-cube"></div>
+</div>
+<a href="javascript:" id="return-to-top" (click)="scrollToTop()"><i class="fa fa-chevron-up"></i></a>
+

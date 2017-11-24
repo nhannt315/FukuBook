@@ -1,0 +1,141 @@
+<ul class="nav" style="margin: 10px">
+  <li>
+    <button class="btn btn-success" (click)="openModal(newShop)">Thêm mới
+    </button>
+  </li>
+</ul>
+<table class="table table-responsive table-hover table-bordered" style="margin-left: 10px; background-color: white">
+  <thead>
+    <tr>
+      <th>Tên shop</th>
+      <th>Facebook</th>
+      <th>Category</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="shopList">
+    <tr *ngFor="let shop of shopList">
+      <td>{{shop.name}}</td>
+      <td><a href="https://facebook.com/{{shop.permalink_url}}">https://facebook.com/{{shop.permalink_url}}</a></td>
+      <td><span *ngFor="let cateName of shop.categoryName">{{cateName}},</span></td>
+      <td>
+        <button class="btn btn-primary" (click)="openModal(editShop, shop)">
+          <i class="fa fa-pencil-square-o"></i>
+        </button>
+        <button class="btn btn-danger" (click)="showDialogConfirmDelete(shop)">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div *ngIf="!shopList" class="sk-folding-cube loading">
+  <div class="sk-cube1 sk-cube"></div>
+  <div class="sk-cube2 sk-cube"></div>
+  <div class="sk-cube4 sk-cube"></div>
+  <div class="sk-cube3 sk-cube"></div>
+</div>
+
+<ng-template #editShop>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Chỉnh sửa thông tin shop</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div *ngIf="currentEditShop" class="modal-body">
+    <form class="form-horizontal form-label-left" #editForm="ngForm" novalidate (ngSubmit)="updateShop()">
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Tên shop</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <input type="text" #name="ngModel" [(ngModel)]="currentEditShop.name" required
+                 name="name" class="form-control text-black">
+          <small [hidden]="name.valid || (name.pristine && !editForm.submitted)"
+                 class="text-danger">
+            Bạn phải nhập tên shop
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Facebook link</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <input type="text" #link="ngModel" [(ngModel)]="currentEditShop.permalink_url" required
+                 name="link" class="form-control text-black">
+          <small [hidden]="link.valid || (link.pristine && !editForm.submitted)"
+                 class="text-danger">
+            Bạn phải nhập link shop
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Category</label>
+        <div class="col-md-9 col-sm-9 col-xs-12 text-black">
+          <ss-multiselect-dropdown [settings]="mySettings" [texts]="myTextCategory"
+                                   [options]="categoryOptions"
+                                   [(ngModel)]="currentEditShop.category"
+                                   [ngModelOptions]="{standalone: true}">
+
+          </ss-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+          <button type="submit" class="btn btn-success" [disabled]="!editForm.form.valid">Cập nhật</button>
+          <button type="button" (click)="modalRef.hide()" class="btn btn-primary">Hủy bỏ</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #newShop>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left text-black">Thêm mới shop</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal form-label-left" #addForm="ngForm" novalidate (ngSubmit)="addNewShop()">
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Tên shop</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <input type="text" #name="ngModel" [(ngModel)]="newShopEntity.name" required
+                 name="name" class="form-control text-black">
+          <small [hidden]="name.valid || (name.pristine && !addForm.submitted)"
+                 class="text-danger">
+            Bạn phải nhập tên shop
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Facebook link</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <input type="text" #link="ngModel" [(ngModel)]="newShopEntity.permalink_url" required
+                 name="link" class="form-control text-black">
+          <small [hidden]="link.valid || (link.pristine && !addForm.submitted)"
+                 class="text-danger">
+            Bạn phải nhập link shop
+          </small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Category</label>
+        <div class="col-md-9 col-sm-9 col-xs-12 text-black">
+          <ss-multiselect-dropdown [settings]="mySettings" [texts]="myTextCategory"
+                                   [options]="categoryOptions"
+                                   [(ngModel)]="newShopEntity.category"
+                                   [ngModelOptions]="{standalone: true}">
+
+          </ss-multiselect-dropdown>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+          <button type="submit" class="btn btn-success" [disabled]="!addForm.form.valid">Thêm mới</button>
+          <button type="button" (click)="modalRef.hide()" class="btn btn-primary">Hủy bỏ</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-template>

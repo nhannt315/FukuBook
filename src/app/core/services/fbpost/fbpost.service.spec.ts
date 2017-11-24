@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { FbpostService } from './fbpost.service';
+import {FbpostService} from './fbpost.service';
 
 describe('FbpostService', () => {
   beforeEach(() => {

@@ -1,0 +1,40 @@
+<div class="addFavUrl" style="display: block;">
+  <form (ngSubmit)="search()" class="" action="" method="post" style="display: inline-block">
+    <div class="form-group">
+      <input type="text" [(ngModel)]="keyword" name="url" id="favUrl" placeholder="Nhập từ khóa tìm kiếm"
+             class="form-control favUrl url">
+    </div>
+  </form>
+  <ss-multiselect-dropdown *ngIf="categorySelectOption" [settings]="mySettings" [options]="categorySelectOption"
+                           [(ngModel)]="selectedCategory" [texts]="myTextCategory">
+
+  </ss-multiselect-dropdown>
+  <ss-multiselect-dropdown *ngIf="shopSelectOption" [settings]="mySettings" [options]="shopSelectOption"
+                           [(ngModel)]="selectedShop" [texts]="myTextShop">
+
+  </ss-multiselect-dropdown>
+  <button class="btn btn-default" type="" style="width: 250px;height: 34px;" (click)="search()">Tìm kiếm</button>
+</div>
+
+<div class="panel-fav-urls" style="display: block;">
+  <div class="heading">
+    Kết quả tìm kiếm
+    <h2 *ngIf="isNotFound">Không có kết quả</h2>
+  </div>
+  <div class="showFavUrl" style="width: 100%">
+    <div id="post-container-main" class="grid showFavUrl" [hidden]="!isDataLoaded">
+
+    </div>
+
+  </div>
+  <div id="post-container-temp" hidden>
+
+  </div>
+  <div *ngIf="isLoading" class="sk-folding-cube loading">
+    <div class="sk-cube1 sk-cube"></div>
+    <div class="sk-cube2 sk-cube"></div>
+    <div class="sk-cube4 sk-cube"></div>
+    <div class="sk-cube3 sk-cube"></div>
+  </div>
+</div>
+<a href="javascript:" id="return-to-top" (click)="scrollToTop()"><i class="fa fa-chevron-up"></i></a>

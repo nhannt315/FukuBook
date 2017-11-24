@@ -25,6 +25,8 @@ export class AuthenticationService {
         if (user && user.token) {
           localStorage.removeItem(SystemConstants.CURRENT_USER);
           localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
+          // this.cookieService.delete(SystemConstants.CURRENT_USER);
+          // this.cookieService.set(SystemConstants.CURRENT_USER, JSON.stringify(user));
         }
       });
   }
@@ -32,6 +34,7 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem(SystemConstants.CURRENT_USER);
+    // this.cookieService.delete(SystemConstants.CURRENT_USER);
   }
 
   signUp(username: String, password: String) {
@@ -47,12 +50,15 @@ export class AuthenticationService {
         if (user && user.token) {
           localStorage.removeItem(SystemConstants.CURRENT_USER);
           localStorage.setItem(SystemConstants.CURRENT_USER, JSON.stringify(user));
+          // this.cookieService.delete(SystemConstants.CURRENT_USER);
+          // this.cookieService.set(SystemConstants.CURRENT_USER, JSON.stringify(user));
         }
       });
   }
 
   getCurrentUser(): any {
     return JSON.parse(localStorage.getItem(SystemConstants.CURRENT_USER));
+    // return this.cookieService.get(SystemConstants.CURRENT_USER);
   }
 
   isLoggedIn(): boolean {

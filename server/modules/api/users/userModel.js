@@ -259,7 +259,6 @@ const getPostsFromFavUrls = (userId, page, callback) => {
     } else {
       result = [];
       PostsFromFavUrls = doc.postsFromFavUrls.splice(12*(page-1), 12*page);
-      // console.log(PostsFromFavUrls.length);
       for (favPost in PostsFromFavUrls) {
         var post = {
           permalink_url: PostsFromFavUrls[favPost]

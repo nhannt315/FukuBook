@@ -1,22 +1,29 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const categorySchema = require('../categories/categorySchema.js');
+
+const categoryModel = mongoose.model('categories', categorySchema);
+
 
 const pageSchema = new Schema({
-  id: {
+  _id: {
+    type: Schema.Types.ObjectId,
+    require: true,
+    auto: true
+  },
+  permalink_url: {
     type: String,
     require: true,
+    unique: true
   },
   name: {
     type: String,
     require: true
   },
-  permalink_url: {
-    type: String,
-    require: true
-  },
   category: {
-    type: String,
-    require: true
+    type: [Schema.Types.ObjectId],
+    ref: 'categories',
+    required: true
   }
 });
 
