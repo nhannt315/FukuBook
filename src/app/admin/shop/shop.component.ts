@@ -121,7 +121,7 @@ export class ShopComponent implements OnInit {
   openModal(template: TemplateRef<any>, shop?: Shop) {
     this.modalRef = this.modalService.show(template);
     if (shop) {
-      this.currentEditShop = Object.assign({}, shop);
+      this.currentEditShop = JSON.parse(JSON.stringify(shop));
     }
   }
 

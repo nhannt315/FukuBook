@@ -42,7 +42,7 @@ export class CategoryComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
     this.newKeyWords = [];
     if (category) {
-      this.currentEditCategory = Object.assign({}, category);
+      this.currentEditCategory = JSON.parse(JSON.stringify(category));
       this.currentEditKeywords = [];
       for (const key of this.currentEditCategory.keywords) {
         this.currentEditKeywords.push({display: key, value: key});
