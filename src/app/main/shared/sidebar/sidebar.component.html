@@ -1,7 +1,7 @@
 <div class="sidebar-panel offscreen-left" id="sidebar">
   <div class="brand">
     <div class="brand-logo">
-      <img src="/assets/img/trendy.png" height="15" alt="">
+      <a routerLink="/main/home/all"><img src="/assets/img/trendy.png" height="15" alt="" ></a>
     </div>
     <button href="javascript:;" class="toggle-sidebar hidden-xs hamburger-icon v3" id="sidebarCollapse"
             data-toggle="layout-small-menu">
@@ -14,6 +14,11 @@
 
   <nav class="ps-container" *ngIf="categoryList">
     <ul class="nav">
+      <li *ngIf="authService.isLoggedIn() && authService.getCurrentUser().admin">
+        <a routerLink="/admin/" routerLinkActive="active">
+          <i class="fa fa-home" aria-hidden="true"></i> <span>Trang quản trị</span>
+        </a>
+      </li>
       <li>
         <a onClick="hideSidepanel()" routerLink="/main/home/all" routerLinkActive="active">
           <i class="fa fa-home" aria-hidden="true"></i> <span>Tất cả</span>
@@ -29,14 +34,8 @@
           <i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>{{category.alias}}</span>
         </a>
       </li>
-
       <li>
-        <a onclick="hideSidepanel()">
-          <i class="fa fa-eye" aria-hidden="true"></i> <span>Trang theo dõi</span>
-        </a>
-      </li>
-      <li>
-        <a onclick="hideSidepanel()">
+        <a onclick="hideSidepanel()" routerLink="/main/favorite" routerLinkActive="active">
           <i class="fa fa-heart" aria-hidden="true"></i> <span>Bài viết đã lưu</span>
         </a>
       </li>

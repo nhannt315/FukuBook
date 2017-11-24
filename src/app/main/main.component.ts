@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {ModalDirective} from 'ngx-bootstrap';
+import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {BsModalRef, BsModalService, ModalDirective} from 'ngx-bootstrap';
 import {AuthenticationService} from '../core/services/authentication/authentication.service';
 import {NotificationService} from '../core/services/notification/notification.service';
+import {SharedService} from '../core/services/shared/shared.service';
 
 declare const $: any;
 
@@ -10,13 +11,17 @@ declare const $: any;
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit {
-  @ViewChild('modalLoginSignup') modalLoginSignup: ModalDirective;
-
+export class MainComponent implements OnInit, AfterViewInit {
+  @ViewChild('modalLoginSignup') public modalLoginSignup: ModalDirective;
+  modalRef: BsModalRef;
   loadAPI: Promise<any>;
   isLogin = true;
+  isChildLoading = false;
 
-  constructor(public authService: AuthenticationService, private notifyService: NotificationService) {
+  constructor(public authService: AuthenticationService,
+              private notifyService: NotificationService,
+              private sharedService: SharedService,
+              private modalService: BsModalService) {
   }
 
   ngOnInit() {
@@ -24,6 +29,13 @@ export class MainComponent implements OnInit {
       this.loadScript();
     });
   }
+
+  ngAfterViewInit(): void {
+    this.modalLoginSignup.onHide.subscribe(() => {
+      this.isChildLoading = false;
+    });
+  }
+
 
   public loadScript() {
 
@@ -41,19 +53,24 @@ export class MainComponent implements OnInit {
     document.getElementsByTagName('head')[0].appendChild(node);
   }
 
-  showLoginModal() {
-    this.isLogin = true;
+  openModal(template: TemplateRef<any>, login: boolean) {
+    // this.modalRef = this.modalService.show(template);
+    this.isLogin = login;
     this.modalLoginSignup.show();
   }
 
-  showSignupModal() {
-    this.isLogin = false;
-    this.modalLoginSignup.show();
-  }
 
   loggedIn(event) {
     this.modalLoginSignup.hide();
+    this.isChildLoading = false;
     this.notifyService.printSuccessMessage(event);
+    this.sharedService.emitChange('LoggedIn');
+  }
+
+  logout() {
+    this.authService.logout();
+    this.isChildLoading = false;
+    this.sharedService.emitChange('LoggedOut');
   }
 
 

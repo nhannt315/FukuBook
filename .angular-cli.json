@@ -24,7 +24,6 @@
         "../node_modules/alertifyjs/build/css/alertify.css",
         "../node_modules/font-awesome/css/font-awesome.css",
         "../node_modules/alertifyjs/build/css/themes/bootstrap.css",
-        "../node_modules/bootstrap-select/dist/css/bootstrap-select.min.css",
         "assets/css/homepage.css",
         "assets/css/main.css",
         "assets/css/responsive.css",
@@ -35,10 +34,7 @@
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../node_modules/alertifyjs/build/alertify.js",
         "../node_modules/isotope-layout/dist/isotope.pkgd.min.js",
-        "../node_modules/isotope-layout/dist/isotope.pkgd.js",
-        "../node_modules/bootstrap-select/dist/js/bootstrap-select.min.js",
-        "./assets/js/homepage.js",
-        "./assets/js/login.js"
+        "../node_modules/isotope-layout/dist/isotope.pkgd.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

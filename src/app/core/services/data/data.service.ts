@@ -2,7 +2,7 @@ import {UtilityService} from '../utility/utility.service';
 import {NotificationService} from '../notification/notification.service';
 import {MessageConstants} from '../../common/message.constants';
 import {SystemConstants} from '../../common/system.constants';
-import {Http, Response, Headers} from '@angular/http';
+import {Headers, Http} from '@angular/http';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Rx';

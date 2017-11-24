@@ -4,7 +4,29 @@ export class ApiUrlConstants {
   public static SIGN_UP = '/user/register';
   public static GET_ALL_CATEGORY = '/category/all';
   public static GET_ALL_SHOP = '/page/all';
+  public static SAVE_FAVORITE_PAGE = '/saveFavUrl';
+  public static GET_FAVORITE_PAGES = '/getFavUrls';
+  public static GET_FAVORITE_POSTS_URL = '/user/getPostsURL';
+  public static SAVE_FAVORITE_POST = '/user/savePost';
+  public static DELETE_FAVORITE_POST = '/user/deletePost';
+  public static CREATE_NEW_SHOP = '/page/';
+  public static CREATE_NEW_CATEGORY = '/category/';
 
+  public static GET_CATEGORY_DETAIL = (categoryName: string) => {
+    return `/category/${categoryName}`;
+  }
+  public static UPDATE_CATEGORY = (categoryId: string) => {
+    return `/category/${categoryId}`;
+  }
+  public static UPDATE_SHOP = (url: String) => {
+    return `/page/${url}`;
+  }
+  public static DELETE_SHOP = (url: String) => {
+    return `/page/${url}`;
+  }
+  public static GET_FAVORITE_POSTS = (page: number) => {
+    return `/user/getPosts/${page}`;
+  }
   public static GET_ALL_POST = (page: number) => {
     return `/post/all?page={page}`;
   }

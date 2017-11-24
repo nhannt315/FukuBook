@@ -5,6 +5,7 @@ export class User {
   postsFromFavUrls: String[];
   postId: String[];
   token: String;
+  admin: boolean;
 }
 
 export class Post {
@@ -30,4 +31,5 @@ export class Shop {
   name: string;
   permalink_url: string;
   category: string[];
+  categoryName: string[];
 }

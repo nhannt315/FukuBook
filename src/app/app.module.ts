@@ -3,19 +3,24 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppRoutesModule} from './app.routes';
 import {HttpModule} from '@angular/http';
-import {CookieService} from 'ngx-cookie-service';
+import {AuthenticationService} from './core/services/authentication/authentication.service';
+import {NotificationService} from './core/services/notification/notification.service';
+import {AuthGuard} from './core/guards/auth.guard';
+import {SharedService} from './core/services/shared/shared.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    AppRoutesModule
+    AppRoutesModule,
+    BrowserAnimationsModule
   ],
-  providers: [CookieService],
+  providers: [AuthenticationService, NotificationService, SharedService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
