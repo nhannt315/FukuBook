@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FavoriteComponent } from './favorite.component';
+import {FavoriteComponent} from './favorite.component';
 
 describe('FavoriteComponent', () => {
   let component: FavoriteComponent;

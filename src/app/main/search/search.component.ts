@@ -66,7 +66,9 @@ export class SearchComponent implements OnInit, OnDestroy {
           if (!this.isEndPage && !this.isLoading) {
             this.pageIndex++;
             this.isLoading = true;
-            this.loadPost();
+            if (this.fbPostService.getItemCount() > 0) {
+              this.loadPost();
+            }
           }
         });
       }

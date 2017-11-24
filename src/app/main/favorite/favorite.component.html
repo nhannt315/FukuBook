@@ -1,9 +1,12 @@
+<div style="text-align: center">
+  <h2>Bài viết yêu thích</h2>
+</div>
 <div style="width: 100%">
   <div id="post-container-main" class="grid" [hidden]="!isDataLoaded">
 
   </div>
 </div>
-<div *ngIf="isNotFound" class="alert" style="text-align: center">
+<div *ngIf="isNotFound && authService.isLoggedIn()" class="alert" style="text-align: center">
   <h2>Không có bài post nào cả</h2>
 </div>
 <div *ngIf="!authService.isLoggedIn()" class="alert" style="text-align: center">

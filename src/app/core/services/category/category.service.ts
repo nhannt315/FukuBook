@@ -30,6 +30,11 @@ export class CategoryService {
       .map(this.extractData);
   }
 
+  public getCategoryDetailByName(name: string) {
+    return this.http.get(ApiUrlConstants.GET_CATEGORY_DETAIL(name))
+      .map(this.extractData);
+  }
+
   public updateCategory(category: Category) {
     const headers = new Headers();
     headers.append('Authorization', 'JWT ' + this.authService.getCurrentUser().token);

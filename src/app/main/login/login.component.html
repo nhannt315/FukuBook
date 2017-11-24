@@ -17,7 +17,7 @@
                   class="simform">
               <div class="sminputs">
                 <div [ngClass]="{'has-error': fSignup.submitted && !usernameSignup.valid}" class="input full">
-                  <label class="string optional" for="user-name">Tên đăng nhập*</label>
+                  <label class="string optional" for="">Tên đăng nhập*</label>
                   <input type="text" class="string optional" placeholder="Tên đăng nhập" name="usernameSignup"
                          [(ngModel)]="userSignup.username"
                          #usernameSignup="ngModel" required/>
@@ -42,7 +42,7 @@
                   <label class="string optional" for="user-pw-repeat">Xác nhận mật khẩu *</label>
                   <input name="rePasswordSignup" class="string optional" maxlength="255" id="user-pw-repeat"
                          placeholder="Nhập lại mật khẩu" #rePasswordSignup="ngModel" [(ngModel)]="repeatPassword"
-                         type="text" size="50" validateEqual="passwordSignup" required/>
+                         type="text" size="50" required/>
 
                   <div
                     *ngIf="fSignup.submitted && (userSignup.password !== repeatPassword)"
@@ -81,7 +81,7 @@
                   class="simform">
               <div class="sminputs">
                 <div [ngClass]="{'has-error': fLogin.submitted && !username.valid}" class="input full">
-                  <label class="string optional" for="user-name">Tài khoản*</label>
+                  <label class="string optional" for="">Tài khoản*</label>
                   <input type="text" class="string optional" placeholder="Tài khoản" name="username"
                          [(ngModel)]="user.username"
                          #username="ngModel" required/>
@@ -91,7 +91,7 @@
               <div class="sminputs">
                 <div [ngClass]="{'has-error': fLogin.submitted && !password.valid}" class="input full">
                   <label class="string optional" for="user-pw">Mật khẩu*</label>
-                  <input type="password" name="password" id="user-pw" class="string optional" placeholder="Mật khẩu"
+                  <input type="password" name="password" class="string optional" placeholder="Mật khẩu"
                          [(ngModel)]="user.password"
                          #password="ngModel" required/>
                   <div *ngIf="fLogin.submitted && !password.valid" class="help-block">Mật khẩu được yêu cầu</div>

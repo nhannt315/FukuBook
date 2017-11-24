@@ -1,23 +1,15 @@
-import {AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
+export class AppComponent implements OnInit {
   ngOnInit(): void {
 
   }
 
-  ngAfterViewChecked(): void {
-
-  }
-
-  ngAfterViewInit(): void {
-
-  }
-
-  constructor(private elementRef: ElementRef) {
+  constructor() {
   }
 }

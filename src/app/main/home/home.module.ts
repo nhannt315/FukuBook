@@ -5,6 +5,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthenticationService} from '../../core/services/authentication/authentication.service';
 import {PostService} from '../../core/services/post/post.service';
 import {NotificationService} from '../../core/services/notification/notification.service';
+import {CategoryService} from '../../core/services/category/category.service';
 
 const routes: Routes = [
   {path: '', redirectTo: 'all', pathMatch: 'full'},
@@ -17,7 +18,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes)
   ],
-  providers: [AuthenticationService, PostService, NotificationService],
+  providers: [AuthenticationService, PostService, NotificationService, CategoryService],
   declarations: [HomeComponent]
 })
 export class HomeModule {

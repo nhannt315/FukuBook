@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {SystemConstants} from '../../common/system.constants';
-import {MessageConstants} from '../../common/message.constants';
 import {Observable} from 'rxjs/Rx';
+
 declare let alertify: any;
 
 @Injectable()

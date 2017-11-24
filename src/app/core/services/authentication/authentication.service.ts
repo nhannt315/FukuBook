@@ -4,12 +4,11 @@ import {SystemConstants} from '../../common/system.constants';
 import {ApiUrlConstants} from '../../common/api.url.constants';
 import 'rxjs/add/operator/map';
 import {User} from '../../models/models.component';
-import {CookieService} from 'ngx-cookie-service';
 
 @Injectable()
 export class AuthenticationService {
 
-  constructor(private http: Http, private cookieService: CookieService) {
+  constructor(private http: Http) {
   }
 
   login(username: String, password: String, remember: boolean) {

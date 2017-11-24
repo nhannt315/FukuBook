@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CategoryService} from '../../../core/services/category/category.service';
 import {Category} from '../../../core/models/models.component';
 import {AuthenticationService} from '../../../core/services/authentication/authentication.service';

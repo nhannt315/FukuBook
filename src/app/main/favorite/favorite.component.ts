@@ -80,11 +80,24 @@ export class FavoriteComponent implements OnInit, AfterContentInit, OnDestroy {
     this.mySubscribe = Observable.interval(500).subscribe(x => {
       this.fbPostService.layoutIfNeeded();
     });
+    this.sharedService.changeEmitted$.subscribe(text => {
+      this.pageIndex = 1;
+      this.postList = [];
+      if (text === 'LoggedIn') {
+        this.fbPostService.clearRootContainer();
+        this.isLoading = true;
+        this.loadPost();
+      } else {
+        this.fbPostService.resetFavoriteButton();
+        this.fbPostService.clearRootContainer();
+      }
+    });
   }
 
 
   private loadPost() {
     if (!this.authService.isLoggedIn()) {
+      this.isLoading = false;
       return;
     }
     this.postService.getUserFavoritePosts(this.pageIndex).subscribe((response: Post[]) => {
@@ -93,24 +106,19 @@ export class FavoriteComponent implements OnInit, AfterContentInit, OnDestroy {
         if (this.isFirstTime) {
           this.isNotFound = true;
         }
+        this.isLoading = false;
       }
       this.isFirstTime = false;
       this.postList.push(...response);
       this.fbPostService.addPost(response, () => {
         this.isDataLoaded = true;
         this.isLoading = false;
-        this.fbPostService.relayout();
-        this.sharedService.changeEmitted$.subscribe(text => {
-          if (text === 'LoggedIn') {
-            this.isLoading = true;
-            this.loadPost();
-          } else {
-            this.fbPostService.resetFavoriteButton();
-            this.fbPostService.clearRootContainer();
-          }
-        });
       });
-    }, error => this.notifyService.printErrorMessage(MessageConstants.SYSTEM_ERROR_MSG));
+    }, error => {
+      this.notifyService.printErrorMessage(MessageConstants.SYSTEM_ERROR_MSG);
+      this.isLoading = false;
+      this.notifyService.handleError(error);
+    });
   }
 
   scrollToTop() {

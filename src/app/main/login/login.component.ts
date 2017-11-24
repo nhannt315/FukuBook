@@ -1,4 +1,4 @@
-import {AfterViewChecked, AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewChecked, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AuthenticationService} from '../../core/services/authentication/authentication.service';
 import {User} from '../../core/models/models.component';
 import {NotificationService} from '../../core/services/notification/notification.service';

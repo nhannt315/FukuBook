@@ -33,6 +33,10 @@ export class FbpostService {
     this.postContainer.empty();
   }
 
+  getItemCount() {
+    return $('.grid-item').length;
+  }
+
   setRootContainer(containerId: String, tempContainerID: String) {
     this.postContainer = $(containerId).isotope({
       masonry: {
@@ -82,7 +86,6 @@ export class FbpostService {
     if (!this.authService.isLoggedIn()) {
       this.postContainer.find('.grid-item').each((index, item) => {
         if ($(item).find('.save-btn').length === 0) {
-
           const favoriteBtn = document.createElement('img');
           favoriteBtn.className = 'save-btn';
           favoriteBtn.setAttribute('data-toggled', 'false');
@@ -112,6 +115,8 @@ export class FbpostService {
           }, error => {
             btn.attr('src', '/assets/res/favorite_border.png');
             btn.prop('disabled', false);
+            this.notifyService.printErrorMessage(MessageConstants.SYSTEM_ERROR_MSG);
+            this.notifyService.handleError(error);
           });
         } else {
           this.postService.deleteFavoritePost(postUrl).subscribe(() => {
@@ -121,6 +126,8 @@ export class FbpostService {
           }, error => {
             btn.attr('src', '/assets/res/favorite_fill.png');
             btn.prop('disabled', false);
+            this.notifyService.printErrorMessage(MessageConstants.SYSTEM_ERROR_MSG);
+            this.notifyService.handleError(error);
           });
         }
       }
@@ -138,19 +145,21 @@ export class FbpostService {
   updateFavoriteButton() {
     this.postService.getUserFavoritePostsUrl().subscribe((response: any[]) => {
       this.postContainer.find('.grid-item').each((index, item) => {
-        const favoriteBtn = document.createElement('img');
-        favoriteBtn.className = 'save-btn';
-        if (response.indexOf($(item).attr('data-href')) === -1) {
-          favoriteBtn.setAttribute('data-toggled', 'false');
-          favoriteBtn.setAttribute('src', '/assets/res/favorite_border.png');
-        } else {
-          favoriteBtn.setAttribute('data-toggled', 'true');
-          favoriteBtn.setAttribute('src', '/assets/res/favorite_fill.png');
+        if ($(item).find('.save-btn').length === 0) {
+          const favoriteBtn = document.createElement('img');
+          favoriteBtn.className = 'save-btn';
+          if (response.indexOf($(item).attr('data-href')) === -1) {
+            favoriteBtn.setAttribute('data-toggled', 'false');
+            favoriteBtn.setAttribute('src', '/assets/res/favorite_border.png');
+          } else {
+            favoriteBtn.setAttribute('data-toggled', 'true');
+            favoriteBtn.setAttribute('src', '/assets/res/favorite_fill.png');
+          }
+          favoriteBtn.setAttribute('data-href', $(item).attr('data-href'));
+          const $favoriteBtn = $(favoriteBtn);
+          $(item).find('span').append($favoriteBtn);
+          $(item).find('span').addClass('fb-xfbml-parse-ignore');
         }
-        favoriteBtn.setAttribute('data-href', $(item).attr('data-href'));
-        const $favoriteBtn = $(favoriteBtn);
-        $(item).find('span').append($favoriteBtn);
-        $(item).find('span').addClass('fb-xfbml-parse-ignore');
       });
     });
   }

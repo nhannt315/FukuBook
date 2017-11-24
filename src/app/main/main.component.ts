@@ -1,7 +1,4 @@
-import {
-  AfterViewChecked, AfterViewInit, Component, OnInit, TemplateRef, ViewChild,
-  ViewContainerRef
-} from '@angular/core';
+import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {BsModalRef, BsModalService, ModalDirective} from 'ngx-bootstrap';
 import {AuthenticationService} from '../core/services/authentication/authentication.service';
 import {NotificationService} from '../core/services/notification/notification.service';
@@ -15,7 +12,7 @@ declare const $: any;
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit, AfterViewInit {
-  @ViewChild(ModalDirective) modalLoginSignup: ModalDirective;
+  @ViewChild('modalLoginSignup') public modalLoginSignup: ModalDirective;
   modalRef: BsModalRef;
   loadAPI: Promise<any>;
   isLogin = true;
