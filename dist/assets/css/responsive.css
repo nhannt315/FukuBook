@@ -1,0 +1,151 @@
+@media screen and (max-width: 767px) {
+  .sidebar-panel {
+    width: 0%;
+    position: fixed;
+    transition: all 0.3s;
+    z-index: 9999;
+    height: 100%;
+    background-color: #495469;
+    overflow: hidden;
+  }
+}
+
+/*Main mini navbar*/
+.main-content .brand {
+  position: fixed;
+  z-index: 1050;
+  text-align: center;
+  width: 100%;
+  height: 55px;
+  clear: both;
+  background-color: #fff;
+  transition: 0.3s;
+}
+
+.main-content .brand .toggle-offscreen {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 7.5px 0;
+}
+
+.main-content .brand .toggle-offscreen button{
+  background: transparent;
+  border: 0;
+  padding: 15px;
+}
+
+.main-content .brand .brand-logo{
+  display: inline-block;
+  float: none;
+  margin: 17.5px 0;
+  opacity: 0.9;
+}
+
+.main-content .brand .toggle-user {
+  right: 0;
+  top: 0;
+  position: absolute;
+  margin: 7.5px 0;
+}
+
+.main-content .brand .toggle-user button{
+  background: transparent;
+  border: 0;
+  padding: 15px 15px 10px 15px;
+}
+
+
+.sidebar-panel.active2 {
+  width: 85%;
+}
+
+.main-content .brand.active {
+  margin-left: 85%;
+}
+/*End main mini navbar*/
+
+/*user layout*/
+.main-content .user-layout {
+  position: fixed;
+  width: 100%;
+  top: 55px;
+  z-index: 1000;
+  background-color: #fff;
+  transition: all 0.3s;
+  margin-left: 100%;
+}
+
+.main-content .user-layout.active {
+  margin-left: 0;
+}
+
+.main-content .posts.active {
+  padding-top: 150px;
+}
+
+.main-content .user-layout button{
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  background-color: transparent;
+  border: 0;
+}
+
+.main-content .user-layout .user{
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+}
+
+/*End user layout*/
+
+/*Main posts*/
+@media screen and (max-width: 767px) {
+  .main-content .posts {
+    width: 100vw;
+    padding-top: 75px;
+    transition: all 0.3s;
+  }
+}
+
+
+/*End main posts*/
+
+
+/*Grid Categories*/
+@media screen and (max-width: 767px) {
+  .fb-post {
+    width: 100vw;
+
+  }
+
+  .grid-item {
+    max-width: 100vw !important;
+    min-width: 100vw !important;
+    margin:0 auto 10px auto;
+    text-align: center;
+    background: white;
+    border-radius: 3px;
+  }
+
+  .gridFood, .gridNews, .gridFashion, .gridFilms, .gridSports, .grid{
+    text-align: center;
+    padding: 0px;
+    margin: 0 auto 10px auto;
+    width : 100vw;
+  }
+
+  .fb-xfbml-parse-ignore {
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+  }
+
+  iframe {
+    min-width: 100vw !important;
+    max-width: 100vw !important;
+  }
+}
+
+
+/*End grid*/
