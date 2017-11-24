@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "client": "ng build --watch",
     "server": "nodemon --watch server server.js",
-    "start": "ng build --watch & nodemon --watch server server.js"
+    "start": "nodemon --watch server server.js"
   },
   "private": true,
   "dependencies": {
