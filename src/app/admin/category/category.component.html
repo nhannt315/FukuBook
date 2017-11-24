@@ -50,7 +50,7 @@
         <div class="col-md-9 col-sm-9 col-xs-12">
           <input type="text" #alias="ngModel" [(ngModel)]="newCategoryEntity.alias" required
                  name="alias" class="form-control text-black" (input)="onInputAliasChange()">
-          <small [hidden]="alias.valid || (alias.pristine && !addForm.addForm)"
+          <small [hidden]="alias.valid || (alias.pristine && !addForm.submitted)"
                  class="text-danger">
             Bạn phải nhập tên Category
           </small>
@@ -60,23 +60,29 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Alias</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
           <input type="text" #name="ngModel" [(ngModel)]="newCategoryEntity.name" required
-                 name="link" class="form-control text-black">
-          <!--<small [hidden]="link.valid || (link.pristine && !addForm.submitted)"-->
-          <!--class="text-danger">-->
-          <!--Bạn phải nhập link shop-->
-          <!--</small>-->
+                 name="name" class="form-control text-black">
+          <small [hidden]="name.valid || (name.pristine && !addForm.submitted)"
+                 class="text-danger">
+            Bạn phải nhập alias
+          </small>
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-md-3 col-sm-3 col-xs-12 text-black">Keywords</label>
         <div class="col-md-9 col-sm-9 col-xs-12 text-black">
           <tag-input [(ngModel)]='newKeyWords' theme='bootstrap'
-                     [ngModelOptions]="{standalone: true}"></tag-input>
+                     [ngModelOptions]="{standalone: true}" #input></tag-input>
+          <small [hidden]="(newKeyWords.length != 0)"
+                 class="text-danger">
+            Bạn phải nhập ít nhất 1 keywords
+          </small>
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-          <button type="submit" class="btn btn-success" [disabled]="!addForm.form.valid">Thêm mới</button>
+          <button type="submit" class="btn btn-success" [disabled]="!addForm.form.valid || (newKeyWords.length === 0)">
+            Thêm mới
+          </button>
           <button type="button" (click)="modalRef.hide()" class="btn btn-primary">Hủy bỏ</button>
         </div>
       </div>
@@ -116,11 +122,17 @@
         <div class="col-md-9 col-sm-9 col-xs-12 text-black">
           <tag-input [(ngModel)]='currentEditKeywords' theme='bootstrap'
                      [ngModelOptions]="{standalone: true}"></tag-input>
+          <small [hidden]="(currentEditKeywords.length > 0)"
+                 class="text-danger">
+            Bạn phải nhập ít nhất 1 keywords
+          </small>
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-          <button type="submit" class="btn btn-success" [disabled]="!editForm.form.valid">Cập nhật</button>
+          <button type="submit" class="btn btn-success"
+                  [disabled]="!editForm.form.valid && (currentEditKeywords.length > 0)">Cập nhật
+          </button>
           <button type="button" (click)="modalRef.hide()" class="btn btn-primary">Hủy bỏ</button>
         </div>
       </div>

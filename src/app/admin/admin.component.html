@@ -53,15 +53,9 @@
   <div class="user-layout visible-xs" id="user-layout">
 
     <div class="login-panel" id="loginedPanel" *ngIf="authService.isLoggedIn()">
-      <div class="user" style="margin-right: 20px">
+      <div class="user">
         <span id="usernameRes">{{authService.getCurrentUser().username}}</span>
         <i id="userImgRes" class="fa fa-user-circle" aria-hidden="true"></i>
-      </div>
-      <div class="">
-        <button type="button" onclick="getFavPosts()">
-          <i class="fa fa-bookmark-o" aria-hidden="true"></i>
-          Các bài viết đã lưu
-        </button>
       </div>
     </div>
   </div>
@@ -74,7 +68,7 @@
 
     <ul class="nav navbar-nav navbar-right">
       <li class="user" *ngIf="authService.isLoggedIn()">
-        <span id="username">{{authService.getCurrentUser().username}}</span>
+        <span id="username" style="margin-right: 30px">{{authService.getCurrentUser().username}}</span>
         <i id="userImg"
            class="fa fa-user-circle"
            aria-hidden="true">
