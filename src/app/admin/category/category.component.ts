@@ -84,6 +84,7 @@ export class CategoryComponent implements OnInit {
     this.notifyService.printConfirmationDialog(MessageConstants.CONFIRM_DELETE_MSG, () => {
       this.categoryService.deleteCategory(categoryId).subscribe(() => {
         this.notifyService.printSuccessMessage(MessageConstants.DELETED_OK_MSG);
+        this.loadCategory();
       }, error => {
         this.notifyService.printErrorMessage(MessageConstants.SYSTEM_ERROR_MSG);
         this.notifyService.handleError(error);
