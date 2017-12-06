@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   isFirstTime = true;
   isNotFound = false;
   mySubscribe;
+  subscriptionList: any[];
 
   constructor(public postService: PostService,
               private notifyService: NotificationService,
@@ -68,12 +69,13 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   }
 
   getCategoryDetail() {
-    this.categoryService.getCategoryDetailByName(this.category).subscribe((response: Category) => {
+    const subscription = this.categoryService.getCategoryDetailByName(this.category).subscribe((response: Category) => {
       this.title = response.alias;
     }, error => {
       this.notifyService.printErrorMessage(MessageConstants.SYSTEM_ERROR_MSG);
       this.notifyService.handleError(error);
     });
+    this.subscriptionList.push(subscription);
   }
 
   init() {
@@ -93,7 +95,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
 
   private loadPost() {
-    this.postService.getPostByCategory(this.category, this.pageIndex).subscribe((response: Post[]) => {
+    const subscription = this.postService.getPostByCategory(this.category, this.pageIndex).subscribe((response: Post[]) => {
       if (!response || response.length === 0) {
         this.isEndPage = true;
         if (this.isFirstTime) {
@@ -115,6 +117,7 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
         });
       });
     }, error => this.notifyService.printErrorMessage(error));
+    this.subscriptionList.push(subscription);
   }
 
   scrollToTop() {
@@ -125,6 +128,9 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.mySubscribe.unsubscribe();
+    for (const sub of this.subscriptionList) {
+      sub.unsubscribe();
+    }
   }
 
 }
