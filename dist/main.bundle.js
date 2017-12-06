@@ -105,9 +105,9 @@ var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent.prototype.ngOnInit = function () {
-        if (location.protocol === 'http:') {
-            location.href = location.href.replace(/^http:/, 'https:');
-        }
+        // if (location.protocol === 'http:') {
+        //   location.href = location.href.replace(/^http:/, 'https:');
+        // }
     };
     return AppComponent;
 }());

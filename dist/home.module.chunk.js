@@ -59,12 +59,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HomeComponent = (function () {
-    function HomeComponent(postService, notifyService, fbPostService, ngZone, route, sharedService, categoryService) {
+    function HomeComponent(postService, notifyService, fbPostService, ngZone, router, route, sharedService, categoryService) {
         var _this = this;
         this.postService = postService;
         this.notifyService = notifyService;
         this.fbPostService = fbPostService;
         this.ngZone = ngZone;
+        this.router = router;
         this.route = route;
         this.sharedService = sharedService;
         this.categoryService = categoryService;
@@ -104,6 +105,9 @@ var HomeComponent = (function () {
                 _this.category = params['category'];
                 _this.getCategoryDetail();
             }
+            if (_this.request) {
+                _this.request.unsubscribe();
+            }
             _this.init();
         });
     };
@@ -133,7 +137,8 @@ var HomeComponent = (function () {
     };
     HomeComponent.prototype.loadPost = function () {
         var _this = this;
-        this.postService.getPostByCategory(this.category, this.pageIndex).subscribe(function (response) {
+        this.request = this.postService.getPostByCategory(this.category, this.pageIndex)
+            .subscribe(function (response) {
             if (!response || response.length === 0) {
                 _this.isEndPage = true;
                 if (_this.isFirstTime) {
@@ -174,10 +179,10 @@ HomeComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/main/home/home.component.html"),
         styles: [__webpack_require__("../../../../../src/app/main/home/home.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__core_services_post_post_service__["a" /* PostService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__core_services_post_post_service__["a" /* PostService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__core_services_notification_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__core_services_notification_notification_service__["a" /* NotificationService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__core_services_fbpost_fbpost_service__["a" /* FbpostService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__core_services_fbpost_fbpost_service__["a" /* FbpostService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* ActivatedRoute */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_6__core_services_shared_shared_service__["a" /* SharedService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__core_services_shared_shared_service__["a" /* SharedService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_7__core_services_category_category_service__["a" /* CategoryService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__core_services_category_category_service__["a" /* CategoryService */]) === "function" && _g || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__core_services_post_post_service__["a" /* PostService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__core_services_post_post_service__["a" /* PostService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__core_services_notification_notification_service__["a" /* NotificationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__core_services_notification_notification_service__["a" /* NotificationService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__core_services_fbpost_fbpost_service__["a" /* FbpostService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__core_services_fbpost_fbpost_service__["a" /* FbpostService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* Router */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_router__["a" /* ActivatedRoute */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__core_services_shared_shared_service__["a" /* SharedService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__core_services_shared_shared_service__["a" /* SharedService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_7__core_services_category_category_service__["a" /* CategoryService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__core_services_category_category_service__["a" /* CategoryService */]) === "function" && _h || Object])
 ], HomeComponent);
 
-var _a, _b, _c, _d, _e, _f, _g;
+var _a, _b, _c, _d, _e, _f, _g, _h;
 //# sourceMappingURL=home.component.js.map
 
 /***/ }),

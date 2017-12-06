@@ -134,7 +134,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.isDataLoaded = false;
     this.isLoading = true;
     this.loadPost();
-    console.log(ApiUrlConstants.SEARCH_POST(this.keyword, this.selectedShop, this.selectedCategory, this.pageIndex, this.pageSize))
   }
 
   scrollToTop() {

@@ -29,8 +29,8 @@
           <i class="fa fa-search" aria-hidden="true"></i> <span>Tìm kiếm</span>
         </a>
       </li>
-      <li *ngFor="let category of categoryList" [routerLink]="['/main/home', category.name]" routerLinkActive="active">
-        <a onClick="hideSidepanel()">
+      <li *ngFor="let category of categoryList" >
+        <a onClick="hideSidepanel()" [routerLink]="['/main/home', category.name]" routerLinkActive="active">
           <i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>{{category.alias}}</span>
         </a>
       </li>

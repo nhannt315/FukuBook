@@ -4,7 +4,7 @@ import {Category, Post} from '../../core/models/models.component';
 import {NotificationService} from '../../core/services/notification/notification.service';
 import {FbpostService} from '../../core/services/fbpost/fbpost.service';
 import {Observable} from 'rxjs/Rx';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {SharedService} from '../../core/services/shared/shared.service';
 import {CategoryService} from '../../core/services/category/category.service';
 import {MessageConstants} from '../../core/common/message.constants';
@@ -18,7 +18,6 @@ declare let $: any;
 })
 export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
-
   pageIndex = 1;
   category = 'all';
   title = '';
@@ -29,11 +28,13 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
   isFirstTime = true;
   isNotFound = false;
   mySubscribe;
+  request: any;
 
   constructor(public postService: PostService,
               private notifyService: NotificationService,
               private fbPostService: FbpostService,
               private ngZone: NgZone,
+              private router: Router,
               private route: ActivatedRoute,
               private sharedService: SharedService, private categoryService: CategoryService) {
     window.onscroll = () => {
@@ -62,6 +63,9 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
       if (params['category']) {
         this.category = params['category'];
         this.getCategoryDetail();
+      }
+      if (this.request) {
+        this.request.unsubscribe();
       }
       this.init();
     });
@@ -93,28 +97,29 @@ export class HomeComponent implements OnInit, AfterContentInit, OnDestroy {
 
 
   private loadPost() {
-    this.postService.getPostByCategory(this.category, this.pageIndex).subscribe((response: Post[]) => {
-      if (!response || response.length === 0) {
-        this.isEndPage = true;
-        if (this.isFirstTime) {
-          this.isNotFound = true;
-        }
-      }
-      this.isFirstTime = false;
-      this.postList.push(...response);
-      this.fbPostService.addPost(response, () => {
-        this.isDataLoaded = true;
-        this.isLoading = false;
-        this.fbPostService.relayout();
-        this.sharedService.changeEmitted$.subscribe(text => {
-          if (text === 'LoggedIn') {
-            this.fbPostService.updateFavoriteButton();
-          } else {
-            this.fbPostService.resetFavoriteButton();
+    this.request = this.postService.getPostByCategory(this.category, this.pageIndex)
+      .subscribe((response: Post[]) => {
+        if (!response || response.length === 0) {
+          this.isEndPage = true;
+          if (this.isFirstTime) {
+            this.isNotFound = true;
           }
+        }
+        this.isFirstTime = false;
+        this.postList.push(...response);
+        this.fbPostService.addPost(response, () => {
+          this.isDataLoaded = true;
+          this.isLoading = false;
+          this.fbPostService.relayout();
+          this.sharedService.changeEmitted$.subscribe(text => {
+            if (text === 'LoggedIn') {
+              this.fbPostService.updateFavoriteButton();
+            } else {
+              this.fbPostService.resetFavoriteButton();
+            }
+          });
         });
-      });
-    }, error => this.notifyService.printErrorMessage(error));
+      }, error => this.notifyService.printErrorMessage(error));
   }
 
   scrollToTop() {

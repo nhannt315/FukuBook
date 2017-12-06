@@ -34,6 +34,7 @@ export class MainComponent implements OnInit, AfterViewInit {
     this.modalLoginSignup.onHide.subscribe(() => {
       this.isChildLoading = false;
     });
+    console.clear();
   }
 
 
